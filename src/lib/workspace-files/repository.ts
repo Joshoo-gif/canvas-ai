@@ -92,3 +92,11 @@ export function getWorkspaceFileLineRange(
   const safeEnd = Math.max(safeStart, Math.floor(endLine));
   return file.extracted_lines.slice(safeStart - 1, safeEnd);
 }
+
+export async function deleteWorkspaceFile(id: string): Promise<void> {
+  const db = getSupabaseServer();
+  const { error } = await db.from("workspace_files").delete().eq("id", id);
+  if (error) {
+    throw new Error(`[workspace-files] deleteWorkspaceFile failed: ${error.message}`);
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
-import { Eye, EyeOff, FileText, Sheet } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Eye, EyeOff, FileText, Sheet, Trash2 } from "lucide-react";
 import type { ThemeClasses } from "@/components/ui";
 import type { WorkspaceFileRow } from "@/lib/supabase/types";
 import type { Artifact } from "@/components/ArtifactViewer";
@@ -18,6 +19,8 @@ interface FileExplorerProps {
   onCloseFile: (artifactId: string) => void;
   /** Called to switch focus to an open artifact */
   onSelectFile: (artifactId: string) => void;
+  /** Called to delete a file */
+  onDeleteFile?: (artifactId: string) => void;
   tc: ThemeClasses;
   isDark: boolean;
 }
@@ -44,10 +47,22 @@ export default function FileExplorer({
   onOpenFile,
   onCloseFile,
   onSelectFile,
+  onDeleteFile,
   tc,
   isDark,
 }: FileExplorerProps) {
   const openIds = new Set(openArtifacts.map((a) => a.id));
+  const [contextMenu, setContextMenu] = useState<{
+    x: number;
+    y: number;
+    fileId: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const handleClick = () => setContextMenu(null);
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  }, []);
 
   if (workspaceFiles.length === 0) {
     return (
@@ -68,6 +83,14 @@ export default function FileExplorer({
         return (
           <div
             key={file.id}
+            onContextMenu={(e) => {
+              e.preventDefault();
+              setContextMenu({
+                x: e.clientX,
+                y: e.clientY,
+                fileId: file.id,
+              });
+            }}
             className={`group flex items-center gap-2 rounded-lg px-2 py-2 transition-all duration-150 ${
               isActive
                 ? tc.itemActive
@@ -136,6 +159,32 @@ export default function FileExplorer({
           </div>
         );
       })}
+
+      {contextMenu && onDeleteFile && (
+        <div
+          className={`fixed z-50 min-w-[160px] rounded-md border shadow-lg ${
+            isDark
+              ? "border-[#404040] bg-[#1E1E1E] text-[#D6D3D1]"
+              : "border-[#E7E5E4] bg-white text-[#404040]"
+          } p-1`}
+          style={{ top: contextMenu.y, left: contextMenu.x }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            type="button"
+            className={`flex w-full items-center gap-2 rounded px-2 py-1.5 text-sm transition-colors ${
+              isDark ? "hover:bg-[#EF4444]/10 hover:text-[#F87171]" : "hover:bg-[#FEF2F2] hover:text-[#DC2626]"
+            } text-red-500`}
+            onClick={() => {
+              onDeleteFile(contextMenu.fileId);
+              setContextMenu(null);
+            }}
+          >
+            <Trash2 className="h-4 w-4" />
+            Delete File
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -51,4 +51,17 @@ export async function uploadWorkspaceFile(
   return payload.file;
 }
 
+export async function deleteWorkspaceFile(
+  workspaceId: string,
+  fileId: string,
+): Promise<void> {
+  const response = await fetch(`/api/workspaces/${workspaceId}/files/${fileId}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error(await readErrorResponse(response));
+  }
+}
+
 export { WORKSPACE_FILE_ACCEPT };

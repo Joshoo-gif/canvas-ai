@@ -139,15 +139,20 @@ export default function CommandCenter({
             </div>
           </div>
         ) : (
-          messages.map((msg) => (
-            <MessageBubble
-              key={msg.id}
-              message={msg}
-              onToolCallClick={onToolCallClick}
-              tc={tc}
-              isDark={isDark}
-            />
-          ))
+          messages.map((msg, idx) => {
+            const isSameSenderAsPrev =
+              idx > 0 && messages[idx - 1].sender === msg.sender;
+            return (
+              <MessageBubble
+                key={msg.id}
+                message={msg}
+                onToolCallClick={onToolCallClick}
+                tc={tc}
+                isDark={isDark}
+                hideProfile={isSameSenderAsPrev}
+              />
+            );
+          })
         )}
         <div ref={messagesEndRef} />
       </div>

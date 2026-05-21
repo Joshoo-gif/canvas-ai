@@ -5,12 +5,15 @@ import ThoughtCard from "./ThoughtCard";
 import ToolCallCard from "./ToolCallCard";
 import type { ThemeClasses } from "@/components/ui";
 import { Bot, User } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface MessageBubbleProps {
   message: Message;
   onToolCallClick?: (toolCall: ToolCall) => void;
   tc: ThemeClasses;
   isDark: boolean;
+  hideProfile?: boolean;
 }
 
 /**
@@ -25,17 +28,20 @@ export default function MessageBubble({
   onToolCallClick,
   tc,
   isDark,
+  hideProfile,
 }: MessageBubbleProps) {
   const isUser = message.sender === "user";
   // A message is "live" if it's an agent message that has no text yet
   // (the streaming placeholder state).
-  const isLive = !isUser && message.text === "";
+  const isLive = !isUser && message.text.trim() === "" && !message.toolCall && !(message.thoughts && message.thoughts.length > 0);
 
   return (
     <div className={`flex gap-3 ${isUser ? "flex-row-reverse" : "flex-row"}`}>
       {/* Avatar */}
       <div className="shrink-0 mt-0.5">
-        {isUser ? (
+        {hideProfile ? (
+          <div className="w-7 h-7" />
+        ) : isUser ? (
           <div
             className={`flex h-7 w-7 items-center justify-center rounded-full ${
               isDark
@@ -63,18 +69,20 @@ export default function MessageBubble({
         className={`flex min-w-0 flex-1 flex-col gap-1.5 ${isUser ? "items-end" : "items-start"}`}
       >
         {/* Sender label + timestamp */}
-        <div className={`flex items-center gap-2 ${isUser ? "flex-row-reverse" : "flex-row"}`}>
-          <span className={`text-[11px] font-semibold ${tc.textPrimary}`}>
-            {isUser ? "You" : "Agent"}
-          </span>
-          <span className={`text-[10px] font-mono ${tc.textSecondary}`}>
-            {message.timestamp}
-          </span>
-        </div>
+        {!hideProfile && (
+          <div className={`flex items-center gap-2 ${isUser ? "flex-row-reverse" : "flex-row"}`}>
+            <span className={`text-[11px] font-semibold ${tc.textPrimary}`}>
+              {isUser ? "You" : "Agent"}
+            </span>
+            <span className={`text-[10px] font-mono ${tc.textSecondary}`}>
+              {message.timestamp}
+            </span>
+          </div>
+        )}
 
         {isUser ? (
           <div
-            className={`max-w-[85%] rounded-2xl rounded-tr-sm px-4 py-3 text-sm leading-relaxed ${tc.userBubble}`}
+            className={`max-w-[85%] rounded-2xl rounded-tr-sm px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${tc.userBubble}`}
           >
             {message.text}
           </div>
@@ -109,15 +117,17 @@ export default function MessageBubble({
             )}
 
             {/* Text bubble — only shown once there is text, no cursor */}
-            {message.text && (
+            {message.text.trim() && (
               <div
-                className={`rounded-2xl rounded-tl-sm border px-4 py-3 text-sm leading-relaxed ${
+                className={`rounded-2xl rounded-tl-sm border px-4 py-3 text-sm leading-relaxed prose prose-sm max-w-none ${
                   isDark
-                    ? "border-[#282828] bg-[#161616] text-[#E8E6E4]"
+                    ? "border-[#282828] bg-[#161616] text-[#E8E6E4] prose-invert"
                     : "border-[#EBEBEB] bg-white text-[#1A1A1A] shadow-sm shadow-black/[0.04]"
                 }`}
               >
-                {message.text}
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {message.text}
+                </ReactMarkdown>
               </div>
             )}
 

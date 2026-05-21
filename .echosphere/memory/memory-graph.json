@@ -1402,6 +1402,345 @@
       ],
       "createdAt": "2026-05-21T12:51:11.272Z",
       "updatedAt": "2026-05-21T12:51:11.272Z"
+    },
+    {
+      "memoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "rootMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+        "144113e3-18c7-413e-a408-87aa6c726015",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1"
+      ],
+      "childMemoryIds": [
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e"
+      ],
+      "sectionKind": "fact",
+      "summary": "Implemented workspace-aware AI tools for the OpenAI SDK chat flow. The backend now exposes four server-side workspace tools (list artifacts, global search, keyword location, and line-range reads) backed by the Supabase workspace file repository, and the chat route streams tool events plus assistant deltas through SSE. The client now renders tool call cards with stable ids and can jump to artifacts/ranges from tool invocations.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/search.ts",
+          "action": "created",
+          "reason": "Added shared workspace file search and read helpers that power all four AI tools without duplicating repository logic.",
+          "notes": "Includes listing, global search, keyword location, and line-range extraction helpers."
+        },
+        {
+          "path": "src/lib/ai/workspace-tools.ts",
+          "action": "created",
+          "reason": "Added the OpenAI tool schemas and workspace-bound invocation preparation layer required for model tool calling.",
+          "notes": "Validates tool arguments with Zod and returns structured descriptors for UI events."
+        },
+        {
+          "path": "src/lib/chat/openai.ts",
+          "action": "modified",
+          "reason": "Replaced the old unused OpenAI helper with the new tool-aware chat orchestration flow using the OpenAI SDK.",
+          "notes": "Handles streamed deltas, tool call loops, and tool result messages."
+        },
+        {
+          "path": "src/app/api/chat/route.ts",
+          "action": "modified",
+          "reason": "Wired the HTTP chat endpoint to the new OpenAI tool orchestration and SSE event stream for tool calls and tool results.",
+          "notes": "Still persists user and assistant messages to Supabase."
+        },
+        {
+          "path": "src/lib/chat/useChat.ts",
+          "action": "modified",
+          "reason": "Updated the client chat hook to render tool call lifecycle events and keep tool statuses synchronized in the conversation thread.",
+          "notes": "Now tracks tool call ids from the SSE stream."
+        },
+        {
+          "path": "src/components/CommandCenter/types.ts",
+          "action": "modified",
+          "reason": "Expanded the tool call type so client state can identify and update individual tool invocations.",
+          "notes": "Added artifactId to support document navigation from tool cards."
+        },
+        {
+          "path": "src/components/CommandCenter/MessageBubble.tsx",
+          "action": "modified",
+          "reason": "Adjusted the live-message rendering so completed tool call cards do not keep showing the streaming loading indicator.",
+          "notes": "Only plain assistant placeholders now render the thinking dots."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Updated tool call navigation to resolve artifacts by id first and then by name, enabling precise file jumps from tool cards.",
+          "notes": "Works with read/range tool results."
+        },
+        {
+          "path": "package.json",
+          "action": "modified",
+          "reason": "Declared zod as a direct dependency because the new tool layer uses Zod schemas at runtime and type validation boundaries.",
+          "notes": "Version added matches the lockfile entry already present in the workspace."
+        },
+        {
+          "path": "package-lock.json",
+          "action": "modified",
+          "reason": "Kept the root dependency manifest aligned with package.json after adding the direct zod dependency.",
+          "notes": "Only the root dependency list was updated; the existing zod package entry already existed in the lockfile."
+        }
+      ],
+      "createdAt": "2026-05-21T13:22:01.396Z",
+      "updatedAt": "2026-05-21T13:22:01.396Z"
+    },
+    {
+      "memoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "rootMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "parentMemoryIds": [
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b"
+      ],
+      "relatedMemoryIds": [
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+        "144113e3-18c7-413e-a408-87aa6c726015",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1"
+      ],
+      "childMemoryIds": [
+        "7172e073-ec40-4061-93ad-f53d00167aad"
+      ],
+      "sectionKind": "decision",
+      "summary": "Implemented workspace-aware AI tools for the OpenAI SDK chat flow. The backend now exposes four server-side workspace tools (list artifacts, global search, keyword location, and line-range reads) backed by the Supabase workspace file repository, and the chat route streams tool events plus assistant deltas through SSE. The client now renders tool call cards with stable ids and can jump to artifacts/ranges from tool invocations.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/search.ts",
+          "action": "created",
+          "reason": "Added shared workspace file search and read helpers that power all four AI tools without duplicating repository logic.",
+          "notes": "Includes listing, global search, keyword location, and line-range extraction helpers."
+        },
+        {
+          "path": "src/lib/ai/workspace-tools.ts",
+          "action": "created",
+          "reason": "Added the OpenAI tool schemas and workspace-bound invocation preparation layer required for model tool calling.",
+          "notes": "Validates tool arguments with Zod and returns structured descriptors for UI events."
+        },
+        {
+          "path": "src/lib/chat/openai.ts",
+          "action": "modified",
+          "reason": "Replaced the old unused OpenAI helper with the new tool-aware chat orchestration flow using the OpenAI SDK.",
+          "notes": "Handles streamed deltas, tool call loops, and tool result messages."
+        },
+        {
+          "path": "src/app/api/chat/route.ts",
+          "action": "modified",
+          "reason": "Wired the HTTP chat endpoint to the new OpenAI tool orchestration and SSE event stream for tool calls and tool results.",
+          "notes": "Still persists user and assistant messages to Supabase."
+        },
+        {
+          "path": "src/lib/chat/useChat.ts",
+          "action": "modified",
+          "reason": "Updated the client chat hook to render tool call lifecycle events and keep tool statuses synchronized in the conversation thread.",
+          "notes": "Now tracks tool call ids from the SSE stream."
+        },
+        {
+          "path": "src/components/CommandCenter/types.ts",
+          "action": "modified",
+          "reason": "Expanded the tool call type so client state can identify and update individual tool invocations.",
+          "notes": "Added artifactId to support document navigation from tool cards."
+        },
+        {
+          "path": "src/components/CommandCenter/MessageBubble.tsx",
+          "action": "modified",
+          "reason": "Adjusted the live-message rendering so completed tool call cards do not keep showing the streaming loading indicator.",
+          "notes": "Only plain assistant placeholders now render the thinking dots."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Updated tool call navigation to resolve artifacts by id first and then by name, enabling precise file jumps from tool cards.",
+          "notes": "Works with read/range tool results."
+        },
+        {
+          "path": "package.json",
+          "action": "modified",
+          "reason": "Declared zod as a direct dependency because the new tool layer uses Zod schemas at runtime and type validation boundaries.",
+          "notes": "Version added matches the lockfile entry already present in the workspace."
+        },
+        {
+          "path": "package-lock.json",
+          "action": "modified",
+          "reason": "Kept the root dependency manifest aligned with package.json after adding the direct zod dependency.",
+          "notes": "Only the root dependency list was updated; the existing zod package entry already existed in the lockfile."
+        }
+      ],
+      "createdAt": "2026-05-21T13:22:01.538Z",
+      "updatedAt": "2026-05-21T13:22:01.538Z"
+    },
+    {
+      "memoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "rootMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "parentMemoryIds": [
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e"
+      ],
+      "relatedMemoryIds": [
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+        "144113e3-18c7-413e-a408-87aa6c726015",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Implemented workspace-aware AI tools for the OpenAI SDK chat flow. The backend now exposes four server-side workspace tools (list artifacts, global search, keyword location, and line-range reads) backed by the Supabase workspace file repository, and the chat route streams tool events plus assistant deltas through SSE. The client now renders tool call cards with stable ids and can jump to artifacts/ranges from tool invocations.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/search.ts",
+          "action": "created",
+          "reason": "Added shared workspace file search and read helpers that power all four AI tools without duplicating repository logic.",
+          "notes": "Includes listing, global search, keyword location, and line-range extraction helpers."
+        },
+        {
+          "path": "src/lib/ai/workspace-tools.ts",
+          "action": "created",
+          "reason": "Added the OpenAI tool schemas and workspace-bound invocation preparation layer required for model tool calling.",
+          "notes": "Validates tool arguments with Zod and returns structured descriptors for UI events."
+        },
+        {
+          "path": "src/lib/chat/openai.ts",
+          "action": "modified",
+          "reason": "Replaced the old unused OpenAI helper with the new tool-aware chat orchestration flow using the OpenAI SDK.",
+          "notes": "Handles streamed deltas, tool call loops, and tool result messages."
+        },
+        {
+          "path": "src/app/api/chat/route.ts",
+          "action": "modified",
+          "reason": "Wired the HTTP chat endpoint to the new OpenAI tool orchestration and SSE event stream for tool calls and tool results.",
+          "notes": "Still persists user and assistant messages to Supabase."
+        },
+        {
+          "path": "src/lib/chat/useChat.ts",
+          "action": "modified",
+          "reason": "Updated the client chat hook to render tool call lifecycle events and keep tool statuses synchronized in the conversation thread.",
+          "notes": "Now tracks tool call ids from the SSE stream."
+        },
+        {
+          "path": "src/components/CommandCenter/types.ts",
+          "action": "modified",
+          "reason": "Expanded the tool call type so client state can identify and update individual tool invocations.",
+          "notes": "Added artifactId to support document navigation from tool cards."
+        },
+        {
+          "path": "src/components/CommandCenter/MessageBubble.tsx",
+          "action": "modified",
+          "reason": "Adjusted the live-message rendering so completed tool call cards do not keep showing the streaming loading indicator.",
+          "notes": "Only plain assistant placeholders now render the thinking dots."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Updated tool call navigation to resolve artifacts by id first and then by name, enabling precise file jumps from tool cards.",
+          "notes": "Works with read/range tool results."
+        },
+        {
+          "path": "package.json",
+          "action": "modified",
+          "reason": "Declared zod as a direct dependency because the new tool layer uses Zod schemas at runtime and type validation boundaries.",
+          "notes": "Version added matches the lockfile entry already present in the workspace."
+        },
+        {
+          "path": "package-lock.json",
+          "action": "modified",
+          "reason": "Kept the root dependency manifest aligned with package.json after adding the direct zod dependency.",
+          "notes": "Only the root dependency list was updated; the existing zod package entry already existed in the lockfile."
+        }
+      ],
+      "createdAt": "2026-05-21T13:22:01.666Z",
+      "updatedAt": "2026-05-21T13:22:01.666Z"
+    },
+    {
+      "memoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "rootMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "parentMemoryIds": [
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b"
+      ],
+      "relatedMemoryIds": [
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb"
+      ],
+      "childMemoryIds": [
+        "094816fe-bec2-44c0-b639-a7b061ce56b6"
+      ],
+      "sectionKind": "fact",
+      "summary": "Implemented the chat thread ordering fix so streamed assistant/tool content now renders top-to-bottom in chronological order. The live assistant stream in useChat now splits into separate assistant segments around tool calls, preventing post-tool deltas from being appended to the pre-tool placeholder bubble. The task card was moved to done after the change was applied.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/chat/useChat.ts",
+          "action": "modified",
+          "reason": "Implemented the streaming message segmentation fix so assistant output is split around tool calls and rendered chronologically in the message list.",
+          "notes": "Added active assistant message tracking, tool-boundary placeholder removal, new assistant segment creation after tool calls, and safer error fallback handling."
+        }
+      ],
+      "createdAt": "2026-05-21T13:54:31.048Z",
+      "updatedAt": "2026-05-21T13:54:31.048Z"
+    },
+    {
+      "memoryId": "094816fe-bec2-44c0-b639-a7b061ce56b6",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "rootMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "parentMemoryIds": [
+        "a5d7853b-3185-4cbd-8d26-723a3c058478"
+      ],
+      "relatedMemoryIds": [
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb"
+      ],
+      "childMemoryIds": [
+        "1f471cc6-33ed-4c62-8d19-4ee459838855"
+      ],
+      "sectionKind": "decision",
+      "summary": "Implemented the chat thread ordering fix so streamed assistant/tool content now renders top-to-bottom in chronological order. The live assistant stream in useChat now splits into separate assistant segments around tool calls, preventing post-tool deltas from being appended to the pre-tool placeholder bubble. The task card was moved to done after the change was applied.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/chat/useChat.ts",
+          "action": "modified",
+          "reason": "Implemented the streaming message segmentation fix so assistant output is split around tool calls and rendered chronologically in the message list.",
+          "notes": "Added active assistant message tracking, tool-boundary placeholder removal, new assistant segment creation after tool calls, and safer error fallback handling."
+        }
+      ],
+      "createdAt": "2026-05-21T13:54:31.122Z",
+      "updatedAt": "2026-05-21T13:54:31.122Z"
+    },
+    {
+      "memoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "rootMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "parentMemoryIds": [
+        "094816fe-bec2-44c0-b639-a7b061ce56b6"
+      ],
+      "relatedMemoryIds": [
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Implemented the chat thread ordering fix so streamed assistant/tool content now renders top-to-bottom in chronological order. The live assistant stream in useChat now splits into separate assistant segments around tool calls, preventing post-tool deltas from being appended to the pre-tool placeholder bubble. The task card was moved to done after the change was applied.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/chat/useChat.ts",
+          "action": "modified",
+          "reason": "Implemented the streaming message segmentation fix so assistant output is split around tool calls and rendered chronologically in the message list.",
+          "notes": "Added active assistant message tracking, tool-boundary placeholder removal, new assistant segment creation after tool calls, and safer error fallback handling."
+        }
+      ],
+      "createdAt": "2026-05-21T13:54:31.191Z",
+      "updatedAt": "2026-05-21T13:54:31.191Z"
     }
   ],
   "edges": [
@@ -2251,7 +2590,259 @@
       "relation": "related",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
       "createdAt": "2026-05-21T12:51:11.272Z"
+    },
+    {
+      "fromMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.396Z"
+    },
+    {
+      "fromMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.396Z"
+    },
+    {
+      "fromMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.396Z"
+    },
+    {
+      "fromMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.396Z"
+    },
+    {
+      "fromMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.396Z"
+    },
+    {
+      "fromMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.396Z"
+    },
+    {
+      "fromMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.538Z"
+    },
+    {
+      "fromMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.538Z"
+    },
+    {
+      "fromMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.538Z"
+    },
+    {
+      "fromMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.538Z"
+    },
+    {
+      "fromMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.538Z"
+    },
+    {
+      "fromMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.538Z"
+    },
+    {
+      "fromMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.538Z"
+    },
+    {
+      "fromMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.666Z"
+    },
+    {
+      "fromMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.666Z"
+    },
+    {
+      "fromMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.666Z"
+    },
+    {
+      "fromMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.666Z"
+    },
+    {
+      "fromMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.666Z"
+    },
+    {
+      "fromMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:22:01.666Z"
+    },
+    {
+      "fromMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.048Z"
+    },
+    {
+      "fromMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.048Z"
+    },
+    {
+      "fromMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.048Z"
+    },
+    {
+      "fromMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.048Z"
+    },
+    {
+      "fromMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.048Z"
+    },
+    {
+      "fromMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "toMemoryId": "094816fe-bec2-44c0-b639-a7b061ce56b6",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.048Z"
+    },
+    {
+      "fromMemoryId": "094816fe-bec2-44c0-b639-a7b061ce56b6",
+      "toMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.122Z"
+    },
+    {
+      "fromMemoryId": "094816fe-bec2-44c0-b639-a7b061ce56b6",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.122Z"
+    },
+    {
+      "fromMemoryId": "094816fe-bec2-44c0-b639-a7b061ce56b6",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.122Z"
+    },
+    {
+      "fromMemoryId": "094816fe-bec2-44c0-b639-a7b061ce56b6",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.122Z"
+    },
+    {
+      "fromMemoryId": "094816fe-bec2-44c0-b639-a7b061ce56b6",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.122Z"
+    },
+    {
+      "fromMemoryId": "094816fe-bec2-44c0-b639-a7b061ce56b6",
+      "toMemoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.122Z"
+    },
+    {
+      "fromMemoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "toMemoryId": "094816fe-bec2-44c0-b639-a7b061ce56b6",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.191Z"
+    },
+    {
+      "fromMemoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.191Z"
+    },
+    {
+      "fromMemoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.191Z"
+    },
+    {
+      "fromMemoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.191Z"
+    },
+    {
+      "fromMemoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T13:54:31.191Z"
     }
   ],
-  "updatedAt": "2026-05-21T12:51:11.273Z"
+  "updatedAt": "2026-05-21T13:54:31.192Z"
 }

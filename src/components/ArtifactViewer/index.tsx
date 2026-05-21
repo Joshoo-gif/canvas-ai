@@ -26,6 +26,7 @@ interface ArtifactViewerProps {
   openArtifact: (file: WorkspaceFileRow) => void;
   highlightedRange: HighlightedRange | null;
   onUploadFiles: () => void;
+  onDeleteFile: (fileId: string) => void;
   settings: Pick<WorkspaceSettings, "theme" | "density" | "fontSize" | "lineNumbers">;
 }
 
@@ -49,6 +50,7 @@ export default function ArtifactViewer({
   openArtifact,
   highlightedRange,
   onUploadFiles,
+  onDeleteFile,
   settings,
 }: ArtifactViewerProps) {
   const isDark = settings.theme === "dark";
@@ -56,6 +58,8 @@ export default function ArtifactViewer({
   const compact = settings.density === "compact";
   const showLineNumbers = settings.lineNumbers;
   const [explorerOpen, setExplorerOpen] = useState(true);
+  const [explorerWidth, setExplorerWidth] = useState(220);
+  const [isResizing, setIsResizing] = useState(false);
 
   const activeArtifact =
     openArtifacts.find((art) => art.id === activeArtifactId) ?? null;
@@ -76,6 +80,32 @@ export default function ArtifactViewer({
   const tabHeightClass = compact ? "h-10" : "h-11";
   const explorerBorder = isDark ? "border-[#2A2A2A]" : "border-[#E7E5E4]";
 
+  const explorerDragRef = useRef(false);
+
+  const startResizeExplorer = (e: React.MouseEvent) => {
+    e.preventDefault();
+    explorerDragRef.current = true;
+    setIsResizing(true);
+    const startX = e.clientX;
+    const startWidth = explorerWidth;
+
+    const onMouseMove = (ev: MouseEvent) => {
+      if (!explorerDragRef.current) return;
+      const newWidth = Math.min(400, Math.max(150, startWidth + (ev.clientX - startX)));
+      setExplorerWidth(newWidth);
+    };
+
+    const onMouseUp = () => {
+      explorerDragRef.current = false;
+      setIsResizing(false);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+  };
+
   return (
     <section
       className={`flex h-full flex-col overflow-hidden ${tc.shell}`}
@@ -92,34 +122,49 @@ export default function ArtifactViewer({
         
         {/* File explorer — collapsible sidebar */}
         <div
-          className={`shrink-0 border-r transition-[width] duration-300 ease-in-out flex flex-col ${explorerBorder} ${
+          className={`relative shrink-0 border-r flex flex-col overflow-x-hidden select-none ${
+            !isResizing ? "transition-[width] duration-300 ease-in-out" : ""
+          } ${explorerBorder} ${
             isDark ? "bg-[#111111]" : "bg-[#FAFAFA]"
-          } ${explorerOpen ? "w-[220px]" : "w-[40px]"}`}
+          }`}
+          style={{ width: explorerOpen ? `${explorerWidth}px` : "40px" }}
         >
+          {/* Resize handle */}
+          <div
+            onMouseDown={startResizeExplorer}
+            className={`absolute bottom-0 right-0 top-0 z-10 w-[5px] cursor-col-resize hover:bg-[#FAFAF9]/10 ${
+              !explorerOpen ? "hidden" : ""
+            }`}
+          />
+
           {/* Sidebar Toggle Header */}
-          <div className={`flex items-center justify-between px-2 py-2 border-b ${explorerBorder}`}>
-            <span
-              className={`text-[10px] font-semibold uppercase tracking-widest transition-opacity duration-200 ${tc.textSecondary} ${
-                explorerOpen ? "opacity-100 px-2" : "opacity-0 w-0 hidden"
-              }`}
-            >
-              Files
-            </span>
-            <button
-              type="button"
-              onClick={() => setExplorerOpen((o) => !o)}
-              className={`flex h-6 w-6 items-center justify-center rounded-md transition-colors ${tc.btnGhost} ${
-                !explorerOpen ? "mx-auto" : ""
-              }`}
-              title={explorerOpen ? "Close file explorer" : "Open file explorer"}
-              aria-label="Toggle file explorer"
-            >
-              {explorerOpen ? (
-                <PanelLeftClose className="h-4 w-4" />
-              ) : (
-                <PanelLeftOpen className="h-4 w-4" />
-              )}
-            </button>
+          <div className={`flex h-10 items-center justify-between overflow-hidden border-b px-2 ${explorerBorder}`}>
+            <div className="flex min-w-0 items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setExplorerOpen((o) => !o)}
+                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md transition-colors ${tc.btnGhost}`}
+                title={explorerOpen ? "Close file explorer" : "Open file explorer"}
+                aria-label="Toggle file explorer"
+              >
+                {explorerOpen ? (
+                  <PanelLeftClose className="h-4 w-4" />
+                ) : (
+                  <PanelLeftOpen className="h-4 w-4" />
+                )}
+              </button>
+
+              <span
+                className={`whitespace-nowrap text-[10px] font-semibold uppercase tracking-widest transition-all duration-200 ${tc.textSecondary} ${
+                  !explorerOpen
+                    ? "max-w-0 -translate-x-1 opacity-0"
+                    : "max-w-[120px] translate-x-0 opacity-100"
+                }`}
+                aria-hidden={!explorerOpen}
+              >
+                Files
+              </span>
+            </div>
           </div>
 
           {/* Sidebar Content */}
@@ -132,15 +177,11 @@ export default function ArtifactViewer({
                 onOpenFile={openArtifact}
                 onCloseFile={closeArtifact}
                 onSelectFile={setActiveArtifactId}
+                onDeleteFile={onDeleteFile}
                 tc={tc}
                 isDark={isDark}
               />
-            ) : (
-              <div className="flex flex-col items-center gap-4 py-4">
-                {/* When collapsed, we could just show icons or nothing.
-                    Showing nothing but the toggle is standard in most editors. */}
-              </div>
-            )}
+            ) : null}
           </div>
         </div>
 

@@ -15,13 +15,13 @@
  * SSE event types:
  *   data: {"type":"delta",  "text": "..."}  — streamed content chunk
  *   data: {"type":"meta",   "conversationId": "...", "messageId": "..."}
+ *   data: {"type":"tool_call",   ... }      — workspace tool invocation
+ *   data: {"type":"tool_result",  ... }      — workspace tool completion
  *   data: {"type":"done"}
  *   data: {"type":"error",  "message": "..."}
  */
 
 import { type NextRequest, NextResponse } from "next/server";
-import OpenAI from "openai";
-import { env } from "@/lib/env";
 import { findWorkspaceById } from "@/lib/workspace/repository";
 import {
   createConversation,
@@ -29,6 +29,11 @@ import {
   insertMessage,
   listMessages,
 } from "@/lib/chat/repository";
+import {
+  streamWorkspaceChat,
+  type ChatMessage,
+  type WorkspaceChatEvent,
+} from "@/lib/chat/openai";
 
 // Edge runtime is NOT used — we need Node.js for the OpenAI SDK.
 export const runtime = "nodejs";
@@ -130,79 +135,72 @@ export async function POST(req: NextRequest) {
         // ------------------------------------------------------------------
         // 5. Build message list for OpenAI
         // ------------------------------------------------------------------
-        const chatMessages: OpenAI.Chat.ChatCompletionMessageParam[] = [
-          {
-            role: "system",
-            content:
-              "You are Canvas, an advanced AI coding assistant embedded in a professional engineering workspace. " +
-              "Be concise, precise, and helpful. When referencing code or files, be specific about line numbers and context.",
+        const chatMessages: ChatMessage[] = history.map((message) => {
+          let content = message.content;
+          if (content.startsWith("__CANVAS_UI_MESSAGES__\n")) {
+            try {
+              const jsonStr = content.substring("__CANVAS_UI_MESSAGES__\n".length);
+              const uiMsgs = JSON.parse(jsonStr) as Array<{ type: string; text?: string }>;
+              content = uiMsgs.filter((m) => m.type === "text").map((m) => m.text).join("");
+            } catch {
+              // Fallback if parsing fails
+              content = content.replace("__CANVAS_UI_MESSAGES__\n", "");
+            }
+          }
+
+          return {
+            role: message.role === "user" ? "user" : "assistant",
+            content,
+          };
+        });
+
+        const assistantResult = await streamWorkspaceChat({
+          workspaceId,
+          history: chatMessages,
+          userMessage,
+          onEvent: (event: WorkspaceChatEvent) => {
+            if (event.type === "delta") {
+              enqueue({ type: "delta", text: event.text });
+              return;
+            }
+
+            if (event.type === "tool_call") {
+              enqueue({
+                type: "tool_call",
+                toolCallId: event.toolCallId,
+                name: event.name,
+                target: event.target,
+                artifactId: event.artifactId ?? null,
+                range: event.range ?? null,
+                status: event.status,
+              });
+              return;
+            }
+
+            enqueue({
+              type: "tool_result",
+              toolCallId: event.toolCallId,
+              status: event.status,
+              message: event.message ?? null,
+            });
           },
-          // Inject conversation history
-          ...history.map((m) => ({
-            role: m.role as "user" | "assistant" | "system",
-            content: m.content,
-          })),
-          // Add the new user message
-          { role: "user", content: userMessage },
-        ];
-
-        // ------------------------------------------------------------------
-        // 6. Stream from OpenAI — only emit content, skip reasoning_content
-        // ------------------------------------------------------------------
-        const openai = new OpenAI({
-          apiKey: env.openai.apiKey,
-          ...(env.openai.baseUrl ? { baseURL: env.openai.baseUrl } : {}),
         });
-
-        const openaiStream = await openai.chat.completions.create({
-          model: env.openai.model,
-          messages: chatMessages,
-          stream: true,
-          stream_options: { include_usage: true },
-        });
-
-        const contentChunks: string[] = [];
-        let finishReason: string | null = null;
-        let promptTokens: number | null = null;
-        let completionTokens: number | null = null;
-
-        for await (const chunk of openaiStream) {
-          if (chunk.usage) {
-            promptTokens = chunk.usage.prompt_tokens ?? null;
-            completionTokens = chunk.usage.completion_tokens ?? null;
-          }
-
-          const choice = chunk.choices?.[0];
-          if (!choice) continue;
-
-          if (choice.finish_reason) {
-            finishReason = choice.finish_reason;
-          }
-
-          const delta = choice.delta as Record<string, unknown>;
-
-          // Skip reasoning_content — only stream the regular content.
-          if (delta?.reasoning_content) continue;
-
-          const text = (delta?.content as string) ?? "";
-          if (text) {
-            contentChunks.push(text);
-            enqueue({ type: "delta", text });
-          }
-        }
-
-        const fullContent = contentChunks.join("");
 
         // ------------------------------------------------------------------
         // 7. Persist the assistant message
         // ------------------------------------------------------------------
+        const hasToolCalls = assistantResult.uiMessages.some(m => m.type === "tool_call");
+        const contentToSave = hasToolCalls
+          ? `__CANVAS_UI_MESSAGES__\n${JSON.stringify(assistantResult.uiMessages)}`
+          : assistantResult.content;
+
         const assistantRow = await insertMessage({
           conversationId,
           role: "assistant",
-          content: fullContent,
-          finishReason,
-          promptTokens,
-          completionTokens,
+          content: contentToSave,
+          finishReason: assistantResult.finishReason,
+          promptTokens: assistantResult.promptTokens,
+          completionTokens: assistantResult.completionTokens,
         });
 
         // ------------------------------------------------------------------

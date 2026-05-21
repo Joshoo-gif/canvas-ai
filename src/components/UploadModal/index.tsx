@@ -22,6 +22,13 @@ function formatBytes(bytes: number) {
   return `${Number.parseFloat((bytes / Math.pow(k, i)).toFixed(1))} ${sizes[i]}`;
 }
 
+function splitFileName(filename: string) {
+  const parts = filename.split(".");
+  if (parts.length === 1) return { base: filename, ext: "" };
+  const ext = "." + parts.pop();
+  return { base: parts.join("."), ext };
+}
+
 function getExtension(filename: string) {
   return filename.split(".").pop()?.toUpperCase() ?? "FILE";
 }
@@ -256,7 +263,14 @@ export default function UploadModal({
                     {getExtension(uploadedFile.name)}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className={`truncate text-base font-semibold ${tc.textPrimary}`}>{uploadedFile.name}</p>
+                    <div className="flex min-w-0 items-baseline">
+                      <p className={`truncate text-base font-semibold ${tc.textPrimary}`}>
+                        {splitFileName(uploadedFile.name).base}
+                      </p>
+                      <p className={`shrink-0 text-base font-semibold ${tc.textPrimary}`}>
+                        {splitFileName(uploadedFile.name).ext}
+                      </p>
+                    </div>
                     <p className={`mt-1 text-xs ${tc.textSecondary}`}>{formatBytes(uploadedFile.size)} · {getMimeLabel(uploadedFile.type)}</p>
                   </div>
                 </div>
@@ -299,7 +313,14 @@ export default function UploadModal({
                     {getExtension(uploadedFile.name)}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className={`truncate text-base font-semibold ${tc.textPrimary}`}>{uploadedFile.name}</p>
+                    <div className="flex min-w-0 items-baseline">
+                      <p className={`truncate text-base font-semibold ${tc.textPrimary}`}>
+                        {splitFileName(uploadedFile.name).base}
+                      </p>
+                      <p className={`shrink-0 text-base font-semibold ${tc.textPrimary}`}>
+                        {splitFileName(uploadedFile.name).ext}
+                      </p>
+                    </div>
                     <p className={`mt-1 text-xs ${tc.textSecondary}`}>{formatBytes(uploadedFile.size)} · {getMimeLabel(uploadedFile.type)}</p>
                   </div>
                 </div>
@@ -345,7 +366,14 @@ export default function UploadModal({
                     {getExtension(uploadedFile.name)}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className={`truncate text-base font-semibold ${tc.textPrimary}`}>{uploadedFile.name}</p>
+                    <div className="flex min-w-0 items-baseline">
+                      <p className={`truncate text-base font-semibold ${tc.textPrimary}`}>
+                        {splitFileName(uploadedFile.name).base}
+                      </p>
+                      <p className={`shrink-0 text-base font-semibold ${tc.textPrimary}`}>
+                        {splitFileName(uploadedFile.name).ext}
+                      </p>
+                    </div>
                     <p className={`mt-1 text-xs ${tc.textSecondary}`}>{formatBytes(uploadedFile.size)} · {getMimeLabel(uploadedFile.type)}</p>
                   </div>
                 </div>
@@ -390,7 +418,7 @@ export default function UploadModal({
           10%, 90% { transform: translate3d(-2px, 0, 0); }
           20%, 80% { transform: translate3d(4px, 0, 0); }
           30%, 50%, 70% { transform: translate3d(-6px, 0, 0); }
-          40%, 60% { transform: translate3d(6px, 0, 0); }
+          40%, 60% { transform: translate3d(4px, 0, 0); }
         }
         @keyframes spin {
           100% { transform: rotate(360deg); }

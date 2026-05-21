@@ -44,6 +44,7 @@ export function useChat({
   const [isStreaming, setIsStreaming] = useState(false);
   const [isLoadingHistory, setIsLoadingHistory] = useState(false);
   const conversationIdRef = useRef<string | null>(null);
+  const activeAssistantMessageIdRef = useRef<string | null>(null);
 
   const setStatus = useCallback(
     (status: string) => {
@@ -57,6 +58,7 @@ export function useChat({
 
     if (!workspaceId) {
       conversationIdRef.current = null;
+      activeAssistantMessageIdRef.current = null;
       setMessages([]);
       setIsLoadingHistory(false);
       setStatus("Create a workspace to start chatting.");
@@ -83,11 +85,13 @@ export function useChat({
         if (cancelled) return;
 
         conversationIdRef.current = payload.conversation?.id ?? null;
+        activeAssistantMessageIdRef.current = null;
         setMessages(payload.messages ?? []);
         setStatus(payload.messages.length > 0 ? "Agent Idle" : "Workspace Ready");
       } catch (error) {
         if (cancelled) return;
         conversationIdRef.current = null;
+        activeAssistantMessageIdRef.current = null;
         setMessages([]);
         setStatus(
           error instanceof Error
@@ -125,6 +129,7 @@ export function useChat({
 
       // Placeholder for the streaming assistant message.
       const assistantId = `agent-${Date.now()}`;
+      activeAssistantMessageIdRef.current = assistantId;
       const placeholderMsg: Message = {
         id: assistantId,
         sender: "agent",
@@ -180,31 +185,155 @@ export function useChat({
               if (event.conversationId) {
                 conversationIdRef.current = event.conversationId as string;
               }
-            } else if (event.type === "delta") {
-              const chunk = (event.text as string) ?? "";
+            } else if (event.type === "tool_call") {
+              const toolCallMessage: Message = {
+                id: event.toolCallId as string,
+                sender: "agent",
+                text: "",
+                timestamp: timestamp(),
+                toolCall: {
+                  id: event.toolCallId as string,
+                  name: event.name as string,
+                  target: event.target as string,
+                  artifactId:
+                    typeof event.artifactId === "string"
+                      ? event.artifactId
+                      : undefined,
+                  range:
+                    event.range &&
+                    typeof event.range === "object" &&
+                    typeof (event.range as { startLine?: unknown }).startLine ===
+                      "number" &&
+                    typeof (event.range as { endLine?: unknown }).endLine ===
+                      "number"
+                      ? {
+                          startLine: (event.range as { startLine: number })
+                            .startLine,
+                          endLine: (event.range as { endLine: number }).endLine,
+                        }
+                      : undefined,
+                  status: "running",
+                },
+              };
+
+              const currentAssistantMessageId =
+                activeAssistantMessageIdRef.current;
+
+              setMessages((prev) => {
+                if (!currentAssistantMessageId) {
+                  return [...prev, toolCallMessage];
+                }
+
+                const currentAssistantMessage = prev.find(
+                  (message) => message.id === currentAssistantMessageId,
+                );
+                const shouldRemoveEmptyPlaceholder =
+                  currentAssistantMessage?.sender === "agent" &&
+                  currentAssistantMessage.text.trim() === "" &&
+                  !currentAssistantMessage.toolCall &&
+                  !(currentAssistantMessage.thoughts?.length ?? 0);
+
+                if (!shouldRemoveEmptyPlaceholder) {
+                  return [...prev, toolCallMessage];
+                }
+
+                return [
+                  ...prev.filter(
+                    (message) => message.id !== currentAssistantMessageId,
+                  ),
+                  toolCallMessage,
+                ];
+              });
+
+              activeAssistantMessageIdRef.current = null;
+              setStatus(`Agent Inspecting ${toolCallMessage.toolCall?.name}...`);
+            } else if (event.type === "tool_result") {
+              const toolStatus =
+                event.status === "completed" || event.status === "failed"
+                  ? event.status
+                  : null;
+              if (!toolStatus) continue;
+
               setMessages((prev) =>
-                prev.map((m) =>
-                  m.id === assistantId
-                    ? { ...m, text: m.text + chunk }
-                    : m,
+                prev.map((message) =>
+                  message.id === (event.toolCallId as string) &&
+                  message.toolCall
+                    ? {
+                        ...message,
+                        toolCall: {
+                          ...message.toolCall,
+                          status: toolStatus,
+                        },
+                      }
+                    : message,
                 ),
               );
+
+              if (toolStatus === "failed") {
+                setStatus("Agent Error");
+              } else {
+                setStatus("Agent Responding...");
+              }
+            } else if (event.type === "delta") {
+              const chunk = (event.text as string) ?? "";
+              if (!chunk) continue;
+              const currentAssistantMessageId =
+                activeAssistantMessageIdRef.current;
+
+              if (!currentAssistantMessageId) {
+                const nextAssistantId = `agent-${Date.now()}`;
+                activeAssistantMessageIdRef.current = nextAssistantId;
+                setMessages((prev) => [
+                  ...prev,
+                  {
+                    id: nextAssistantId,
+                    sender: "agent",
+                    text: chunk,
+                    timestamp: timestamp(),
+                  },
+                ]);
+              } else {
+                setMessages((prev) =>
+                  prev.map((message) =>
+                    message.id === currentAssistantMessageId
+                      ? { ...message, text: message.text + chunk }
+                      : message,
+                  ),
+                );
+              }
             } else if (event.type === "done") {
               setStatus("Agent Idle");
             } else if (event.type === "error") {
               const errMsg = (event.message as string) ?? "Unknown error.";
-              setMessages((prev) =>
-                prev.map((m) =>
-                  m.id === assistantId
-                    ? {
-                        ...m,
-                        text:
-                          m.text ||
-                          `⚠️ Error: ${errMsg}`,
-                      }
-                    : m,
-                ),
-              );
+              const targetAssistantId =
+                activeAssistantMessageIdRef.current ?? assistantId;
+              activeAssistantMessageIdRef.current = null;
+              setMessages((prev) => {
+                const targetMessageExists = prev.some(
+                  (message) => message.id === targetAssistantId,
+                );
+
+                if (targetMessageExists) {
+                  return prev.map((message) =>
+                    message.id === targetAssistantId
+                      ? {
+                          ...message,
+                          text: message.text || `⚠️ Error: ${errMsg}`,
+                        }
+                      : message,
+                  );
+                }
+
+                return [
+                  ...prev,
+                  {
+                    id: `agent-error-${Date.now()}`,
+                    sender: "agent",
+                    text: `⚠️ Error: ${errMsg}`,
+                    timestamp: timestamp(),
+                  },
+                ];
+              });
               setStatus("Agent Error");
             }
           }
@@ -212,16 +341,35 @@ export function useChat({
       } catch (err: unknown) {
         const errMsg =
           err instanceof Error ? err.message : "Failed to reach the server.";
-        setMessages((prev) =>
-          prev.map((m) =>
-            m.id === assistantId
-              ? {
-                  ...m,
-                  text: m.text || `⚠️ ${errMsg}`,
-                }
-              : m,
-          ),
-        );
+        const targetAssistantId =
+          activeAssistantMessageIdRef.current ?? assistantId;
+        activeAssistantMessageIdRef.current = null;
+        setMessages((prev) => {
+          const targetMessageExists = prev.some(
+            (message) => message.id === targetAssistantId,
+          );
+
+          if (targetMessageExists) {
+            return prev.map((message) =>
+              message.id === targetAssistantId
+                ? {
+                    ...message,
+                    text: message.text || `⚠️ ${errMsg}`,
+                  }
+                : message,
+            );
+          }
+
+          return [
+            ...prev,
+            {
+              id: `agent-error-${Date.now()}`,
+              sender: "agent",
+              text: `⚠️ ${errMsg}`,
+              timestamp: timestamp(),
+            },
+          ];
+        });
         setStatus("Agent Error");
       } finally {
         setIsStreaming(false);

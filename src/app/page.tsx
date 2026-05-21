@@ -22,6 +22,7 @@ import { useChat } from "@/lib/chat/useChat";
 import {
   listWorkspaceFiles,
   uploadWorkspaceFile,
+  deleteWorkspaceFile,
 } from "@/lib/workspace-files/client";
 import { workspaceFilesToArtifacts, workspaceFileToArtifact } from "@/lib/workspace-files/mappers";
 import type { WorkspaceRow, WorkspaceFileRow } from "@/lib/supabase/types";
@@ -213,18 +214,26 @@ export default function WorkspacePage() {
   }, []);
 
   const handleToolCallClick = (toolCall: ToolCall) => {
-    if (!toolCall.range) return;
-
-    const artifact = openArtifacts.find(
-      (item) => item.name.toLowerCase() === toolCall.target.toLowerCase(),
-    );
+    const artifactFromId = toolCall.artifactId
+      ? workspaceFiles.find((file) => file.id === toolCall.artifactId)
+      : null;
+    const artifact =
+      artifactFromId ??
+      workspaceFiles.find(
+        (file) => file.original_name.toLowerCase() === toolCall.target.toLowerCase(),
+      );
 
     if (!artifact) return;
 
-    setActiveArtifactId(artifact.id);
-    setHighlightedRange(toolCall.range);
+    handleOpenArtifact(artifact);
+
+    if (toolCall.range) {
+      setHighlightedRange(toolCall.range);
+    }
     setAgentStatus(
-      `Inspecting lines ${toolCall.range.startLine}-${toolCall.range.endLine}`,
+      toolCall.range
+        ? `Inspecting lines ${toolCall.range.startLine}-${toolCall.range.endLine}`
+        : `Inspecting ${toolCall.name}`,
     );
     setMobileActiveTab("workspace");
   };
@@ -281,6 +290,23 @@ export default function WorkspacePage() {
       setAgentStatus(`Uploaded ${savedFile.original_name}`);
     },
     [activeWorkspaceId],
+  );
+
+  const handleDeleteFile = useCallback(
+    async (fileId: string) => {
+      if (!activeWorkspaceId) return;
+      try {
+        await deleteWorkspaceFile(activeWorkspaceId, fileId);
+        setWorkspaceFiles((current) => current.filter((file) => file.id !== fileId));
+        handleCloseArtifact(fileId);
+        setAgentStatus("File deleted successfully.");
+      } catch (error) {
+        setAgentStatus(
+          error instanceof Error ? `Failed to delete file: ${error.message}` : "Failed to delete file."
+        );
+      }
+    },
+    [activeWorkspaceId, handleCloseArtifact],
   );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: reset highlighted range when changing active tab
@@ -402,6 +428,7 @@ export default function WorkspacePage() {
               openArtifact={handleOpenArtifact}
               highlightedRange={highlightedRange}
               onUploadFiles={openUploadModal}
+              onDeleteFile={handleDeleteFile}
               settings={settings}
             />
           </div>
