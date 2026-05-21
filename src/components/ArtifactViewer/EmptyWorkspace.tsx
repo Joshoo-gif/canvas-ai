@@ -1,19 +1,19 @@
 "use client";
 
-import { FilePlus } from "lucide-react";
+import { FileUp } from "lucide-react";
 import type { ThemeClasses } from "@/components/ui";
 
 interface EmptyWorkspaceProps {
-  onDeployFiles: () => void;
+  onUploadFiles: () => void;
   tc: ThemeClasses;
 }
 
 /**
  * Shown when no artifacts are open in the ArtifactViewer.
- * Prompts the user to deploy sample files.
+ * Prompts the user to upload workspace files.
  */
 export default function EmptyWorkspace({
-  onDeployFiles,
+  onUploadFiles,
   tc,
 }: EmptyWorkspaceProps) {
   return (
@@ -23,23 +23,25 @@ export default function EmptyWorkspace({
       <div
         className={`mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border ${tc.emptyCard}`}
       >
-        <FilePlus className={`h-6 w-6 ${tc.textSecondary}`} />
+        <FileUp className={`h-6 w-6 ${tc.textSecondary}`} />
       </div>
 
       <h3 className={`mb-1.5 text-sm font-semibold ${tc.textPrimary}`}>
-        Workspace Empty
+        No files uploaded yet
       </h3>
 
       <p className={`mb-6 max-w-xs text-xs leading-relaxed ${tc.textSecondary}`}>
-        Deploy or drop files into the workspace to begin analysis.
+        Upload txt, md, pdf, or docx files to extract their text into numbered
+        lines for later AI reading.
       </p>
 
       <button
         type="button"
-        onClick={onDeployFiles}
-        className={`h-9 rounded-full px-5 text-xs font-semibold shadow-sm transition-all duration-200 ${tc.btnPrimary}`}
+        onClick={onUploadFiles}
+        className={`flex h-10 items-center gap-2 rounded-full px-5 text-xs font-semibold shadow-sm transition-all duration-200 ${tc.btnPrimary}`}
       >
-        Deploy Sample Files
+        <FileUp className="h-3.5 w-3.5" />
+        Upload file
       </button>
     </div>
   );

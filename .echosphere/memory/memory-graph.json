@@ -530,6 +530,878 @@
       ],
       "createdAt": "2026-05-21T11:33:16.261Z",
       "updatedAt": "2026-05-21T11:33:16.261Z"
+    },
+    {
+      "memoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "rootMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "parentMemoryIds": [
+        "84f40668-eecb-4871-abbc-1cad807fc0eb"
+      ],
+      "relatedMemoryIds": [
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd"
+      ],
+      "childMemoryIds": [
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1"
+      ],
+      "sectionKind": "fact",
+      "summary": "User wants the left workspace panel (ArtifactViewer area) to support uploading files, extract text from txt/md/pdf/docx into line-based content, persist the extracted content in Supabase, and leave a clean hook for a future AI file-reading tool. I inspected the workspace page, ArtifactViewer, chat input, workspace repository, Supabase schema/types, and existing API patterns to shape the plan.",
+      "affectedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "action": "inspected",
+          "reason": "This is the top-level workspace composition and controls the left ArtifactViewer panel where upload support should be integrated.",
+          "notes": "Contains current workspace state, sample artifacts, and panel layout."
+        },
+        {
+          "path": "src/components/ArtifactViewer/index.tsx",
+          "action": "inspected",
+          "reason": "This is the workspace panel component that will likely host upload/dropzone and file preview behavior.",
+          "notes": "Currently only renders tabs, content, and an empty state CTA."
+        },
+        {
+          "path": "src/components/ArtifactViewer/EmptyWorkspace.tsx",
+          "action": "inspected",
+          "reason": "This empty state is the most likely UI entry point for adding upload affordances and supported-format guidance.",
+          "notes": "Currently only offers a sample deploy button."
+        },
+        {
+          "path": "src/components/CommandCenter/ChatInput.tsx",
+          "action": "inspected",
+          "reason": "Contains an existing attachment button that may inform or share UX patterns for file input styling.",
+          "notes": "No file upload logic exists yet."
+        },
+        {
+          "path": "src/lib/workspace/repository.ts",
+          "action": "inspected",
+          "reason": "Shows the established Supabase repository pattern to mirror for workspace file persistence.",
+          "notes": "Useful for future repository separation."
+        },
+        {
+          "path": "src/lib/chat/repository.ts",
+          "action": "inspected",
+          "reason": "Provides the repository structure and validation/error-handling style to follow for new file ingestion helpers.",
+          "notes": "Good reference for server-side data access conventions."
+        },
+        {
+          "path": "src/lib/supabase/types.ts",
+          "action": "inspected",
+          "reason": "This file will need to be extended to include any new file/document tables introduced by the migration.",
+          "notes": "Must stay in sync with Supabase schema."
+        },
+        {
+          "path": "sqls/001_initial_schema.sql",
+          "action": "inspected",
+          "reason": "Baseline migration shows current tables and trigger/RLS patterns to extend for uploaded files.",
+          "notes": "New migration should follow the same style."
+        },
+        {
+          "path": "src/app/api/workspaces/route.ts",
+          "action": "inspected",
+          "reason": "Defines the existing API style for workspace list/create routes, which new file routes should match.",
+          "notes": "Validates JSON handling and error responses."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/chat/route.ts",
+          "action": "inspected",
+          "reason": "Shows the pattern for workspace-scoped API routes that the file ingestion route should mirror.",
+          "notes": "Useful for params handling and 404 behavior."
+        }
+      ],
+      "createdAt": "2026-05-21T11:58:56.512Z",
+      "updatedAt": "2026-05-21T11:58:56.512Z"
+    },
+    {
+      "memoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "rootMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "parentMemoryIds": [
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee"
+      ],
+      "relatedMemoryIds": [
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd"
+      ],
+      "childMemoryIds": [
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6"
+      ],
+      "sectionKind": "decision",
+      "summary": "User wants the left workspace panel (ArtifactViewer area) to support uploading files, extract text from txt/md/pdf/docx into line-based content, persist the extracted content in Supabase, and leave a clean hook for a future AI file-reading tool. I inspected the workspace page, ArtifactViewer, chat input, workspace repository, Supabase schema/types, and existing API patterns to shape the plan.",
+      "affectedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "action": "inspected",
+          "reason": "This is the top-level workspace composition and controls the left ArtifactViewer panel where upload support should be integrated.",
+          "notes": "Contains current workspace state, sample artifacts, and panel layout."
+        },
+        {
+          "path": "src/components/ArtifactViewer/index.tsx",
+          "action": "inspected",
+          "reason": "This is the workspace panel component that will likely host upload/dropzone and file preview behavior.",
+          "notes": "Currently only renders tabs, content, and an empty state CTA."
+        },
+        {
+          "path": "src/components/ArtifactViewer/EmptyWorkspace.tsx",
+          "action": "inspected",
+          "reason": "This empty state is the most likely UI entry point for adding upload affordances and supported-format guidance.",
+          "notes": "Currently only offers a sample deploy button."
+        },
+        {
+          "path": "src/components/CommandCenter/ChatInput.tsx",
+          "action": "inspected",
+          "reason": "Contains an existing attachment button that may inform or share UX patterns for file input styling.",
+          "notes": "No file upload logic exists yet."
+        },
+        {
+          "path": "src/lib/workspace/repository.ts",
+          "action": "inspected",
+          "reason": "Shows the established Supabase repository pattern to mirror for workspace file persistence.",
+          "notes": "Useful for future repository separation."
+        },
+        {
+          "path": "src/lib/chat/repository.ts",
+          "action": "inspected",
+          "reason": "Provides the repository structure and validation/error-handling style to follow for new file ingestion helpers.",
+          "notes": "Good reference for server-side data access conventions."
+        },
+        {
+          "path": "src/lib/supabase/types.ts",
+          "action": "inspected",
+          "reason": "This file will need to be extended to include any new file/document tables introduced by the migration.",
+          "notes": "Must stay in sync with Supabase schema."
+        },
+        {
+          "path": "sqls/001_initial_schema.sql",
+          "action": "inspected",
+          "reason": "Baseline migration shows current tables and trigger/RLS patterns to extend for uploaded files.",
+          "notes": "New migration should follow the same style."
+        },
+        {
+          "path": "src/app/api/workspaces/route.ts",
+          "action": "inspected",
+          "reason": "Defines the existing API style for workspace list/create routes, which new file routes should match.",
+          "notes": "Validates JSON handling and error responses."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/chat/route.ts",
+          "action": "inspected",
+          "reason": "Shows the pattern for workspace-scoped API routes that the file ingestion route should mirror.",
+          "notes": "Useful for params handling and 404 behavior."
+        }
+      ],
+      "createdAt": "2026-05-21T11:58:56.627Z",
+      "updatedAt": "2026-05-21T11:58:56.627Z"
+    },
+    {
+      "memoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "rootMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "parentMemoryIds": [
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1"
+      ],
+      "relatedMemoryIds": [
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "User wants the left workspace panel (ArtifactViewer area) to support uploading files, extract text from txt/md/pdf/docx into line-based content, persist the extracted content in Supabase, and leave a clean hook for a future AI file-reading tool. I inspected the workspace page, ArtifactViewer, chat input, workspace repository, Supabase schema/types, and existing API patterns to shape the plan.",
+      "affectedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "action": "inspected",
+          "reason": "This is the top-level workspace composition and controls the left ArtifactViewer panel where upload support should be integrated.",
+          "notes": "Contains current workspace state, sample artifacts, and panel layout."
+        },
+        {
+          "path": "src/components/ArtifactViewer/index.tsx",
+          "action": "inspected",
+          "reason": "This is the workspace panel component that will likely host upload/dropzone and file preview behavior.",
+          "notes": "Currently only renders tabs, content, and an empty state CTA."
+        },
+        {
+          "path": "src/components/ArtifactViewer/EmptyWorkspace.tsx",
+          "action": "inspected",
+          "reason": "This empty state is the most likely UI entry point for adding upload affordances and supported-format guidance.",
+          "notes": "Currently only offers a sample deploy button."
+        },
+        {
+          "path": "src/components/CommandCenter/ChatInput.tsx",
+          "action": "inspected",
+          "reason": "Contains an existing attachment button that may inform or share UX patterns for file input styling.",
+          "notes": "No file upload logic exists yet."
+        },
+        {
+          "path": "src/lib/workspace/repository.ts",
+          "action": "inspected",
+          "reason": "Shows the established Supabase repository pattern to mirror for workspace file persistence.",
+          "notes": "Useful for future repository separation."
+        },
+        {
+          "path": "src/lib/chat/repository.ts",
+          "action": "inspected",
+          "reason": "Provides the repository structure and validation/error-handling style to follow for new file ingestion helpers.",
+          "notes": "Good reference for server-side data access conventions."
+        },
+        {
+          "path": "src/lib/supabase/types.ts",
+          "action": "inspected",
+          "reason": "This file will need to be extended to include any new file/document tables introduced by the migration.",
+          "notes": "Must stay in sync with Supabase schema."
+        },
+        {
+          "path": "sqls/001_initial_schema.sql",
+          "action": "inspected",
+          "reason": "Baseline migration shows current tables and trigger/RLS patterns to extend for uploaded files.",
+          "notes": "New migration should follow the same style."
+        },
+        {
+          "path": "src/app/api/workspaces/route.ts",
+          "action": "inspected",
+          "reason": "Defines the existing API style for workspace list/create routes, which new file routes should match.",
+          "notes": "Validates JSON handling and error responses."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/chat/route.ts",
+          "action": "inspected",
+          "reason": "Shows the pattern for workspace-scoped API routes that the file ingestion route should mirror.",
+          "notes": "Useful for params handling and 404 behavior."
+        }
+      ],
+      "createdAt": "2026-05-21T11:58:56.748Z",
+      "updatedAt": "2026-05-21T11:58:56.748Z"
+    },
+    {
+      "memoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "rootMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "parentMemoryIds": [
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1"
+      ],
+      "relatedMemoryIds": [
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490"
+      ],
+      "childMemoryIds": [
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "sectionKind": "fact",
+      "summary": "Implemented workspace file upload and text extraction flow. The workspace panel now exposes a real upload button and empty-state CTA, uploads txt/md/pdf/docx through a workspace-scoped API route, extracts normalized line-based text on the server, persists uploaded file metadata and extracted lines in Supabase, and keeps a repository hook ready for future AI file-reading tools.",
+      "affectedFiles": [
+        {
+          "path": "sqls/002_workspace_files.sql",
+          "action": "created",
+          "reason": "Adds the new Supabase table and related indexes/triggers needed to persist uploaded files and extracted lines.",
+          "notes": "Includes RLS enablement and updated_at trigger."
+        },
+        {
+          "path": "src/lib/supabase/types.ts",
+          "action": "modified",
+          "reason": "Extends the generated-style database contract with workspace file row, insert, and relationship types.",
+          "notes": "Keeps client/server type usage explicit."
+        },
+        {
+          "path": "src/lib/workspace-files/validation.ts",
+          "action": "created",
+          "reason": "Centralizes file-type allowlisting, size limits, and accept-string generation for upload validation.",
+          "notes": "Shared by client and server code."
+        },
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "created",
+          "reason": "Implements server-side extraction and normalization for txt, md, pdf, and docx files into line arrays.",
+          "notes": "Uses built-in parsing logic rather than external packages."
+        },
+        {
+          "path": "src/lib/workspace-files/repository.ts",
+          "action": "created",
+          "reason": "Provides Supabase persistence and retrieval helpers for uploaded workspace files, plus a reusable line-range helper for future AI reads.",
+          "notes": "Server-side data access only."
+        },
+        {
+          "path": "src/lib/workspace-files/client.ts",
+          "action": "created",
+          "reason": "Wraps the workspace file API for the client-side page orchestration layer.",
+          "notes": "Handles fetch, upload, and response validation."
+        },
+        {
+          "path": "src/lib/workspace-files/mappers.ts",
+          "action": "created",
+          "reason": "Converts persisted file rows into ArtifactViewer artifacts so uploaded files render with the existing line-based viewer.",
+          "notes": "Keeps UI mapping separate from data access."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/files/route.ts",
+          "action": "created",
+          "reason": "Exposes workspace-scoped GET and POST endpoints for listing and uploading extracted files.",
+          "notes": "Validates workspace existence and multipart uploads."
+        },
+        {
+          "path": "src/components/ArtifactViewer/index.tsx",
+          "action": "modified",
+          "reason": "Adds the workspace file header upload control to the left panel while keeping the viewer composition-focused.",
+          "notes": "Now accepts fileCount and onUploadFiles props."
+        },
+        {
+          "path": "src/components/ArtifactViewer/EmptyWorkspace.tsx",
+          "action": "modified",
+          "reason": "Reworks the empty state into a file upload call to action with the supported document formats.",
+          "notes": "Removed the old sample deploy wording."
+        },
+        {
+          "path": "src/components/ArtifactViewer/WorkspacePanelHeader.tsx",
+          "action": "created",
+          "reason": "Provides the new top-of-panel upload entry point and file count display without bloating the viewer entry file.",
+          "notes": "Uses neutral styling consistent with the app."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Orchestrates workspace file loading, upload actions, hidden file input handling, and artifact state synchronization.",
+          "notes": "Keeps the page as the composition layer and delegates extraction/persistence to helpers."
+        }
+      ],
+      "createdAt": "2026-05-21T12:13:25.928Z",
+      "updatedAt": "2026-05-21T12:13:25.928Z"
+    },
+    {
+      "memoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "rootMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "parentMemoryIds": [
+        "f711082b-2766-4a8a-9e95-dd15d29678fa"
+      ],
+      "relatedMemoryIds": [
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490"
+      ],
+      "childMemoryIds": [
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3"
+      ],
+      "sectionKind": "decision",
+      "summary": "Implemented workspace file upload and text extraction flow. The workspace panel now exposes a real upload button and empty-state CTA, uploads txt/md/pdf/docx through a workspace-scoped API route, extracts normalized line-based text on the server, persists uploaded file metadata and extracted lines in Supabase, and keeps a repository hook ready for future AI file-reading tools.",
+      "affectedFiles": [
+        {
+          "path": "sqls/002_workspace_files.sql",
+          "action": "created",
+          "reason": "Adds the new Supabase table and related indexes/triggers needed to persist uploaded files and extracted lines.",
+          "notes": "Includes RLS enablement and updated_at trigger."
+        },
+        {
+          "path": "src/lib/supabase/types.ts",
+          "action": "modified",
+          "reason": "Extends the generated-style database contract with workspace file row, insert, and relationship types.",
+          "notes": "Keeps client/server type usage explicit."
+        },
+        {
+          "path": "src/lib/workspace-files/validation.ts",
+          "action": "created",
+          "reason": "Centralizes file-type allowlisting, size limits, and accept-string generation for upload validation.",
+          "notes": "Shared by client and server code."
+        },
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "created",
+          "reason": "Implements server-side extraction and normalization for txt, md, pdf, and docx files into line arrays.",
+          "notes": "Uses built-in parsing logic rather than external packages."
+        },
+        {
+          "path": "src/lib/workspace-files/repository.ts",
+          "action": "created",
+          "reason": "Provides Supabase persistence and retrieval helpers for uploaded workspace files, plus a reusable line-range helper for future AI reads.",
+          "notes": "Server-side data access only."
+        },
+        {
+          "path": "src/lib/workspace-files/client.ts",
+          "action": "created",
+          "reason": "Wraps the workspace file API for the client-side page orchestration layer.",
+          "notes": "Handles fetch, upload, and response validation."
+        },
+        {
+          "path": "src/lib/workspace-files/mappers.ts",
+          "action": "created",
+          "reason": "Converts persisted file rows into ArtifactViewer artifacts so uploaded files render with the existing line-based viewer.",
+          "notes": "Keeps UI mapping separate from data access."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/files/route.ts",
+          "action": "created",
+          "reason": "Exposes workspace-scoped GET and POST endpoints for listing and uploading extracted files.",
+          "notes": "Validates workspace existence and multipart uploads."
+        },
+        {
+          "path": "src/components/ArtifactViewer/index.tsx",
+          "action": "modified",
+          "reason": "Adds the workspace file header upload control to the left panel while keeping the viewer composition-focused.",
+          "notes": "Now accepts fileCount and onUploadFiles props."
+        },
+        {
+          "path": "src/components/ArtifactViewer/EmptyWorkspace.tsx",
+          "action": "modified",
+          "reason": "Reworks the empty state into a file upload call to action with the supported document formats.",
+          "notes": "Removed the old sample deploy wording."
+        },
+        {
+          "path": "src/components/ArtifactViewer/WorkspacePanelHeader.tsx",
+          "action": "created",
+          "reason": "Provides the new top-of-panel upload entry point and file count display without bloating the viewer entry file.",
+          "notes": "Uses neutral styling consistent with the app."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Orchestrates workspace file loading, upload actions, hidden file input handling, and artifact state synchronization.",
+          "notes": "Keeps the page as the composition layer and delegates extraction/persistence to helpers."
+        }
+      ],
+      "createdAt": "2026-05-21T12:13:26.053Z",
+      "updatedAt": "2026-05-21T12:13:26.053Z"
+    },
+    {
+      "memoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "rootMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "parentMemoryIds": [
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "relatedMemoryIds": [
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Implemented workspace file upload and text extraction flow. The workspace panel now exposes a real upload button and empty-state CTA, uploads txt/md/pdf/docx through a workspace-scoped API route, extracts normalized line-based text on the server, persists uploaded file metadata and extracted lines in Supabase, and keeps a repository hook ready for future AI file-reading tools.",
+      "affectedFiles": [
+        {
+          "path": "sqls/002_workspace_files.sql",
+          "action": "created",
+          "reason": "Adds the new Supabase table and related indexes/triggers needed to persist uploaded files and extracted lines.",
+          "notes": "Includes RLS enablement and updated_at trigger."
+        },
+        {
+          "path": "src/lib/supabase/types.ts",
+          "action": "modified",
+          "reason": "Extends the generated-style database contract with workspace file row, insert, and relationship types.",
+          "notes": "Keeps client/server type usage explicit."
+        },
+        {
+          "path": "src/lib/workspace-files/validation.ts",
+          "action": "created",
+          "reason": "Centralizes file-type allowlisting, size limits, and accept-string generation for upload validation.",
+          "notes": "Shared by client and server code."
+        },
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "created",
+          "reason": "Implements server-side extraction and normalization for txt, md, pdf, and docx files into line arrays.",
+          "notes": "Uses built-in parsing logic rather than external packages."
+        },
+        {
+          "path": "src/lib/workspace-files/repository.ts",
+          "action": "created",
+          "reason": "Provides Supabase persistence and retrieval helpers for uploaded workspace files, plus a reusable line-range helper for future AI reads.",
+          "notes": "Server-side data access only."
+        },
+        {
+          "path": "src/lib/workspace-files/client.ts",
+          "action": "created",
+          "reason": "Wraps the workspace file API for the client-side page orchestration layer.",
+          "notes": "Handles fetch, upload, and response validation."
+        },
+        {
+          "path": "src/lib/workspace-files/mappers.ts",
+          "action": "created",
+          "reason": "Converts persisted file rows into ArtifactViewer artifacts so uploaded files render with the existing line-based viewer.",
+          "notes": "Keeps UI mapping separate from data access."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/files/route.ts",
+          "action": "created",
+          "reason": "Exposes workspace-scoped GET and POST endpoints for listing and uploading extracted files.",
+          "notes": "Validates workspace existence and multipart uploads."
+        },
+        {
+          "path": "src/components/ArtifactViewer/index.tsx",
+          "action": "modified",
+          "reason": "Adds the workspace file header upload control to the left panel while keeping the viewer composition-focused.",
+          "notes": "Now accepts fileCount and onUploadFiles props."
+        },
+        {
+          "path": "src/components/ArtifactViewer/EmptyWorkspace.tsx",
+          "action": "modified",
+          "reason": "Reworks the empty state into a file upload call to action with the supported document formats.",
+          "notes": "Removed the old sample deploy wording."
+        },
+        {
+          "path": "src/components/ArtifactViewer/WorkspacePanelHeader.tsx",
+          "action": "created",
+          "reason": "Provides the new top-of-panel upload entry point and file count display without bloating the viewer entry file.",
+          "notes": "Uses neutral styling consistent with the app."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Orchestrates workspace file loading, upload actions, hidden file input handling, and artifact state synchronization.",
+          "notes": "Keeps the page as the composition layer and delegates extraction/persistence to helpers."
+        }
+      ],
+      "createdAt": "2026-05-21T12:13:26.181Z",
+      "updatedAt": "2026-05-21T12:13:26.181Z"
+    },
+    {
+      "memoryId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "rootMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "parentMemoryIds": [
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "relatedMemoryIds": [
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee"
+      ],
+      "childMemoryIds": [
+        "98b9b58b-6637-4106-a88b-ceeb865b3abe"
+      ],
+      "sectionKind": "fact",
+      "summary": "Fixed the workspace file upload failure caused by malformed Unicode reaching Supabase. The ingestion pipeline now sanitizes extracted and inserted text to remove NULs and lone surrogates before persistence, which should prevent the Postgres Unicode escape error during file uploads.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Added Unicode normalization and sanitization for extracted file text, line arrays, and upload metadata before persistence.",
+          "notes": "Removes NUL characters and lone surrogates."
+        },
+        {
+          "path": "src/lib/workspace-files/repository.ts",
+          "action": "modified",
+          "reason": "Added defensive sanitization before the Supabase insert to prevent malformed Unicode from reaching the database.",
+          "notes": "Provides a second validation layer at persistence time."
+        }
+      ],
+      "createdAt": "2026-05-21T12:16:53.451Z",
+      "updatedAt": "2026-05-21T12:16:53.451Z"
+    },
+    {
+      "memoryId": "98b9b58b-6637-4106-a88b-ceeb865b3abe",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "rootMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "parentMemoryIds": [
+        "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d"
+      ],
+      "relatedMemoryIds": [
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee"
+      ],
+      "childMemoryIds": [
+        "773a6839-5c90-4e3a-a450-67d4d592e55d"
+      ],
+      "sectionKind": "decision",
+      "summary": "Fixed the workspace file upload failure caused by malformed Unicode reaching Supabase. The ingestion pipeline now sanitizes extracted and inserted text to remove NULs and lone surrogates before persistence, which should prevent the Postgres Unicode escape error during file uploads.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Added Unicode normalization and sanitization for extracted file text, line arrays, and upload metadata before persistence.",
+          "notes": "Removes NUL characters and lone surrogates."
+        },
+        {
+          "path": "src/lib/workspace-files/repository.ts",
+          "action": "modified",
+          "reason": "Added defensive sanitization before the Supabase insert to prevent malformed Unicode from reaching the database.",
+          "notes": "Provides a second validation layer at persistence time."
+        }
+      ],
+      "createdAt": "2026-05-21T12:16:53.534Z",
+      "updatedAt": "2026-05-21T12:16:53.534Z"
+    },
+    {
+      "memoryId": "773a6839-5c90-4e3a-a450-67d4d592e55d",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "rootMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "parentMemoryIds": [
+        "98b9b58b-6637-4106-a88b-ceeb865b3abe"
+      ],
+      "relatedMemoryIds": [
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Fixed the workspace file upload failure caused by malformed Unicode reaching Supabase. The ingestion pipeline now sanitizes extracted and inserted text to remove NULs and lone surrogates before persistence, which should prevent the Postgres Unicode escape error during file uploads.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Added Unicode normalization and sanitization for extracted file text, line arrays, and upload metadata before persistence.",
+          "notes": "Removes NUL characters and lone surrogates."
+        },
+        {
+          "path": "src/lib/workspace-files/repository.ts",
+          "action": "modified",
+          "reason": "Added defensive sanitization before the Supabase insert to prevent malformed Unicode from reaching the database.",
+          "notes": "Provides a second validation layer at persistence time."
+        }
+      ],
+      "createdAt": "2026-05-21T12:16:53.617Z",
+      "updatedAt": "2026-05-21T12:16:53.617Z"
+    },
+    {
+      "memoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "rootMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "parentMemoryIds": [
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3"
+      ],
+      "relatedMemoryIds": [
+        "144113e3-18c7-413e-a408-87aa6c726015",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6"
+      ],
+      "childMemoryIds": [
+        "0d22b756-7bed-4f69-ab26-12933f6a4dc6"
+      ],
+      "sectionKind": "fact",
+      "summary": "Switched workspace file ingestion from hand-rolled parsing to dedicated PDF/DOCX libraries. The upload path now targets @cedrugs/pdf-parse for PDFs and mammoth for DOCX, while continuing to normalize extracted text into numbered lines for the viewer and future AI file-reading tool. Added ambient declarations for the new modules and updated package.json dependencies accordingly.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Replaced the custom PDF/DOCX extraction heuristics with proper parser-based extraction so uploads yield readable text lines.",
+          "notes": "Keeps sanitization and line normalization after extraction."
+        },
+        {
+          "path": "package.json",
+          "action": "modified",
+          "reason": "Added the new parser dependencies required for readable PDF and DOCX extraction.",
+          "notes": "Dependencies need to be installed into node_modules."
+        },
+        {
+          "path": "src/types/mammoth.d.ts",
+          "action": "created",
+          "reason": "Provides an explicit TypeScript contract for the mammoth parser import used by the ingestion layer.",
+          "notes": "Keeps the module boundary typed."
+        },
+        {
+          "path": "src/types/cedrugs-pdf-parse.d.ts",
+          "action": "created",
+          "reason": "Provides an explicit TypeScript contract for the PDF parser import used by the ingestion layer.",
+          "notes": "Keeps the module boundary typed."
+        }
+      ],
+      "createdAt": "2026-05-21T12:29:21.674Z",
+      "updatedAt": "2026-05-21T12:29:21.674Z"
+    },
+    {
+      "memoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "rootMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "parentMemoryIds": [
+        "c8c67f4c-369d-44c5-b82a-3a573828e885"
+      ],
+      "relatedMemoryIds": [
+        "144113e3-18c7-413e-a408-87aa6c726015",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6"
+      ],
+      "childMemoryIds": [
+        "78fd018a-a322-4c4c-b968-030b915af986"
+      ],
+      "sectionKind": "decision",
+      "summary": "Switched workspace file ingestion from hand-rolled parsing to dedicated PDF/DOCX libraries. The upload path now targets @cedrugs/pdf-parse for PDFs and mammoth for DOCX, while continuing to normalize extracted text into numbered lines for the viewer and future AI file-reading tool. Added ambient declarations for the new modules and updated package.json dependencies accordingly.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Replaced the custom PDF/DOCX extraction heuristics with proper parser-based extraction so uploads yield readable text lines.",
+          "notes": "Keeps sanitization and line normalization after extraction."
+        },
+        {
+          "path": "package.json",
+          "action": "modified",
+          "reason": "Added the new parser dependencies required for readable PDF and DOCX extraction.",
+          "notes": "Dependencies need to be installed into node_modules."
+        },
+        {
+          "path": "src/types/mammoth.d.ts",
+          "action": "created",
+          "reason": "Provides an explicit TypeScript contract for the mammoth parser import used by the ingestion layer.",
+          "notes": "Keeps the module boundary typed."
+        },
+        {
+          "path": "src/types/cedrugs-pdf-parse.d.ts",
+          "action": "created",
+          "reason": "Provides an explicit TypeScript contract for the PDF parser import used by the ingestion layer.",
+          "notes": "Keeps the module boundary typed."
+        }
+      ],
+      "createdAt": "2026-05-21T12:29:21.760Z",
+      "updatedAt": "2026-05-21T12:29:21.760Z"
+    },
+    {
+      "memoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "rootMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "parentMemoryIds": [
+        "0d22b756-7bed-4f69-ab26-12933f6a4dc6"
+      ],
+      "relatedMemoryIds": [
+        "144113e3-18c7-413e-a408-87aa6c726015",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+        "6a80611f-a231-44c2-8daa-8e5b092fbaa6"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Switched workspace file ingestion from hand-rolled parsing to dedicated PDF/DOCX libraries. The upload path now targets @cedrugs/pdf-parse for PDFs and mammoth for DOCX, while continuing to normalize extracted text into numbered lines for the viewer and future AI file-reading tool. Added ambient declarations for the new modules and updated package.json dependencies accordingly.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Replaced the custom PDF/DOCX extraction heuristics with proper parser-based extraction so uploads yield readable text lines.",
+          "notes": "Keeps sanitization and line normalization after extraction."
+        },
+        {
+          "path": "package.json",
+          "action": "modified",
+          "reason": "Added the new parser dependencies required for readable PDF and DOCX extraction.",
+          "notes": "Dependencies need to be installed into node_modules."
+        },
+        {
+          "path": "src/types/mammoth.d.ts",
+          "action": "created",
+          "reason": "Provides an explicit TypeScript contract for the mammoth parser import used by the ingestion layer.",
+          "notes": "Keeps the module boundary typed."
+        },
+        {
+          "path": "src/types/cedrugs-pdf-parse.d.ts",
+          "action": "created",
+          "reason": "Provides an explicit TypeScript contract for the PDF parser import used by the ingestion layer.",
+          "notes": "Keeps the module boundary typed."
+        }
+      ],
+      "createdAt": "2026-05-21T12:29:21.852Z",
+      "updatedAt": "2026-05-21T12:29:21.852Z"
+    },
+    {
+      "memoryId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "rootMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "parentMemoryIds": [
+        "0d22b756-7bed-4f69-ab26-12933f6a4dc6"
+      ],
+      "relatedMemoryIds": [
+        "c8c67f4c-369d-44c5-b82a-3a573828e885",
+        "78fd018a-a322-4c4c-b968-030b915af986",
+        "144113e3-18c7-413e-a408-87aa6c726015",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa"
+      ],
+      "childMemoryIds": [
+        "9348ff4c-d95d-455a-a3ec-7d55fe99591d"
+      ],
+      "sectionKind": "fact",
+      "summary": "Updated workspace document ingestion so extracted PDF/DOCX/TXT/MD content now drops leading and trailing blank lines before storing both the numbered line array and the concatenated extracted text. This keeps the downstream contract intact while removing empty boundary lines from uploaded documents.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Implemented trimming of leading and trailing empty lines during workspace document ingestion and rebuilt stored extracted text from the trimmed lines.",
+          "notes": "No other files were changed for this fix."
+        }
+      ],
+      "createdAt": "2026-05-21T12:51:11.142Z",
+      "updatedAt": "2026-05-21T12:51:11.142Z"
+    },
+    {
+      "memoryId": "9348ff4c-d95d-455a-a3ec-7d55fe99591d",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "rootMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "parentMemoryIds": [
+        "dddba644-7772-43c4-99cf-7d6dec958f54"
+      ],
+      "relatedMemoryIds": [
+        "c8c67f4c-369d-44c5-b82a-3a573828e885",
+        "78fd018a-a322-4c4c-b968-030b915af986",
+        "144113e3-18c7-413e-a408-87aa6c726015",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa"
+      ],
+      "childMemoryIds": [
+        "972d9a53-cc61-4ff1-9baf-0c5555e23f2a"
+      ],
+      "sectionKind": "decision",
+      "summary": "Updated workspace document ingestion so extracted PDF/DOCX/TXT/MD content now drops leading and trailing blank lines before storing both the numbered line array and the concatenated extracted text. This keeps the downstream contract intact while removing empty boundary lines from uploaded documents.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Implemented trimming of leading and trailing empty lines during workspace document ingestion and rebuilt stored extracted text from the trimmed lines.",
+          "notes": "No other files were changed for this fix."
+        }
+      ],
+      "createdAt": "2026-05-21T12:51:11.209Z",
+      "updatedAt": "2026-05-21T12:51:11.209Z"
+    },
+    {
+      "memoryId": "972d9a53-cc61-4ff1-9baf-0c5555e23f2a",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "rootMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "parentMemoryIds": [
+        "9348ff4c-d95d-455a-a3ec-7d55fe99591d"
+      ],
+      "relatedMemoryIds": [
+        "c8c67f4c-369d-44c5-b82a-3a573828e885",
+        "78fd018a-a322-4c4c-b968-030b915af986",
+        "144113e3-18c7-413e-a408-87aa6c726015",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Updated workspace document ingestion so extracted PDF/DOCX/TXT/MD content now drops leading and trailing blank lines before storing both the numbered line array and the concatenated extracted text. This keeps the downstream contract intact while removing empty boundary lines from uploaded documents.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Implemented trimming of leading and trailing empty lines during workspace document ingestion and rebuilt stored extracted text from the trimmed lines.",
+          "notes": "No other files were changed for this fix."
+        }
+      ],
+      "createdAt": "2026-05-21T12:51:11.272Z",
+      "updatedAt": "2026-05-21T12:51:11.272Z"
     }
   ],
   "edges": [
@@ -784,7 +1656,602 @@
       "relation": "related",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
       "createdAt": "2026-05-21T11:33:16.261Z"
+    },
+    {
+      "fromMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.512Z"
+    },
+    {
+      "fromMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.512Z"
+    },
+    {
+      "fromMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.512Z"
+    },
+    {
+      "fromMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.512Z"
+    },
+    {
+      "fromMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.512Z"
+    },
+    {
+      "fromMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.512Z"
+    },
+    {
+      "fromMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.627Z"
+    },
+    {
+      "fromMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.627Z"
+    },
+    {
+      "fromMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.627Z"
+    },
+    {
+      "fromMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.627Z"
+    },
+    {
+      "fromMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.627Z"
+    },
+    {
+      "fromMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.627Z"
+    },
+    {
+      "fromMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.748Z"
+    },
+    {
+      "fromMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.748Z"
+    },
+    {
+      "fromMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.748Z"
+    },
+    {
+      "fromMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.748Z"
+    },
+    {
+      "fromMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:58:56.748Z"
+    },
+    {
+      "fromMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:25.928Z"
+    },
+    {
+      "fromMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:25.928Z"
+    },
+    {
+      "fromMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:25.928Z"
+    },
+    {
+      "fromMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:25.928Z"
+    },
+    {
+      "fromMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:25.928Z"
+    },
+    {
+      "fromMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:25.928Z"
+    },
+    {
+      "fromMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.053Z"
+    },
+    {
+      "fromMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.053Z"
+    },
+    {
+      "fromMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.053Z"
+    },
+    {
+      "fromMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.053Z"
+    },
+    {
+      "fromMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.053Z"
+    },
+    {
+      "fromMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.053Z"
+    },
+    {
+      "fromMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.181Z"
+    },
+    {
+      "fromMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.182Z"
+    },
+    {
+      "fromMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.182Z"
+    },
+    {
+      "fromMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.182Z"
+    },
+    {
+      "fromMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:13:26.182Z"
+    },
+    {
+      "fromMemoryId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.451Z"
+    },
+    {
+      "fromMemoryId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.451Z"
+    },
+    {
+      "fromMemoryId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.451Z"
+    },
+    {
+      "fromMemoryId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.451Z"
+    },
+    {
+      "fromMemoryId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.451Z"
+    },
+    {
+      "fromMemoryId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "toMemoryId": "98b9b58b-6637-4106-a88b-ceeb865b3abe",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.451Z"
+    },
+    {
+      "fromMemoryId": "98b9b58b-6637-4106-a88b-ceeb865b3abe",
+      "toMemoryId": "f132b4ab-a1fa-44ed-9c6a-03cf8f561d5d",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.534Z"
+    },
+    {
+      "fromMemoryId": "98b9b58b-6637-4106-a88b-ceeb865b3abe",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.534Z"
+    },
+    {
+      "fromMemoryId": "98b9b58b-6637-4106-a88b-ceeb865b3abe",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.534Z"
+    },
+    {
+      "fromMemoryId": "98b9b58b-6637-4106-a88b-ceeb865b3abe",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.534Z"
+    },
+    {
+      "fromMemoryId": "98b9b58b-6637-4106-a88b-ceeb865b3abe",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.534Z"
+    },
+    {
+      "fromMemoryId": "98b9b58b-6637-4106-a88b-ceeb865b3abe",
+      "toMemoryId": "773a6839-5c90-4e3a-a450-67d4d592e55d",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.534Z"
+    },
+    {
+      "fromMemoryId": "773a6839-5c90-4e3a-a450-67d4d592e55d",
+      "toMemoryId": "98b9b58b-6637-4106-a88b-ceeb865b3abe",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.617Z"
+    },
+    {
+      "fromMemoryId": "773a6839-5c90-4e3a-a450-67d4d592e55d",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.617Z"
+    },
+    {
+      "fromMemoryId": "773a6839-5c90-4e3a-a450-67d4d592e55d",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.617Z"
+    },
+    {
+      "fromMemoryId": "773a6839-5c90-4e3a-a450-67d4d592e55d",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.617Z"
+    },
+    {
+      "fromMemoryId": "773a6839-5c90-4e3a-a450-67d4d592e55d",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:16:53.617Z"
+    },
+    {
+      "fromMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.674Z"
+    },
+    {
+      "fromMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.674Z"
+    },
+    {
+      "fromMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.674Z"
+    },
+    {
+      "fromMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.674Z"
+    },
+    {
+      "fromMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.674Z"
+    },
+    {
+      "fromMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "toMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.674Z"
+    },
+    {
+      "fromMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "toMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.760Z"
+    },
+    {
+      "fromMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.760Z"
+    },
+    {
+      "fromMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.760Z"
+    },
+    {
+      "fromMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.760Z"
+    },
+    {
+      "fromMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.760Z"
+    },
+    {
+      "fromMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "toMemoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.760Z"
+    },
+    {
+      "fromMemoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "toMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.852Z"
+    },
+    {
+      "fromMemoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.852Z"
+    },
+    {
+      "fromMemoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.852Z"
+    },
+    {
+      "fromMemoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.852Z"
+    },
+    {
+      "fromMemoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "toMemoryId": "6a80611f-a231-44c2-8daa-8e5b092fbaa6",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:29:21.852Z"
+    },
+    {
+      "fromMemoryId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "toMemoryId": "0d22b756-7bed-4f69-ab26-12933f6a4dc6",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.142Z"
+    },
+    {
+      "fromMemoryId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "toMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.142Z"
+    },
+    {
+      "fromMemoryId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "toMemoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.142Z"
+    },
+    {
+      "fromMemoryId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.142Z"
+    },
+    {
+      "fromMemoryId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.142Z"
+    },
+    {
+      "fromMemoryId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "toMemoryId": "9348ff4c-d95d-455a-a3ec-7d55fe99591d",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.142Z"
+    },
+    {
+      "fromMemoryId": "9348ff4c-d95d-455a-a3ec-7d55fe99591d",
+      "toMemoryId": "dddba644-7772-43c4-99cf-7d6dec958f54",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.209Z"
+    },
+    {
+      "fromMemoryId": "9348ff4c-d95d-455a-a3ec-7d55fe99591d",
+      "toMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.209Z"
+    },
+    {
+      "fromMemoryId": "9348ff4c-d95d-455a-a3ec-7d55fe99591d",
+      "toMemoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.209Z"
+    },
+    {
+      "fromMemoryId": "9348ff4c-d95d-455a-a3ec-7d55fe99591d",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.209Z"
+    },
+    {
+      "fromMemoryId": "9348ff4c-d95d-455a-a3ec-7d55fe99591d",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.209Z"
+    },
+    {
+      "fromMemoryId": "9348ff4c-d95d-455a-a3ec-7d55fe99591d",
+      "toMemoryId": "972d9a53-cc61-4ff1-9baf-0c5555e23f2a",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.209Z"
+    },
+    {
+      "fromMemoryId": "972d9a53-cc61-4ff1-9baf-0c5555e23f2a",
+      "toMemoryId": "9348ff4c-d95d-455a-a3ec-7d55fe99591d",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.272Z"
+    },
+    {
+      "fromMemoryId": "972d9a53-cc61-4ff1-9baf-0c5555e23f2a",
+      "toMemoryId": "c8c67f4c-369d-44c5-b82a-3a573828e885",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.272Z"
+    },
+    {
+      "fromMemoryId": "972d9a53-cc61-4ff1-9baf-0c5555e23f2a",
+      "toMemoryId": "78fd018a-a322-4c4c-b968-030b915af986",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.272Z"
+    },
+    {
+      "fromMemoryId": "972d9a53-cc61-4ff1-9baf-0c5555e23f2a",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.272Z"
+    },
+    {
+      "fromMemoryId": "972d9a53-cc61-4ff1-9baf-0c5555e23f2a",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T12:51:11.272Z"
     }
   ],
-  "updatedAt": "2026-05-21T11:33:16.262Z"
+  "updatedAt": "2026-05-21T12:51:11.273Z"
 }

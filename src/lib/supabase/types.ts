@@ -1,6 +1,6 @@
 /**
  * Database type definitions derived from the Supabase schema.
- * Keep this file in sync with sqls/001_initial_schema.sql.
+ * Keep this file in sync with sqls/001_initial_schema.sql and sqls/002_workspace_files.sql.
  *
  * When using the Supabase CLI you can auto-generate this file with:
  *   npx supabase gen types typescript --project-id <project-ref> > src/lib/supabase/types.ts
@@ -19,6 +19,22 @@ export interface WorkspaceRow {
   id: string;
   name: string;
   description: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface WorkspaceFileRow {
+  id: string;
+  workspace_id: string;
+  original_name: string;
+  mime_type: string;
+  extension: string;
+  byte_size: number;
+  extracted_text: string;
+  extracted_lines: string[];
+  line_count: number;
+  processing_status: "ready" | "error";
+  error_message: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -54,6 +70,22 @@ export type WorkspaceInsert = {
   updated_at?: string;
 };
 
+export type WorkspaceFileInsert = {
+  id?: string;
+  workspace_id: string;
+  original_name: string;
+  mime_type: string;
+  extension: string;
+  byte_size: number;
+  extracted_text?: string;
+  extracted_lines?: string[];
+  line_count?: number;
+  processing_status?: "ready" | "error";
+  error_message?: string | null;
+  created_at?: string;
+  updated_at?: string;
+};
+
 export type ConversationInsert = {
   id?: string;
   workspace_id?: string | null;
@@ -85,6 +117,20 @@ export type Database = {
         Insert: WorkspaceInsert;
         Update: Partial<WorkspaceInsert>;
         Relationships: [];
+      };
+      workspace_files: {
+        Row: WorkspaceFileRow;
+        Insert: WorkspaceFileInsert;
+        Update: Partial<WorkspaceFileInsert>;
+        Relationships: [
+          {
+            foreignKeyName: "workspace_files_workspace_id_fkey";
+            columns: ["workspace_id"];
+            isOneToOne: false;
+            referencedRelation: "workspaces";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       conversations: {
         Row: ConversationRow;

@@ -2,94 +2,33 @@
 
 import {
   Folder,
+  GripVertical,
   MessageSquare,
   Monitor,
   Plus,
-  GripVertical,
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ArtifactViewer, { type Artifact } from "@/components/ArtifactViewer";
 import CommandCenter, { type ToolCall } from "@/components/CommandCenter";
 import CreateWorkspaceModal from "@/components/CreateWorkspaceModal";
 import Sidebar from "@/components/Sidebar";
+import UploadModal from "@/components/UploadModal";
 import {
   DEFAULT_WORKSPACE_SETTINGS,
   type WorkspaceSettingUpdater,
   type WorkspaceSettings,
 } from "@/components/workspaceSettings";
 import { useChat } from "@/lib/chat/useChat";
-import type { WorkspaceRow } from "@/lib/supabase/types";
+import {
+  listWorkspaceFiles,
+  uploadWorkspaceFile,
+} from "@/lib/workspace-files/client";
+import { workspaceFilesToArtifacts, workspaceFileToArtifact } from "@/lib/workspace-files/mappers";
+import type { WorkspaceRow, WorkspaceFileRow } from "@/lib/supabase/types";
 
-const INITIAL_ARTIFACTS: Artifact[] = [
-  {
-    id: "specs",
-    name: "project_specs.md",
-    type: "code",
-    content: [
-      "# Canvas System Architecture Specification",
-      "",
-      "This document details the system design, dependencies, and execution model for Canvas agent workspace.",
-      "",
-      "## 1. System Objectives",
-      "- Low-latency agent-to-workspace communication.",
-      "- Granular control over file access and execution.",
-      "- Responsive visual states for terminal output.",
-      "",
-      "## 2. Dependencies",
-      "- Next.js 16 (React 19)",
-      "- Tailwind CSS v4",
-      "- Lucide React for visual representation",
-      "",
-      "## 3. Data Flow",
-      "- UI State reflects active documents in Panel A.",
-      "- Command log shows agent action sequences.",
-      "- Direct memory mapping speeds up document loading by 40%.",
-      "",
-      "## 4. Execution Sandbox",
-      "- Secure runtime environment isolated from host OS.",
-      "- Pre-installed lint checking via Biome compiler.",
-    ],
-  },
-  {
-    id: "research",
-    name: "research_paper.pdf",
-    type: "document",
-    content: [
-      "ATTENTION MECHANICS IN MULTI-AGENT CONSENSUS",
-      "Abstract: We explore communication loops between generative agents.",
-      "",
-      "1. Introduction",
-      "Multi-agent networks have recently demonstrated high utility in code production.",
-      "However, consensus requires synchronized execution vectors.",
-      "",
-      "2. The Consensus Protocol",
-      "We define consensus as a function C(A, E) where:",
-      "  A is the agent action state.",
-      "  E is the environment context vector.",
-      "",
-      "3. Mathematical Foundations",
-      "Let attention matrices be normalized across the local workspace layers.",
-      "This minimizes divergence and aligns task goals.",
-      "",
-      "4. Experimental Results",
-      "Our tests show a 40% speedup in convergence time when deploying direct memory maps.",
-      "Furthermore, execution conflicts are mitigated by 65% with locks.",
-    ],
-  },
-  {
-    id: "financials",
-    name: "financials.csv",
-    type: "sheet",
-    content: [
-      "Quarter,Revenue,Expenses,Profit,Growth",
-      "Q1 2026,120000,85000,35000,+4.5%",
-      "Q2 2026,145000,92000,53000,+20.8%",
-      "Q3 2026,170000,105000,65000,+17.2%",
-      "Q4 2026,210000,118000,92000,+23.5%",
-      "Total 2026,645000,400000,245000,+16.5%",
-    ],
-  },
-];
+function toArtifactMap(files: WorkspaceFileRow[]): Artifact[] {
+  return workspaceFilesToArtifacts(files);
+}
 
 export default function WorkspacePage() {
   const [collapsed, setCollapsed] = useState(false);
@@ -98,11 +37,27 @@ export default function WorkspacePage() {
     null,
   );
   const [createWorkspaceOpen, setCreateWorkspaceOpen] = useState(false);
+  const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const [workspaceFiles, setWorkspaceFiles] = useState<WorkspaceFileRow[]>([]);
+  const [openArtifacts, setOpenArtifacts] = useState<Artifact[]>([]);
+  const [activeArtifactId, setActiveArtifactId] = useState<string | null>(null);
+  const [highlightedRange, setHighlightedRange] = useState<{
+    startLine: number;
+    endLine: number;
+  } | null>(null);
+  const [agentStatus, setAgentStatus] = useState(
+    "Create a workspace to start chatting.",
+  );
+  const [settings, setSettings] = useState<WorkspaceSettings>(() => ({
+    ...DEFAULT_WORKSPACE_SETTINGS,
+  }));
+  const [mobileActiveTab, setMobileActiveTab] = useState<"workspace" | "chat">(
+    "workspace",
+  );
 
-  // Resizable panel — chat width as % of the content area (22–65%)
   const [chatWidthPct, setChatWidthPct] = useState(38);
-  const isDraggingRef = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isDraggingRef = useRef(false);
 
   const startResize = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -113,7 +68,10 @@ export default function WorkspacePage() {
       const rect = containerRef.current.getBoundingClientRect();
       const totalWidth = rect.width;
       const offsetFromRight = rect.right - ev.clientX;
-      const newPct = Math.min(65, Math.max(22, (offsetFromRight / totalWidth) * 100));
+      const newPct = Math.min(
+        65,
+        Math.max(22, (offsetFromRight / totalWidth) * 100),
+      );
       setChatWidthPct(newPct);
     };
 
@@ -126,26 +84,6 @@ export default function WorkspacePage() {
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
   };
-  const [openArtifacts, setOpenArtifacts] =
-    useState<Artifact[]>(INITIAL_ARTIFACTS);
-  const [activeArtifactId, setActiveArtifactId] = useState<string | null>(
-    "specs",
-  );
-  const [highlightedRange, setHighlightedRange] = useState<{
-    startLine: number;
-    endLine: number;
-  } | null>(null);
-  const [agentStatus, setAgentStatus] = useState(
-    "Create a workspace to start chatting.",
-  );
-  const [settings, setSettings] = useState<WorkspaceSettings>(() => ({
-    ...DEFAULT_WORKSPACE_SETTINGS,
-  }));
-
-  // Mobile Tab view: 'workspace' or 'chat'
-  const [mobileActiveTab, setMobileActiveTab] = useState<"workspace" | "chat">(
-    "workspace",
-  );
 
   const updateSetting: WorkspaceSettingUpdater = (key, value) => {
     setSettings((previous) => ({
@@ -178,7 +116,10 @@ export default function WorkspacePage() {
         const nextWorkspaces = payload.workspaces ?? [];
         setWorkspaces(nextWorkspaces);
         setActiveWorkspaceId((current) => {
-          if (current && nextWorkspaces.some((workspace) => workspace.id === current)) {
+          if (
+            current &&
+            nextWorkspaces.some((workspace) => workspace.id === current)
+          ) {
             return current;
           }
           return nextWorkspaces[0]?.id ?? null;
@@ -200,6 +141,43 @@ export default function WorkspacePage() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    if (!activeWorkspaceId) {
+      setWorkspaceFiles([]);
+      setOpenArtifacts([]);
+      setActiveArtifactId(null);
+      return;
+    }
+
+    void (async () => {
+      try {
+        const files = await listWorkspaceFiles(activeWorkspaceId);
+        if (cancelled) return;
+
+        setWorkspaceFiles(files);
+        setOpenArtifacts([]);
+        setActiveArtifactId(null);
+      } catch (error) {
+        if (cancelled) return;
+
+        setWorkspaceFiles([]);
+        setOpenArtifacts([]);
+        setActiveArtifactId(null);
+        setAgentStatus(
+          error instanceof Error
+            ? `Failed to load workspace files: ${error.message}`
+            : "Failed to load workspace files.",
+        );
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [activeWorkspaceId]);
 
   const handleWorkspaceSelect = useCallback((workspaceId: string) => {
     setActiveWorkspaceId(workspaceId);
@@ -226,29 +204,29 @@ export default function WorkspacePage() {
       ...current.filter((workspace) => workspace.id !== payload.workspace.id),
     ]);
     setActiveWorkspaceId(payload.workspace.id);
+    setWorkspaceFiles([]);
+    setOpenArtifacts([]);
+    setActiveArtifactId(null);
     setCreateWorkspaceOpen(false);
     setMobileActiveTab("chat");
-    setAgentStatus("Workspace Ready");
+    setAgentStatus("Workspace ready.");
   }, []);
 
-  // Highlight specific range when clicking a tool call log
   const handleToolCallClick = (toolCall: ToolCall) => {
-    if (toolCall.range) {
-      // Find matching artifact
-      const art = openArtifacts.find(
-        (a) => a.name.toLowerCase() === toolCall.target.toLowerCase(),
-      );
-      if (art) {
-        setActiveArtifactId(art.id);
-        setHighlightedRange(toolCall.range);
-        setAgentStatus(
-          `Agent Inspecting Lines ${toolCall.range.startLine}-${toolCall.range.endLine}`,
-        );
+    if (!toolCall.range) return;
 
-        // On mobile, switch to workspace view to see the highlighted file
-        setMobileActiveTab("workspace");
-      }
-    }
+    const artifact = openArtifacts.find(
+      (item) => item.name.toLowerCase() === toolCall.target.toLowerCase(),
+    );
+
+    if (!artifact) return;
+
+    setActiveArtifactId(artifact.id);
+    setHighlightedRange(toolCall.range);
+    setAgentStatus(
+      `Inspecting lines ${toolCall.range.startLine}-${toolCall.range.endLine}`,
+    );
+    setMobileActiveTab("workspace");
   };
 
   const handleSendMessage = useCallback(
@@ -259,21 +237,51 @@ export default function WorkspacePage() {
   );
 
   const handleCloseArtifact = (id: string) => {
-    const nextArtifacts = openArtifacts.filter((a) => a.id !== id);
+    const nextArtifacts = openArtifacts.filter((artifact) => artifact.id !== id);
     setOpenArtifacts(nextArtifacts);
+
     if (activeArtifactId === id) {
-      setActiveArtifactId(
-        nextArtifacts.length > 0 ? nextArtifacts[0].id : null,
-      );
+      setActiveArtifactId(nextArtifacts[0]?.id ?? null);
       setHighlightedRange(null);
     }
   };
 
-  const handleDeployFiles = () => {
-    setOpenArtifacts(INITIAL_ARTIFACTS);
-    setActiveArtifactId("specs");
+  /** Open a file from the file explorer (add it to open artifacts if not already) */
+  const handleOpenArtifact = useCallback((file: WorkspaceFileRow) => {
+    const artifact = workspaceFileToArtifact(file);
+    setOpenArtifacts((current) => {
+      if (current.some((a) => a.id === artifact.id)) return current;
+      return [artifact, ...current];
+    });
+    setActiveArtifactId(artifact.id);
     setHighlightedRange(null);
-  };
+    setMobileActiveTab("workspace");
+  }, []);
+
+  const openUploadModal = useCallback(() => {
+    if (!activeWorkspaceId) {
+      setAgentStatus("Select a workspace before uploading files.");
+      return;
+    }
+    setUploadModalOpen(true);
+  }, [activeWorkspaceId]);
+
+  /** Called by UploadModal — uploads a single file and updates state */
+  const handleUpload = useCallback(
+    async (file: File) => {
+      if (!activeWorkspaceId) throw new Error("No workspace selected.");
+
+      const savedFile = await uploadWorkspaceFile(activeWorkspaceId, file);
+      const nextArtifact = workspaceFileToArtifact(savedFile);
+
+      setWorkspaceFiles((current) => [
+        savedFile,
+        ...current.filter((item) => item.id !== savedFile.id),
+      ]);
+      setAgentStatus(`Uploaded ${savedFile.original_name}`);
+    },
+    [activeWorkspaceId],
+  );
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: reset highlighted range when changing active tab
   useEffect(() => {
@@ -300,8 +308,7 @@ export default function WorkspacePage() {
 
   return (
     <div className={`flex h-screen w-screen overflow-hidden ${shellClass}`}>
-      {/* Sidebar - Collapsible navigation on larger screens, hidden or absolute drawer on mobile */}
-      <div className="hidden md:flex h-full">
+      <div className="hidden h-full md:flex">
         <Sidebar
           collapsed={collapsed}
           setCollapsed={setCollapsed}
@@ -314,11 +321,9 @@ export default function WorkspacePage() {
         />
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
-        {/* Mobile Header / Workspace Switcher tabs */}
+      <div className="flex min-w-0 flex-1 flex-col">
         <header
-          className={`flex md:hidden h-14 items-center justify-between px-4 shrink-0 border-b ${mobileHeaderClass}`}
+          className={`flex h-14 shrink-0 items-center justify-between border-b px-4 md:hidden ${mobileHeaderClass}`}
         >
           <div className="flex min-w-0 items-center gap-2">
             <div
@@ -335,6 +340,7 @@ export default function WorkspacePage() {
               </div>
             </div>
           </div>
+
           <div className="flex items-center gap-2">
             <div
               className={`flex items-center rounded-full border p-0.5 ${mobileSwitcherClass}`}
@@ -364,6 +370,7 @@ export default function WorkspacePage() {
                 Chat
               </button>
             </div>
+
             <button
               type="button"
               onClick={() => setCreateWorkspaceOpen(true)}
@@ -376,53 +383,51 @@ export default function WorkspacePage() {
           </div>
         </header>
 
-        {/* Workspace Split Panels */}
-        <div ref={containerRef} className="flex-1 flex min-h-0 relative">
-          {/* Panel A (Artifact Workspace) */}
+        <div ref={containerRef} className="relative flex min-h-0 flex-1">
           <div
-            className={`h-full min-h-0 min-w-0 ${
+            className={`min-h-0 min-w-0 ${
               mobileActiveTab === "workspace"
-                ? "flex flex-col flex-1"
+                ? "flex flex-1 flex-col"
                 : "hidden md:flex md:flex-col"
             }`}
             style={{ width: `${100 - chatWidthPct}%` }}
           >
             <ArtifactViewer
               openArtifacts={openArtifacts}
+              workspaceFiles={workspaceFiles}
+              fileCount={workspaceFiles.length}
               activeArtifactId={activeArtifactId}
               setActiveArtifactId={setActiveArtifactId}
               closeArtifact={handleCloseArtifact}
+              openArtifact={handleOpenArtifact}
               highlightedRange={highlightedRange}
-              onDeployFiles={handleDeployFiles}
+              onUploadFiles={openUploadModal}
               settings={settings}
             />
           </div>
 
-          {/* Drag-to-resize divider (desktop only) */}
           <div
             onMouseDown={startResize}
-            className={`hidden md:flex relative z-10 w-[5px] shrink-0 cursor-col-resize items-center justify-center group select-none ${
+            className={`group relative z-10 hidden w-[5px] shrink-0 cursor-col-resize select-none items-center justify-center transition-colors duration-150 md:flex ${
               isDark
                 ? "bg-[#1A1A1A] hover:bg-[#262626]"
                 : "bg-[#EDEBE9] hover:bg-[#E0DEDC]"
-            } transition-colors duration-150`}
+            }`}
             role="separator"
             aria-label="Resize panels"
             title="Drag to resize"
           >
             <GripVertical
-              className={`h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity ${
+              className={`h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100 ${
                 isDark ? "text-[#A8A29E]" : "text-[#737373]"
               }`}
             />
           </div>
 
-
-          {/* Panel B (Agent Command Center) */}
           <div
-            className={`h-full min-h-0 ${
+            className={`min-h-0 ${
               mobileActiveTab === "chat"
-                ? "flex flex-col flex-1"
+                ? "flex flex-1 flex-col"
                 : "hidden md:flex md:flex-col"
             }`}
             style={{ width: `${chatWidthPct}%` }}
@@ -443,6 +448,13 @@ export default function WorkspacePage() {
         open={createWorkspaceOpen}
         onClose={() => setCreateWorkspaceOpen(false)}
         onCreate={handleCreateWorkspace}
+      />
+
+      <UploadModal
+        open={uploadModalOpen}
+        onClose={() => setUploadModalOpen(false)}
+        onUpload={handleUpload}
+        isDark={isDark}
       />
     </div>
   );
