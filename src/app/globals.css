@@ -61,4 +61,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  /* Range input thumb */
+  input[type="range"]::-webkit-slider-thumb {
+    background: var(--thumb-bg, #0A0A0A);
+    border-color: var(--thumb-border, #FFFFFF);
+  }
+  input[type="range"]::-moz-range-thumb {
+    background: var(--thumb-bg, #0A0A0A);
+    border-color: var(--thumb-border, #FFFFFF);
+    border-style: solid;
+    cursor: pointer;
+  }
 }

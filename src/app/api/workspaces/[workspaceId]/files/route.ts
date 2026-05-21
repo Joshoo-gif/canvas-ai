@@ -12,9 +12,16 @@ interface WorkspaceFilesRouteContext {
   params: Promise<{ workspaceId: string }>;
 }
 
+import { getSessionUserId } from "@/lib/auth/session";
+
 export async function GET(_: Request, context: WorkspaceFilesRouteContext) {
+  const userId = await getSessionUserId();
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { workspaceId } = await context.params;
-  const workspace = await findWorkspaceById(workspaceId);
+  const workspace = await findWorkspaceById(workspaceId, userId);
 
   if (!workspace) {
     return NextResponse.json({ error: "Workspace not found." }, { status: 404 });
@@ -25,8 +32,13 @@ export async function GET(_: Request, context: WorkspaceFilesRouteContext) {
 }
 
 export async function POST(req: Request, context: WorkspaceFilesRouteContext) {
+  const userId = await getSessionUserId();
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { workspaceId } = await context.params;
-  const workspace = await findWorkspaceById(workspaceId);
+  const workspace = await findWorkspaceById(workspaceId, userId);
 
   if (!workspace) {
     return NextResponse.json({ error: "Workspace not found." }, { status: 404 });

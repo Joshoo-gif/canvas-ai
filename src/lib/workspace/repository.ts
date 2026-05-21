@@ -12,11 +12,12 @@ export type { WorkspaceRow };
  * List all workspaces newest-first so the sidebar can render the user's most
  * recently active spaces at the top.
  */
-export async function listWorkspaces(): Promise<WorkspaceRow[]> {
+export async function listWorkspaces(userId: string): Promise<WorkspaceRow[]> {
   const db = getSupabaseServer();
   const { data, error } = await db
     .from("workspaces")
     .select("*")
+    .eq("user_id", userId)
     .order("updated_at", { ascending: false })
     .order("created_at", { ascending: false });
 
@@ -30,12 +31,14 @@ export async function listWorkspaces(): Promise<WorkspaceRow[]> {
  */
 export async function findWorkspaceById(
   id: string,
+  userId: string,
 ): Promise<WorkspaceRow | null> {
   const db = getSupabaseServer();
   const { data, error } = await db
     .from("workspaces")
     .select("*")
     .eq("id", id)
+    .eq("user_id", userId)
     .maybeSingle();
 
   if (error) throw new Error(`[workspace] findById failed: ${error.message}`);
@@ -45,9 +48,9 @@ export async function findWorkspaceById(
 /**
  * Create a new workspace with the given name.
  */
-export async function createWorkspace(name: string): Promise<WorkspaceRow> {
+export async function createWorkspace(name: string, userId: string): Promise<WorkspaceRow> {
   const db = getSupabaseServer();
-  const insert: WorkspaceInsert = { name };
+  const insert: WorkspaceInsert = { name, user_id: userId } as any;
   const { data, error } = await db
     .from("workspaces")
     .insert(insert)
@@ -57,6 +60,22 @@ export async function createWorkspace(name: string): Promise<WorkspaceRow> {
   if (error || !data)
     throw new Error(`[workspace] createWorkspace failed: ${error?.message}`);
   return data as WorkspaceRow;
+}
+
+/**
+ * Delete a workspace by ID.
+ */
+export async function deleteWorkspace(id: string, userId: string): Promise<void> {
+  const db = getSupabaseServer();
+  
+  // Try to delete chats and files first to avoid foreign key constraint issues if ON DELETE CASCADE is missing
+  await db.from("chats").delete().eq("workspace_id", id);
+  await db.from("workspace_files").delete().eq("workspace_id", id);
+  
+  const { error } = await db.from("workspaces").delete().eq("id", id).eq("user_id", userId);
+  if (error) {
+    throw new Error(`[workspace] deleteWorkspace failed: ${error.message}`);
+  }
 }
 
 /** UUID v4 regex — only valid UUIDs are forwarded to Supabase. */
@@ -79,19 +98,20 @@ function isUuid(value: string): boolean {
  * silently ignored so they never reach Supabase.
  */
 export async function resolveWorkspace(
+  userId: string,
   requestedId?: string | null,
 ): Promise<WorkspaceRow> {
   if (requestedId && isUuid(requestedId)) {
-    const ws = await findWorkspaceById(requestedId);
+    const ws = await findWorkspaceById(requestedId, userId);
     if (ws) return ws;
   }
 
   const { env } = await import("@/lib/env");
   if (env.canvas.defaultWorkspaceId && isUuid(env.canvas.defaultWorkspaceId)) {
-    const ws = await findWorkspaceById(env.canvas.defaultWorkspaceId);
+    const ws = await findWorkspaceById(env.canvas.defaultWorkspaceId, userId);
     if (ws) return ws;
   }
 
   // Auto-create a default workspace on first use.
-  return createWorkspace("Default Workspace");
+  return createWorkspace("Default Workspace", userId);
 }

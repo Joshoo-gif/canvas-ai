@@ -11,12 +11,24 @@ function parseWorkspaceName(value: unknown): string | null {
   return name;
 }
 
+import { getSessionUserId } from "@/lib/auth/session";
+
 export async function GET() {
-  const workspaces = await listWorkspaces();
+  const userId = await getSessionUserId();
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const workspaces = await listWorkspaces(userId);
   return NextResponse.json({ workspaces });
 }
 
 export async function POST(req: NextRequest) {
+  const userId = await getSessionUserId();
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   let body: unknown;
 
   try {
@@ -36,6 +48,6 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const workspace = await createWorkspace(name);
+  const workspace = await createWorkspace(name, userId);
   return NextResponse.json({ workspace }, { status: 201 });
 }

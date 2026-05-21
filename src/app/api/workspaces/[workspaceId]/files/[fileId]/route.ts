@@ -11,9 +11,16 @@ interface WorkspaceFileRouteContext {
   params: Promise<{ workspaceId: string; fileId: string }>;
 }
 
+import { getSessionUserId } from "@/lib/auth/session";
+
 export async function DELETE(_: Request, context: WorkspaceFileRouteContext) {
+  const userId = await getSessionUserId();
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { workspaceId, fileId } = await context.params;
-  const workspace = await findWorkspaceById(workspaceId);
+  const workspace = await findWorkspaceById(workspaceId, userId);
 
   if (!workspace) {
     return NextResponse.json({ error: "Workspace not found." }, { status: 404 });

@@ -1,7 +1,7 @@
 "use client";
 
-import { Folder, Plus, Settings } from "lucide-react";
-import { useCallback, useState } from "react";
+import { Folder, Plus, Settings, Trash2, LogOut } from "lucide-react";
+import { useCallback, useState, useEffect } from "react";
 import { useThemeClasses } from "@/components/ui";
 import IconButton from "@/components/ui/IconButton";
 import SettingsModal from "@/components/SettingsModal";
@@ -20,6 +20,7 @@ interface SidebarProps {
   onCreateWorkspace: () => void;
   settings: WorkspaceSettings;
   onSettingChange: WorkspaceSettingUpdater;
+  onDeleteWorkspace?: (id: string) => void;
 }
 
 /**
@@ -35,9 +36,28 @@ export default function Sidebar({
   onCreateWorkspace,
   settings,
   onSettingChange,
+  onDeleteWorkspace,
 }: SidebarProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const closeSettings = useCallback(() => setSettingsOpen(false), []);
+  const router = (typeof window !== "undefined") ? require("next/navigation").useRouter() : null;
+
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
+    router?.push("/login");
+  };
+
+  const [contextMenu, setContextMenu] = useState<{
+    x: number;
+    y: number;
+    workspaceId: string;
+  } | null>(null);
+
+  useEffect(() => {
+    const handleClick = () => setContextMenu(null);
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  }, []);
 
   const isDark = settings.theme === "dark";
   const tc = useThemeClasses(isDark);
@@ -132,6 +152,14 @@ export default function Sidebar({
                   type="button"
                   key={item.id}
                   onClick={() => setActiveWorkspaceId(item.id)}
+                  onContextMenu={(e) => {
+                    e.preventDefault();
+                    setContextMenu({
+                      x: e.clientX,
+                      y: e.clientY,
+                      workspaceId: item.id,
+                    });
+                  }}
                   className={`flex h-10 w-full items-center rounded-lg text-left transition-all duration-150 ${
                     isActive ? tc.itemActive : tc.itemInactive
                   } ${collapsed ? "justify-center" : "gap-2.5 px-2.5"}`}
@@ -159,8 +187,36 @@ export default function Sidebar({
           )}
         </div>
 
-        {/* Footer — Settings trigger */}
-        <div className={`border-t p-2 ${tc.border}`}>
+        {contextMenu && onDeleteWorkspace && (
+          <div
+            className={`fixed z-50 min-w-[160px] rounded-md border shadow-lg ${
+              isDark
+                ? "border-[#404040] bg-[#1E1E1E] text-[#D6D3D1]"
+                : "border-[#E7E5E4] bg-white text-[#404040]"
+            } p-1`}
+            style={{ top: contextMenu.y, left: contextMenu.x }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className={`flex w-full items-center gap-2 rounded px-2 py-1.5 text-sm transition-colors ${
+                isDark
+                  ? "hover:bg-[#EF4444]/10 hover:text-[#F87171]"
+                  : "hover:bg-[#FEF2F2] hover:text-[#DC2626]"
+              } text-red-500`}
+              onClick={() => {
+                onDeleteWorkspace(contextMenu.workspaceId);
+                setContextMenu(null);
+              }}
+            >
+              <Trash2 className="h-4 w-4" />
+              Delete Workspace
+            </button>
+          </div>
+        )}
+
+        {/* Footer — Settings & Logout */}
+        <div className={`border-t p-2 space-y-1 ${tc.border}`}>
           <button
             type="button"
             onClick={() => setSettingsOpen(true)}
@@ -178,6 +234,26 @@ export default function Sidebar({
               aria-hidden={collapsed}
             >
               Settings
+            </span>
+          </button>
+          
+          <button
+            type="button"
+            onClick={handleLogout}
+            className={`flex h-10 w-full items-center justify-start gap-2.5 overflow-hidden rounded-lg px-2.5 transition-all ${tc.btnGhost} hover:text-red-500`}
+            title="Logout"
+            aria-label="Logout"
+          >
+            <LogOut className="h-4 w-4 shrink-0 text-red-500/70" />
+            <span
+              className={`whitespace-nowrap text-xs text-red-500 transition-all duration-200 ${
+                collapsed
+                  ? "max-w-0 -translate-x-1 opacity-0"
+                  : "max-w-[80px] translate-x-0 opacity-100"
+              }`}
+              aria-hidden={collapsed}
+            >
+              Logout
             </span>
           </button>
         </div>

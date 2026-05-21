@@ -228,6 +228,33 @@ export default function WorkspacePage() {
     setAgentStatus("Workspace ready.");
   }, []);
 
+  const handleDeleteWorkspace = useCallback(async (id: string) => {
+    try {
+      const response = await fetch(`/api/workspaces/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        const errorBody: { error?: string } = await response.json().catch(() => ({}));
+        throw new Error(errorBody.error ?? `HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      setWorkspaces((current) => {
+        const updated = current.filter((workspace) => workspace.id !== id);
+        if (activeWorkspaceId === id) {
+          setActiveWorkspaceId(updated.length > 0 ? updated[0].id : null);
+          setActiveConversationId(null);
+        }
+        return updated;
+      });
+      setAgentStatus("Workspace deleted successfully.");
+    } catch (error) {
+      setAgentStatus(
+        error instanceof Error ? `Failed to delete workspace: ${error.message}` : "Failed to delete workspace."
+      );
+    }
+  }, [activeWorkspaceId]);
+
   const handleToolCallClick = (toolCall: ToolCall) => {
     const artifactFromId = toolCall.artifactId
       ? workspaceFiles.find((file) => file.id === toolCall.artifactId)
@@ -359,6 +386,7 @@ export default function WorkspacePage() {
           onCreateWorkspace={() => setCreateWorkspaceOpen(true)}
           settings={settings}
           onSettingChange={updateSetting}
+          onDeleteWorkspace={handleDeleteWorkspace}
         />
       </div>
 

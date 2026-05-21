@@ -83,6 +83,14 @@ export async function POST(req: NextRequest) {
         // ------------------------------------------------------------------
         // 2. Resolve or create workspace + conversation
         // ------------------------------------------------------------------
+        const { getSessionUserId } = await import("@/lib/auth/session");
+        const userId = await getSessionUserId();
+        if (!userId) {
+          enqueue({ type: "error", message: "Unauthorized" });
+          controller.close();
+          return;
+        }
+
         const workspaceId = body.workspaceId ?? null;
         if (!workspaceId) {
           enqueue({ type: "error", message: "workspaceId is required." });
@@ -90,7 +98,7 @@ export async function POST(req: NextRequest) {
           return;
         }
 
-        const workspace = await findWorkspaceById(workspaceId);
+        const workspace = await findWorkspaceById(workspaceId, userId);
         if (!workspace) {
           enqueue({ type: "error", message: "Workspace not found." });
           controller.close();
