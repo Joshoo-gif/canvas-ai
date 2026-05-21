@@ -261,6 +261,275 @@
       ],
       "createdAt": "2026-05-21T05:21:57.760Z",
       "updatedAt": "2026-05-21T05:21:57.760Z"
+    },
+    {
+      "memoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "rootMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "cd68d7f3-80f9-4fcb-9490-f4d19d70567a",
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+        "1f46ef2c-2e89-49af-8fcc-6f12c098d73c",
+        "c0ae9a94-dc74-4f1d-bbcc-7586e2d9dc20"
+      ],
+      "childMemoryIds": [
+        "84f40668-eecb-4871-abbc-1cad807fc0eb"
+      ],
+      "sectionKind": "fact",
+      "summary": "Implemented a Supabase-backed workspace and chat flow. The app now loads real workspaces from Supabase, allows creating a workspace through a modal opened from a plus button in the sidebar and mobile header, and loads workspace-specific chat history through a workspace chat API. The chat send path now requires a valid workspace, validates that conversations belong to the selected workspace, and falls back to creating a conversation inside that workspace when needed. No SQL migration changes were required because the existing workspaces/conversations/messages schema already supported the flow.",
+      "affectedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Replaced mock workspace state with Supabase-loaded workspaces, added workspace creation flow, and wired the page to the new chat loader and modal.",
+          "notes": "Main UI orchestrator for the feature."
+        },
+        {
+          "path": "src/components/Sidebar.tsx",
+          "action": "modified",
+          "reason": "Sidebar now shows real workspace rows, adds a plus button for creating workspaces, and handles the empty-workspace state.",
+          "notes": "Desktop navigation entrypoint."
+        },
+        {
+          "path": "src/components/CreateWorkspaceModal/index.tsx",
+          "action": "created",
+          "reason": "New modal component for creating workspaces from the sidebar/mobile header CTA with validation and inline error handling.",
+          "notes": "Keeps workspace creation UI isolated."
+        },
+        {
+          "path": "src/lib/chat/useChat.ts",
+          "action": "modified",
+          "reason": "Hook now loads persisted workspace chat history from Supabase before streaming new messages and blocks sends while history is loading.",
+          "notes": "Client-side chat state and streaming logic."
+        },
+        {
+          "path": "src/app/api/workspaces/route.ts",
+          "action": "created",
+          "reason": "New API route to list workspaces and create a new workspace with validation.",
+          "notes": "Server boundary for workspace CRUD."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/chat/route.ts",
+          "action": "created",
+          "reason": "New API route to return the latest conversation and persisted messages for a workspace.",
+          "notes": "Server boundary for workspace-specific chat loading."
+        },
+        {
+          "path": "src/app/api/chat/route.ts",
+          "action": "modified",
+          "reason": "Chat streaming route now enforces valid workspace ownership for conversations and no longer falls back to the old auto-created default workspace flow.",
+          "notes": "Prevents chats from escaping the selected workspace."
+        },
+        {
+          "path": "src/lib/workspace/repository.ts",
+          "action": "modified",
+          "reason": "Added a listWorkspaces helper used by the new workspace listing API.",
+          "notes": "Keeps workspace data access centralized."
+        },
+        {
+          "path": "src/lib/chat/repository.ts",
+          "action": "modified",
+          "reason": "Added workspace conversation listing helpers used by the workspace chat loader.",
+          "notes": "Supports selecting the active workspace conversation."
+        },
+        {
+          "path": "src/components/CommandCenter/index.tsx",
+          "action": "modified",
+          "reason": "Added a neutral empty-state panel so the chat area still has a useful workspace-ready state when there are no messages.",
+          "notes": "Improves UX for newly created or empty workspaces."
+        },
+        {
+          "path": "sqls/001_initial_schema.sql",
+          "action": "inspected",
+          "reason": "Verified the existing schema already contained workspaces, conversations, and messages, so no migration was needed for this feature.",
+          "notes": "No file changes required."
+        }
+      ],
+      "createdAt": "2026-05-21T11:33:15.989Z",
+      "updatedAt": "2026-05-21T11:33:15.989Z"
+    },
+    {
+      "memoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "rootMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "parentMemoryIds": [
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf"
+      ],
+      "relatedMemoryIds": [
+        "cd68d7f3-80f9-4fcb-9490-f4d19d70567a",
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+        "1f46ef2c-2e89-49af-8fcc-6f12c098d73c",
+        "c0ae9a94-dc74-4f1d-bbcc-7586e2d9dc20"
+      ],
+      "childMemoryIds": [
+        "71f297da-7502-4e6e-ab49-adaf6ab38490"
+      ],
+      "sectionKind": "decision",
+      "summary": "Implemented a Supabase-backed workspace and chat flow. The app now loads real workspaces from Supabase, allows creating a workspace through a modal opened from a plus button in the sidebar and mobile header, and loads workspace-specific chat history through a workspace chat API. The chat send path now requires a valid workspace, validates that conversations belong to the selected workspace, and falls back to creating a conversation inside that workspace when needed. No SQL migration changes were required because the existing workspaces/conversations/messages schema already supported the flow.",
+      "affectedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Replaced mock workspace state with Supabase-loaded workspaces, added workspace creation flow, and wired the page to the new chat loader and modal.",
+          "notes": "Main UI orchestrator for the feature."
+        },
+        {
+          "path": "src/components/Sidebar.tsx",
+          "action": "modified",
+          "reason": "Sidebar now shows real workspace rows, adds a plus button for creating workspaces, and handles the empty-workspace state.",
+          "notes": "Desktop navigation entrypoint."
+        },
+        {
+          "path": "src/components/CreateWorkspaceModal/index.tsx",
+          "action": "created",
+          "reason": "New modal component for creating workspaces from the sidebar/mobile header CTA with validation and inline error handling.",
+          "notes": "Keeps workspace creation UI isolated."
+        },
+        {
+          "path": "src/lib/chat/useChat.ts",
+          "action": "modified",
+          "reason": "Hook now loads persisted workspace chat history from Supabase before streaming new messages and blocks sends while history is loading.",
+          "notes": "Client-side chat state and streaming logic."
+        },
+        {
+          "path": "src/app/api/workspaces/route.ts",
+          "action": "created",
+          "reason": "New API route to list workspaces and create a new workspace with validation.",
+          "notes": "Server boundary for workspace CRUD."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/chat/route.ts",
+          "action": "created",
+          "reason": "New API route to return the latest conversation and persisted messages for a workspace.",
+          "notes": "Server boundary for workspace-specific chat loading."
+        },
+        {
+          "path": "src/app/api/chat/route.ts",
+          "action": "modified",
+          "reason": "Chat streaming route now enforces valid workspace ownership for conversations and no longer falls back to the old auto-created default workspace flow.",
+          "notes": "Prevents chats from escaping the selected workspace."
+        },
+        {
+          "path": "src/lib/workspace/repository.ts",
+          "action": "modified",
+          "reason": "Added a listWorkspaces helper used by the new workspace listing API.",
+          "notes": "Keeps workspace data access centralized."
+        },
+        {
+          "path": "src/lib/chat/repository.ts",
+          "action": "modified",
+          "reason": "Added workspace conversation listing helpers used by the workspace chat loader.",
+          "notes": "Supports selecting the active workspace conversation."
+        },
+        {
+          "path": "src/components/CommandCenter/index.tsx",
+          "action": "modified",
+          "reason": "Added a neutral empty-state panel so the chat area still has a useful workspace-ready state when there are no messages.",
+          "notes": "Improves UX for newly created or empty workspaces."
+        },
+        {
+          "path": "sqls/001_initial_schema.sql",
+          "action": "inspected",
+          "reason": "Verified the existing schema already contained workspaces, conversations, and messages, so no migration was needed for this feature.",
+          "notes": "No file changes required."
+        }
+      ],
+      "createdAt": "2026-05-21T11:33:16.130Z",
+      "updatedAt": "2026-05-21T11:33:16.130Z"
+    },
+    {
+      "memoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "rootMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "parentMemoryIds": [
+        "84f40668-eecb-4871-abbc-1cad807fc0eb"
+      ],
+      "relatedMemoryIds": [
+        "cd68d7f3-80f9-4fcb-9490-f4d19d70567a",
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+        "1f46ef2c-2e89-49af-8fcc-6f12c098d73c",
+        "c0ae9a94-dc74-4f1d-bbcc-7586e2d9dc20"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Implemented a Supabase-backed workspace and chat flow. The app now loads real workspaces from Supabase, allows creating a workspace through a modal opened from a plus button in the sidebar and mobile header, and loads workspace-specific chat history through a workspace chat API. The chat send path now requires a valid workspace, validates that conversations belong to the selected workspace, and falls back to creating a conversation inside that workspace when needed. No SQL migration changes were required because the existing workspaces/conversations/messages schema already supported the flow.",
+      "affectedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Replaced mock workspace state with Supabase-loaded workspaces, added workspace creation flow, and wired the page to the new chat loader and modal.",
+          "notes": "Main UI orchestrator for the feature."
+        },
+        {
+          "path": "src/components/Sidebar.tsx",
+          "action": "modified",
+          "reason": "Sidebar now shows real workspace rows, adds a plus button for creating workspaces, and handles the empty-workspace state.",
+          "notes": "Desktop navigation entrypoint."
+        },
+        {
+          "path": "src/components/CreateWorkspaceModal/index.tsx",
+          "action": "created",
+          "reason": "New modal component for creating workspaces from the sidebar/mobile header CTA with validation and inline error handling.",
+          "notes": "Keeps workspace creation UI isolated."
+        },
+        {
+          "path": "src/lib/chat/useChat.ts",
+          "action": "modified",
+          "reason": "Hook now loads persisted workspace chat history from Supabase before streaming new messages and blocks sends while history is loading.",
+          "notes": "Client-side chat state and streaming logic."
+        },
+        {
+          "path": "src/app/api/workspaces/route.ts",
+          "action": "created",
+          "reason": "New API route to list workspaces and create a new workspace with validation.",
+          "notes": "Server boundary for workspace CRUD."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/chat/route.ts",
+          "action": "created",
+          "reason": "New API route to return the latest conversation and persisted messages for a workspace.",
+          "notes": "Server boundary for workspace-specific chat loading."
+        },
+        {
+          "path": "src/app/api/chat/route.ts",
+          "action": "modified",
+          "reason": "Chat streaming route now enforces valid workspace ownership for conversations and no longer falls back to the old auto-created default workspace flow.",
+          "notes": "Prevents chats from escaping the selected workspace."
+        },
+        {
+          "path": "src/lib/workspace/repository.ts",
+          "action": "modified",
+          "reason": "Added a listWorkspaces helper used by the new workspace listing API.",
+          "notes": "Keeps workspace data access centralized."
+        },
+        {
+          "path": "src/lib/chat/repository.ts",
+          "action": "modified",
+          "reason": "Added workspace conversation listing helpers used by the workspace chat loader.",
+          "notes": "Supports selecting the active workspace conversation."
+        },
+        {
+          "path": "src/components/CommandCenter/index.tsx",
+          "action": "modified",
+          "reason": "Added a neutral empty-state panel so the chat area still has a useful workspace-ready state when there are no messages.",
+          "notes": "Improves UX for newly created or empty workspaces."
+        },
+        {
+          "path": "sqls/001_initial_schema.sql",
+          "action": "inspected",
+          "reason": "Verified the existing schema already contained workspaces, conversations, and messages, so no migration was needed for this feature.",
+          "notes": "No file changes required."
+        }
+      ],
+      "createdAt": "2026-05-21T11:33:16.261Z",
+      "updatedAt": "2026-05-21T11:33:16.261Z"
     }
   ],
   "edges": [
@@ -382,7 +651,140 @@
       "relation": "related",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
       "createdAt": "2026-05-21T05:21:57.760Z"
+    },
+    {
+      "fromMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "toMemoryId": "cd68d7f3-80f9-4fcb-9490-f4d19d70567a",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:15.989Z"
+    },
+    {
+      "fromMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:15.989Z"
+    },
+    {
+      "fromMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:15.989Z"
+    },
+    {
+      "fromMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "toMemoryId": "1f46ef2c-2e89-49af-8fcc-6f12c098d73c",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:15.989Z"
+    },
+    {
+      "fromMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "toMemoryId": "c0ae9a94-dc74-4f1d-bbcc-7586e2d9dc20",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:15.989Z"
+    },
+    {
+      "fromMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:15.989Z"
+    },
+    {
+      "fromMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.130Z"
+    },
+    {
+      "fromMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "toMemoryId": "cd68d7f3-80f9-4fcb-9490-f4d19d70567a",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.130Z"
+    },
+    {
+      "fromMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.130Z"
+    },
+    {
+      "fromMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.130Z"
+    },
+    {
+      "fromMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "toMemoryId": "1f46ef2c-2e89-49af-8fcc-6f12c098d73c",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.130Z"
+    },
+    {
+      "fromMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "toMemoryId": "c0ae9a94-dc74-4f1d-bbcc-7586e2d9dc20",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.130Z"
+    },
+    {
+      "fromMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.130Z"
+    },
+    {
+      "fromMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.261Z"
+    },
+    {
+      "fromMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "toMemoryId": "cd68d7f3-80f9-4fcb-9490-f4d19d70567a",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.261Z"
+    },
+    {
+      "fromMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.261Z"
+    },
+    {
+      "fromMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.261Z"
+    },
+    {
+      "fromMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "toMemoryId": "1f46ef2c-2e89-49af-8fcc-6f12c098d73c",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.261Z"
+    },
+    {
+      "fromMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "toMemoryId": "c0ae9a94-dc74-4f1d-bbcc-7586e2d9dc20",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T11:33:16.261Z"
     }
   ],
-  "updatedAt": "2026-05-21T05:21:57.760Z"
+  "updatedAt": "2026-05-21T11:33:16.262Z"
 }

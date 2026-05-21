@@ -1,32 +1,24 @@
 "use client";
 
 import {
-  Compass,
   Folder,
-  LayoutDashboard,
   MessageSquare,
   Monitor,
+  Plus,
+  GripVertical,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ArtifactViewer, { type Artifact } from "@/components/ArtifactViewer";
-import CommandCenter, {
-  type Message,
-  type ToolCall,
-} from "@/components/CommandCenter";
-import Sidebar, { type WorkspaceItem } from "@/components/Sidebar";
+import CommandCenter, { type ToolCall } from "@/components/CommandCenter";
+import CreateWorkspaceModal from "@/components/CreateWorkspaceModal";
+import Sidebar from "@/components/Sidebar";
 import {
   DEFAULT_WORKSPACE_SETTINGS,
   type WorkspaceSettingUpdater,
   type WorkspaceSettings,
 } from "@/components/workspaceSettings";
-// Note: ArtifactViewer, CommandCenter, and SettingsModal are now folder modules
-// with sub-components; imports above remain stable via index.tsx barrel files.
-
-const WORKSPACES: WorkspaceItem[] = [
-  { id: "dev", name: "Development Workspace", icon: Folder },
-  { id: "research", name: "Consensus Research", icon: Compass },
-  { id: "analytics", name: "Dashboard Analytics", icon: LayoutDashboard },
-];
+import { useChat } from "@/lib/chat/useChat";
+import type { WorkspaceRow } from "@/lib/supabase/types";
 
 const INITIAL_ARTIFACTS: Artifact[] = [
   {
@@ -99,51 +91,41 @@ const INITIAL_ARTIFACTS: Artifact[] = [
   },
 ];
 
-const INITIAL_MESSAGES: Message[] = [
-  {
-    id: "msg-1",
-    sender: "agent",
-    text: "Welcome to Canvas. I have successfully initialized and indexed your workspace files.",
-    timestamp: "12:10 PM",
-    thoughts: [
-      "Checking active directory structure...",
-      "Found 3 artifacts: project_specs.md, research_paper.pdf, financials.csv.",
-      "Ready to accept commands.",
-    ],
-  },
-  {
-    id: "msg-2",
-    sender: "user",
-    text: "Could you inspect the latest project specifications and let me know the dependencies?",
-    timestamp: "12:11 PM",
-  },
-  {
-    id: "msg-3",
-    sender: "agent",
-    text: "Analyzing project requirements. I will read the specifications file.",
-    timestamp: "12:11 PM",
-    thoughts: [
-      "Locating file project_specs.md in workspace",
-      "Executing read tool to examine section 2 (dependencies)",
-    ],
-    toolCall: {
-      name: "view_file",
-      target: "project_specs.md",
-      range: { startLine: 10, endLine: 18 },
-      status: "completed",
-    },
-  },
-  {
-    id: "msg-4",
-    sender: "agent",
-    text: "Based on lines 10-18 in project_specs.md, the dependencies are:\n\n- Next.js 16 (React 19)\n- Tailwind CSS v4\n- Lucide React for UI Icons",
-    timestamp: "12:11 PM",
-  },
-];
-
 export default function WorkspacePage() {
   const [collapsed, setCollapsed] = useState(false);
-  const [activeWorkspaceId, setActiveWorkspaceId] = useState("dev");
+  const [workspaces, setWorkspaces] = useState<WorkspaceRow[]>([]);
+  const [activeWorkspaceId, setActiveWorkspaceId] = useState<string | null>(
+    null,
+  );
+  const [createWorkspaceOpen, setCreateWorkspaceOpen] = useState(false);
+
+  // Resizable panel — chat width as % of the content area (22–65%)
+  const [chatWidthPct, setChatWidthPct] = useState(38);
+  const isDraggingRef = useRef(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const startResize = (e: React.MouseEvent) => {
+    e.preventDefault();
+    isDraggingRef.current = true;
+
+    const onMouseMove = (ev: MouseEvent) => {
+      if (!isDraggingRef.current || !containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const totalWidth = rect.width;
+      const offsetFromRight = rect.right - ev.clientX;
+      const newPct = Math.min(65, Math.max(22, (offsetFromRight / totalWidth) * 100));
+      setChatWidthPct(newPct);
+    };
+
+    const onMouseUp = () => {
+      isDraggingRef.current = false;
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
+    };
+
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
+  };
   const [openArtifacts, setOpenArtifacts] =
     useState<Artifact[]>(INITIAL_ARTIFACTS);
   const [activeArtifactId, setActiveArtifactId] = useState<string | null>(
@@ -153,8 +135,9 @@ export default function WorkspacePage() {
     startLine: number;
     endLine: number;
   } | null>(null);
-  const [messages, setMessages] = useState<Message[]>(INITIAL_MESSAGES);
-  const [agentStatus, setAgentStatus] = useState("Agent Idle");
+  const [agentStatus, setAgentStatus] = useState(
+    "Create a workspace to start chatting.",
+  );
   const [settings, setSettings] = useState<WorkspaceSettings>(() => ({
     ...DEFAULT_WORKSPACE_SETTINGS,
   }));
@@ -170,6 +153,83 @@ export default function WorkspacePage() {
       [key]: value,
     }));
   };
+
+  const { messages, isStreaming, sendMessage } = useChat({
+    workspaceId: activeWorkspaceId,
+    onStatusChange: setAgentStatus,
+  });
+
+  const activeWorkspace =
+    workspaces.find((workspace) => workspace.id === activeWorkspaceId) ?? null;
+
+  useEffect(() => {
+    let cancelled = false;
+
+    void (async () => {
+      try {
+        const response = await fetch("/api/workspaces");
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        const payload: { workspaces: WorkspaceRow[] } = await response.json();
+        if (cancelled) return;
+
+        const nextWorkspaces = payload.workspaces ?? [];
+        setWorkspaces(nextWorkspaces);
+        setActiveWorkspaceId((current) => {
+          if (current && nextWorkspaces.some((workspace) => workspace.id === current)) {
+            return current;
+          }
+          return nextWorkspaces[0]?.id ?? null;
+        });
+      } catch (error) {
+        if (cancelled) return;
+
+        setWorkspaces([]);
+        setActiveWorkspaceId(null);
+        setAgentStatus(
+          error instanceof Error
+            ? `Failed to load workspaces: ${error.message}`
+            : "Failed to load workspaces.",
+        );
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleWorkspaceSelect = useCallback((workspaceId: string) => {
+    setActiveWorkspaceId(workspaceId);
+    setMobileActiveTab("chat");
+  }, []);
+
+  const handleCreateWorkspace = useCallback(async (name: string) => {
+    const response = await fetch("/api/workspaces", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name }),
+    });
+
+    if (!response.ok) {
+      const errorBody: { error?: string } = await response.json().catch(() => ({}));
+      throw new Error(errorBody.error ?? `HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    const payload: { workspace: WorkspaceRow } = await response.json();
+    setWorkspaces((current) => [
+      payload.workspace,
+      ...current.filter((workspace) => workspace.id !== payload.workspace.id),
+    ]);
+    setActiveWorkspaceId(payload.workspace.id);
+    setCreateWorkspaceOpen(false);
+    setMobileActiveTab("chat");
+    setAgentStatus("Workspace Ready");
+  }, []);
 
   // Highlight specific range when clicking a tool call log
   const handleToolCallClick = (toolCall: ToolCall) => {
@@ -191,106 +251,12 @@ export default function WorkspacePage() {
     }
   };
 
-  const handleSendMessage = (text: string) => {
-    const timeStr = new Date().toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
-    // Add user message
-    const userMsg: Message = {
-      id: `user-${Date.now()}`,
-      sender: "user",
-      text,
-      timestamp: timeStr,
-    };
-
-    setMessages((prev) => [...prev, userMsg]);
-    setAgentStatus("Compiling Insights...");
-
-    // Simulate Agent response after a short delay
-    setTimeout(() => {
-      const lower = text.toLowerCase();
-      let responseText =
-        "I have reviewed your query and verified the current workspace state.";
-      let thoughts = ["Analyzing prompt", "Evaluating files in directory"];
-      let toolCall: ToolCall | undefined;
-
-      if (
-        lower.includes("financial") ||
-        lower.includes("csv") ||
-        lower.includes("revenue")
-      ) {
-        responseText =
-          "I've checked the ledger inside financials.csv. The cumulative revenue for 2026 is $645,000, yielding a net profit of $245,000, with Q4 showing the strongest quarterly growth (+23.5%).";
-        thoughts = [
-          "Parsing financials.csv",
-          "Summing quarterly rows",
-          "Selecting cells in row 6 (Totals)",
-        ];
-        toolCall = {
-          name: "view_file",
-          target: "financials.csv",
-          range: { startLine: 1, endLine: 6 },
-          status: "completed",
-        };
-      } else if (
-        lower.includes("paper") ||
-        lower.includes("consensus") ||
-        lower.includes("research")
-      ) {
-        responseText =
-          "According to Section 4 of the consensus paper (research_paper.pdf), deploying direct memory maps leads to a 40% speedup in convergence time, and environment locks mitigate execution conflicts by 65%.";
-        thoughts = [
-          "Searching for keyword consensus in paper",
-          "Reading Section 4 (Experimental Results)",
-        ];
-        toolCall = {
-          name: "view_file",
-          target: "research_paper.pdf",
-          range: { startLine: 17, endLine: 19 },
-          status: "completed",
-        };
-      } else if (
-        lower.includes("spec") ||
-        lower.includes("canvas") ||
-        lower.includes("sandbox")
-      ) {
-        responseText =
-          "The project specs indicate that Canvas executes tools inside a secure sandbox runtime isolated from the host OS, complete with pre-installed Biome checks (lines 20-22).";
-        thoughts = [
-          "Inspecting project_specs.md",
-          "Looking at Section 4 (Execution Sandbox)",
-        ];
-        toolCall = {
-          name: "view_file",
-          target: "project_specs.md",
-          range: { startLine: 20, endLine: 22 },
-          status: "completed",
-        };
-      }
-
-      const agentMsg: Message = {
-        id: `agent-${Date.now()}`,
-        sender: "agent",
-        text: responseText,
-        timestamp: new Date().toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-        thoughts,
-        toolCall,
-      };
-
-      setMessages((prev) => [...prev, agentMsg]);
-
-      if (toolCall?.range) {
-        handleToolCallClick(toolCall);
-      } else {
-        setAgentStatus("Agent Idle");
-      }
-    }, 1200);
-  };
+  const handleSendMessage = useCallback(
+    async (text: string) => {
+      await sendMessage(text);
+    },
+    [sendMessage],
+  );
 
   const handleCloseArtifact = (id: string) => {
     const nextArtifacts = openArtifacts.filter((a) => a.id !== id);
@@ -340,8 +306,9 @@ export default function WorkspacePage() {
           collapsed={collapsed}
           setCollapsed={setCollapsed}
           activeWorkspaceId={activeWorkspaceId}
-          setActiveWorkspaceId={setActiveWorkspaceId}
-          workspaces={WORKSPACES}
+          setActiveWorkspaceId={handleWorkspaceSelect}
+          workspaces={workspaces}
+          onCreateWorkspace={() => setCreateWorkspaceOpen(true)}
           settings={settings}
           onSettingChange={updateSetting}
         />
@@ -353,53 +320,72 @@ export default function WorkspacePage() {
         <header
           className={`flex md:hidden h-14 items-center justify-between px-4 shrink-0 border-b ${mobileHeaderClass}`}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex min-w-0 items-center gap-2">
             <div
               className={`flex h-7 w-7 items-center justify-center rounded-lg ${mobileLogoClass}`}
             >
               <Folder className="h-3.5 w-3.5" />
             </div>
-            <span className="text-sm font-semibold tracking-tight">Canvas</span>
+            <div className="min-w-0">
+              <div className="truncate text-sm font-semibold tracking-tight">
+                Canvas
+              </div>
+              <div className="truncate text-[11px] text-[#737373]">
+                {activeWorkspace?.name ?? "No workspace selected"}
+              </div>
+            </div>
           </div>
-          <div
-            className={`flex items-center rounded-full border p-0.5 ${mobileSwitcherClass}`}
-          >
+          <div className="flex items-center gap-2">
+            <div
+              className={`flex items-center rounded-full border p-0.5 ${mobileSwitcherClass}`}
+            >
+              <button
+                type="button"
+                onClick={() => setMobileActiveTab("workspace")}
+                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-all ${
+                  mobileActiveTab === "workspace"
+                    ? mobileActiveClass
+                    : mobileInactiveClass
+                }`}
+              >
+                <Monitor className="h-3 w-3" />
+                Workspace
+              </button>
+              <button
+                type="button"
+                onClick={() => setMobileActiveTab("chat")}
+                className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold transition-all ${
+                  mobileActiveTab === "chat"
+                    ? mobileActiveClass
+                    : mobileInactiveClass
+                }`}
+              >
+                <MessageSquare className="h-3 w-3" />
+                Chat
+              </button>
+            </div>
             <button
               type="button"
-              onClick={() => setMobileActiveTab("workspace")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-                mobileActiveTab === "workspace"
-                  ? mobileActiveClass
-                  : mobileInactiveClass
-              }`}
+              onClick={() => setCreateWorkspaceOpen(true)}
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E5E4] bg-white text-[#101011] transition-colors hover:bg-[#F4F4F5]"
+              aria-label="Create workspace"
+              title="Create workspace"
             >
-              <Monitor className="h-3 w-3" />
-              Workspace
-            </button>
-            <button
-              type="button"
-              onClick={() => setMobileActiveTab("chat")}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-all ${
-                mobileActiveTab === "chat"
-                  ? mobileActiveClass
-                  : mobileInactiveClass
-              }`}
-            >
-              <MessageSquare className="h-3 w-3" />
-              Chat
+              <Plus className="h-4 w-4" />
             </button>
           </div>
         </header>
 
         {/* Workspace Split Panels */}
-        <div className="flex-1 flex min-h-0 relative">
+        <div ref={containerRef} className="flex-1 flex min-h-0 relative">
           {/* Panel A (Artifact Workspace) */}
           <div
-            className={`h-full min-h-0 min-w-0 transition-all ${
+            className={`h-full min-h-0 min-w-0 ${
               mobileActiveTab === "workspace"
                 ? "flex flex-col flex-1"
-                : "hidden md:flex md:flex-col md:w-[60%]"
+                : "hidden md:flex md:flex-col"
             }`}
+            style={{ width: `${100 - chatWidthPct}%` }}
           >
             <ArtifactViewer
               openArtifacts={openArtifacts}
@@ -412,13 +398,34 @@ export default function WorkspacePage() {
             />
           </div>
 
+          {/* Drag-to-resize divider (desktop only) */}
+          <div
+            onMouseDown={startResize}
+            className={`hidden md:flex relative z-10 w-[5px] shrink-0 cursor-col-resize items-center justify-center group select-none ${
+              isDark
+                ? "bg-[#1A1A1A] hover:bg-[#262626]"
+                : "bg-[#EDEBE9] hover:bg-[#E0DEDC]"
+            } transition-colors duration-150`}
+            role="separator"
+            aria-label="Resize panels"
+            title="Drag to resize"
+          >
+            <GripVertical
+              className={`h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity ${
+                isDark ? "text-[#A8A29E]" : "text-[#737373]"
+              }`}
+            />
+          </div>
+
+
           {/* Panel B (Agent Command Center) */}
           <div
-            className={`h-full min-h-0 transition-all ${
+            className={`h-full min-h-0 ${
               mobileActiveTab === "chat"
                 ? "flex flex-col flex-1"
-                : "hidden md:flex md:flex-col md:w-[40%]"
+                : "hidden md:flex md:flex-col"
             }`}
+            style={{ width: `${chatWidthPct}%` }}
           >
             <CommandCenter
               messages={messages}
@@ -426,10 +433,17 @@ export default function WorkspacePage() {
               onSendMessage={handleSendMessage}
               onToolCallClick={handleToolCallClick}
               settings={settings}
+              isStreaming={isStreaming}
             />
           </div>
         </div>
       </div>
+
+      <CreateWorkspaceModal
+        open={createWorkspaceOpen}
+        onClose={() => setCreateWorkspaceOpen(false)}
+        onCreate={handleCreateWorkspace}
+      />
     </div>
   );
 }

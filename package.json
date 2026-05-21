@@ -10,9 +10,12 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.106.1",
     "@tailwindcss/postcss": "^4.2.2",
+    "ai": "^6.0.188",
     "lucide-react": "^1.16.0",
     "next": "16.2.1",
+    "openai": "^6.38.0",
     "postcss": "^8.5.8",
     "react": "19.2.4",
     "react-dom": "19.2.4",

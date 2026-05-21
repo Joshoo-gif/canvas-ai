@@ -6,6 +6,7 @@ import type { WorkspaceSettings } from "@/components/workspaceSettings";
 import ChatInput from "./ChatInput";
 import MessageBubble from "./MessageBubble";
 import type { Message, ToolCall } from "./types";
+import { Bot, MessageSquare } from "lucide-react";
 
 // Re-export types so consumers can import from the same path
 export type { Message, ToolCall } from "./types";
@@ -16,6 +17,8 @@ interface CommandCenterProps {
   onSendMessage: (text: string) => void;
   onToolCallClick?: (toolCall: ToolCall) => void;
   settings: Pick<WorkspaceSettings, "theme" | "density" | "autoScroll">;
+  /** True while the assistant is streaming a response. */
+  isStreaming?: boolean;
 }
 
 /**
@@ -32,6 +35,7 @@ export default function CommandCenter({
   onSendMessage,
   onToolCallClick,
   settings,
+  isStreaming = false,
 }: CommandCenterProps) {
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -47,40 +51,104 @@ export default function CommandCenter({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputText.trim()) return;
+    if (!inputText.trim() || isStreaming) return;
     onSendMessage(inputText);
     setInputText("");
   };
 
   return (
     <section
-      className={`flex h-full min-h-0 flex-col overflow-hidden border-l ${tc.shellMuted} ${tc.border}`}
+      className={`flex h-full min-h-0 flex-col overflow-hidden ${isDark ? "bg-[#0E0E0E]" : "bg-[#F8F7F6]"}`}
       aria-label="Agent Command Center"
     >
       {/* Header */}
       <div
-        className={`flex h-14 shrink-0 items-center justify-between px-5 ${tc.header} ${tc.border}`}
+        className={`flex h-14 shrink-0 items-center justify-between px-5 border-b ${
+          isDark
+            ? "bg-[#111111] border-[#282828]"
+            : "bg-white border-[#EBEBEB]"
+        }`}
       >
-        <h2 className={`text-sm font-semibold tracking-tight ${tc.textPrimary}`}>
-          Command Center
-        </h2>
+        <div className="flex items-center gap-2.5">
+          <div
+            className={`flex h-7 w-7 items-center justify-center rounded-lg ${
+              isDark
+                ? "bg-[#262626] text-[#A8A29E]"
+                : "bg-[#F0EEEC] text-[#737373]"
+            }`}
+          >
+            <Bot className="h-3.5 w-3.5" />
+          </div>
+          <div>
+            <h2
+              className={`text-[13px] font-semibold tracking-tight leading-none ${tc.textPrimary}`}
+            >
+              Agent Chat
+            </h2>
+            <p className={`text-[10px] mt-0.5 ${tc.textSecondary}`}>
+              Canvas AI
+            </p>
+          </div>
+        </div>
         <StatusDot status={agentStatus} />
       </div>
 
       {/* Message thread */}
       <div
         className={`min-h-0 flex-1 overflow-y-auto ${
-          compact ? "space-y-4 px-4 py-4" : "space-y-5 px-5 py-5"
+          compact ? "px-4 py-4 space-y-3" : "px-5 py-5 space-y-4"
         }`}
       >
-        {messages.map((msg) => (
-          <MessageBubble
-            key={msg.id}
-            message={msg}
-            onToolCallClick={onToolCallClick}
-            tc={tc}
-          />
-        ))}
+        {messages.length === 0 ? (
+          <div className="flex h-full flex-col items-center justify-center gap-6 text-center px-6">
+            <div
+              className={`flex h-14 w-14 items-center justify-center rounded-2xl ${
+                isDark
+                  ? "bg-[#1E1E1E] border border-[#303030]"
+                  : "bg-white border border-[#E8E6E4] shadow-sm"
+              }`}
+            >
+              <MessageSquare className={`h-6 w-6 ${tc.textSecondary}`} />
+            </div>
+            <div className="space-y-2 max-w-xs">
+              <div className={`text-sm font-semibold ${tc.textPrimary}`}>
+                Start a conversation
+              </div>
+              <p className={`text-xs leading-relaxed ${tc.textSecondary}`}>
+                Select a workspace and type a message below. The agent can
+                read files, run tools, and stream responses in real time.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 w-full max-w-xs">
+              {["Explain the project architecture", "What files are open?", "Run a lint check"].map(
+                (suggestion) => (
+                  <button
+                    key={suggestion}
+                    type="button"
+                    onClick={() => onSendMessage(suggestion)}
+                    className={`w-full rounded-xl border px-3 py-2.5 text-left text-xs font-medium transition-all ${
+                      isDark
+                        ? "border-[#2A2A2A] bg-[#1A1A1A] text-[#A8A29E] hover:border-[#404040] hover:text-[#FAFAF9]"
+                        : "border-[#E8E6E4] bg-white text-[#737373] hover:border-[#C4C2C0] hover:text-[#0A0A0A]"
+                    }`}
+                  >
+                    {suggestion}
+                  </button>
+                )
+              )}
+            </div>
+          </div>
+        ) : (
+          messages.map((msg) => (
+            <MessageBubble
+              key={msg.id}
+              message={msg}
+              onToolCallClick={onToolCallClick}
+              tc={tc}
+              isDark={isDark}
+            />
+          ))
+        )}
         <div ref={messagesEndRef} />
       </div>
 
@@ -90,6 +158,8 @@ export default function CommandCenter({
         onChange={setInputText}
         onSubmit={handleSubmit}
         tc={tc}
+        isDark={isDark}
+        isStreaming={isStreaming}
       />
     </section>
   );

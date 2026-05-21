@@ -1,7 +1,6 @@
 "use client";
 
-import { Folder, Settings } from "lucide-react";
-import type React from "react";
+import { Folder, Plus, Settings } from "lucide-react";
 import { useCallback, useState } from "react";
 import { useThemeClasses } from "@/components/ui";
 import IconButton from "@/components/ui/IconButton";
@@ -10,19 +9,15 @@ import type {
   WorkspaceSettingUpdater,
   WorkspaceSettings,
 } from "@/components/workspaceSettings";
-
-export interface WorkspaceItem {
-  id: string;
-  name: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
+import type { WorkspaceRow } from "@/lib/supabase/types";
 
 interface SidebarProps {
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
-  activeWorkspaceId: string;
+  activeWorkspaceId: string | null;
   setActiveWorkspaceId: (id: string) => void;
-  workspaces: WorkspaceItem[];
+  workspaces: WorkspaceRow[];
+  onCreateWorkspace: () => void;
   settings: WorkspaceSettings;
   onSettingChange: WorkspaceSettingUpdater;
 }
@@ -37,6 +32,7 @@ export default function Sidebar({
   activeWorkspaceId,
   setActiveWorkspaceId,
   workspaces,
+  onCreateWorkspace,
   settings,
   onSettingChange,
 }: SidebarProps) {
@@ -56,26 +52,37 @@ export default function Sidebar({
       >
         {/* Header */}
         <div
-          className={`flex h-14 shrink-0 items-center justify-start gap-2.5 overflow-hidden border-b px-3 ${tc.border}`}
+          className={`flex h-14 shrink-0 items-center justify-between gap-2 overflow-hidden border-b px-3 ${tc.border}`}
         >
-          <IconButton
-            label={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-            colorClass={tc.btnPrimary}
-            onClick={() => setCollapsed(!collapsed)}
-          >
-            <Folder className="h-4 w-4" />
-          </IconButton>
+          <div className="flex min-w-0 items-center gap-2">
+            <IconButton
+              label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+              colorClass={tc.btnPrimary}
+              onClick={() => setCollapsed(!collapsed)}
+            >
+              <Folder className="h-4 w-4" />
+            </IconButton>
 
-          <span
-            className={`whitespace-nowrap text-[15px] font-semibold tracking-tight transition-all duration-200 ${tc.textPrimary} ${
-              collapsed
-                ? "max-w-0 -translate-x-1 opacity-0"
-                : "max-w-[120px] translate-x-0 opacity-100"
-            }`}
-            aria-hidden={collapsed}
+            <span
+              className={`whitespace-nowrap text-[15px] font-semibold tracking-tight transition-all duration-200 ${tc.textPrimary} ${
+                collapsed
+                  ? "max-w-0 -translate-x-1 opacity-0"
+                  : "max-w-[120px] translate-x-0 opacity-100"
+              }`}
+              aria-hidden={collapsed}
+            >
+              Canvas
+            </span>
+          </div>
+
+          <IconButton
+            label="Create workspace"
+            colorClass={tc.btnGhost}
+            sizeClass="h-11 w-11"
+            onClick={onCreateWorkspace}
           >
-            Canvas
-          </span>
+            <Plus className="h-4 w-4" />
+          </IconButton>
         </div>
 
         {/* Workspace list */}
@@ -90,39 +97,66 @@ export default function Sidebar({
             </div>
           )}
 
-          {workspaces.map((item) => {
-            const Icon = item.icon;
-            const isActive = item.id === activeWorkspaceId;
-
-            return (
+          {workspaces.length === 0 ? (
+            <div className={`mx-2 rounded-2xl border p-3 ${tc.emptyCard} ${tc.border}`}>
+              {!collapsed && (
+                <div className="space-y-2">
+                  <div className={`text-xs font-medium ${tc.textPrimary}`}>
+                    No workspaces yet
+                  </div>
+                  <p className={`text-[11px] leading-relaxed ${tc.textSecondary}`}>
+                    Create your first workspace to start a conversation and save
+                    chats here.
+                  </p>
+                </div>
+              )}
               <button
                 type="button"
-                key={item.id}
-                onClick={() => setActiveWorkspaceId(item.id)}
-                className={`flex h-10 w-full items-center rounded-lg text-left transition-all duration-150 ${
-                  isActive ? tc.itemActive : tc.itemInactive
-                } ${collapsed ? "justify-center" : "gap-2.5 px-2.5"}`}
-                title={item.name}
-                aria-label={item.name}
+                onClick={onCreateWorkspace}
+                className={`mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-xl text-xs font-medium transition-colors ${
+                  isDark
+                    ? "bg-[#FAFAF9] text-[#171717] hover:bg-[#E7E5E4]"
+                    : "bg-[#0A0A0A] text-white hover:bg-[#404040]"
+                }`}
               >
-                <Icon
-                  className={`h-4 w-4 shrink-0 ${
-                    isActive ? tc.textPrimary : tc.textSecondary
-                  }`}
-                />
-                {!collapsed && (
-                  <span className="truncate text-xs">{item.name}</span>
-                )}
-                {!collapsed && isActive && (
-                  <span
-                    className={`ml-auto h-1.5 w-1.5 shrink-0 rounded-full ${
-                      isDark ? "bg-[#FAFAF9]" : "bg-[#0A0A0A]"
+                <Plus className="h-4 w-4" />
+                {!collapsed && "Create workspace"}
+              </button>
+            </div>
+          ) : (
+            workspaces.map((item) => {
+              const isActive = item.id === activeWorkspaceId;
+
+              return (
+                <button
+                  type="button"
+                  key={item.id}
+                  onClick={() => setActiveWorkspaceId(item.id)}
+                  className={`flex h-10 w-full items-center rounded-lg text-left transition-all duration-150 ${
+                    isActive ? tc.itemActive : tc.itemInactive
+                  } ${collapsed ? "justify-center" : "gap-2.5 px-2.5"}`}
+                  title={item.name}
+                  aria-label={item.name}
+                >
+                  <Folder
+                    className={`h-4 w-4 shrink-0 ${
+                      isActive ? tc.textPrimary : tc.textSecondary
                     }`}
                   />
-                )}
-              </button>
-            );
-          })}
+                  {!collapsed && (
+                    <span className="truncate text-xs">{item.name}</span>
+                  )}
+                  {!collapsed && isActive && (
+                    <span
+                      className={`ml-auto h-1.5 w-1.5 shrink-0 rounded-full ${
+                        isDark ? "bg-[#FAFAF9]" : "bg-[#0A0A0A]"
+                      }`}
+                    />
+                  )}
+                </button>
+              );
+            })
+          )}
         </div>
 
         {/* Footer — Settings trigger */}
