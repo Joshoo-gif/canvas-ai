@@ -5,7 +5,7 @@ export function workspaceFileToArtifact(file: WorkspaceFileRow): Artifact {
   return {
     id: file.id,
     name: file.original_name,
-    type: "document",
+    type: file.extension === "csv" ? "sheet" : "document",
     content: file.extracted_lines,
   };
 }

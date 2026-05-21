@@ -42,6 +42,7 @@ export default function WorkspacePage() {
   const [historyModalOpen, setHistoryModalOpen] = useState(false);
   const [createWorkspaceOpen, setCreateWorkspaceOpen] = useState(false);
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const [pendingUploadAfterWorkspaceCreate, setPendingUploadAfterWorkspaceCreate] = useState(false);
   const [workspaceFiles, setWorkspaceFiles] = useState<WorkspaceFileRow[]>([]);
   const [openArtifacts, setOpenArtifacts] = useState<Artifact[]>([]);
   const [activeArtifactId, setActiveArtifactId] = useState<string | null>(null);
@@ -96,11 +97,13 @@ export default function WorkspacePage() {
     }));
   };
 
-  const { messages, isStreaming, sendMessage } = useChat({
+  const { messages, isStreaming, sendMessage, conversationId: hookConversationId } = useChat({
     workspaceId: activeWorkspaceId,
     conversationId: activeConversationId,
     onStatusChange: setAgentStatus,
   });
+
+  const actualConversationId = hookConversationId ?? activeConversationId;
 
   const handleNewChat = useCallback(() => {
     setActiveConversationId("new");
@@ -224,8 +227,17 @@ export default function WorkspacePage() {
     setOpenArtifacts([]);
     setActiveArtifactId(null);
     setCreateWorkspaceOpen(false);
+    if (pendingUploadAfterWorkspaceCreate) {
+      setPendingUploadAfterWorkspaceCreate(false);
+      setUploadModalOpen(true);
+    }
     setMobileActiveTab("chat");
     setAgentStatus("Workspace ready.");
+  }, [pendingUploadAfterWorkspaceCreate]);
+
+  const handleCloseCreateWorkspace = useCallback(() => {
+    setCreateWorkspaceOpen(false);
+    setPendingUploadAfterWorkspaceCreate(false);
   }, []);
 
   const handleDeleteWorkspace = useCallback(async (id: string) => {
@@ -311,7 +323,9 @@ export default function WorkspacePage() {
 
   const openUploadModal = useCallback(() => {
     if (!activeWorkspaceId) {
-      setAgentStatus("Select a workspace before uploading files.");
+      setPendingUploadAfterWorkspaceCreate(true);
+      setCreateWorkspaceOpen(true);
+      setAgentStatus("Create a workspace first, then upload your file.");
       return;
     }
     setUploadModalOpen(true);
@@ -518,7 +532,7 @@ export default function WorkspacePage() {
 
       <CreateWorkspaceModal
         open={createWorkspaceOpen}
-        onClose={() => setCreateWorkspaceOpen(false)}
+        onClose={handleCloseCreateWorkspace}
         onCreate={handleCreateWorkspace}
       />
 
@@ -535,7 +549,7 @@ export default function WorkspacePage() {
         workspaceId={activeWorkspaceId}
         onSelectConversation={handleSelectConversation}
         isDark={isDark}
-        activeConversationId={activeConversationId}
+        activeConversationId={actualConversationId}
         onActiveConversationDeleted={handleNewChat}
       />
     </div>

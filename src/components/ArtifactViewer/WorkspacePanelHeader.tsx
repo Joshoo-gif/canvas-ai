@@ -27,7 +27,7 @@ export default function WorkspacePanelHeader({
           <div className={`truncate text-[10px] ${tc.textSecondary}`}>
             {fileCount > 0
               ? `${fileCount} uploaded file${fileCount === 1 ? "" : "s"}`
-              : "Upload txt, md, pdf, or docx files"}
+              : "Upload txt, md, csv, pdf, or docx files"}
           </div>
         </div>
       </div>

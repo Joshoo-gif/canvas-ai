@@ -3,6 +3,7 @@ export const SUPPORTED_WORKSPACE_FILE_EXTENSIONS = [
   "md",
   "pdf",
   "docx",
+  "csv",
 ] as const;
 
 export type WorkspaceFileExtension =
@@ -11,6 +12,9 @@ export type WorkspaceFileExtension =
 const EXTENSION_BY_MIME: Readonly<Record<string, WorkspaceFileExtension>> = {
   "text/plain": "txt",
   "text/markdown": "md",
+  "text/csv": "csv",
+  "application/csv": "csv",
+  "application/vnd.ms-excel": "csv",
   "application/pdf": "pdf",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
     "docx",
@@ -19,6 +23,7 @@ const EXTENSION_BY_MIME: Readonly<Record<string, WorkspaceFileExtension>> = {
 const MIME_BY_EXTENSION: Readonly<Record<WorkspaceFileExtension, string[]>> = {
   txt: ["text/plain"],
   md: ["text/markdown", "text/plain"],
+  csv: ["text/csv", "application/csv", "application/vnd.ms-excel"],
   pdf: ["application/pdf"],
   docx: [
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
@@ -30,10 +35,14 @@ export const MAX_WORKSPACE_FILE_BYTES = 20 * 1024 * 1024;
 export const WORKSPACE_FILE_ACCEPT = [
   ".txt",
   ".md",
+  ".csv",
   ".pdf",
   ".docx",
   "text/plain",
   "text/markdown",
+  "text/csv",
+  "application/csv",
+  "application/vnd.ms-excel",
   "application/pdf",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ].join(",");

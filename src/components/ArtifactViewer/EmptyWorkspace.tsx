@@ -31,8 +31,8 @@ export default function EmptyWorkspace({
       </h3>
 
       <p className={`mb-6 max-w-xs text-xs leading-relaxed ${tc.textSecondary}`}>
-        Upload txt, md, pdf, or docx files to extract their text into numbered
-        lines for later AI reading.
+        Upload txt, md, csv, pdf, or docx files to extract their text into
+        numbered lines for later AI reading.
       </p>
 
       <button

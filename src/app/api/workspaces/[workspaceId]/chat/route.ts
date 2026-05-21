@@ -5,6 +5,7 @@ import {
   listMessages,
 } from "@/lib/chat/repository";
 import { findWorkspaceById } from "@/lib/workspace/repository";
+import { getSessionUserId } from "@/lib/auth/session";
 import type { MessageRow } from "@/lib/supabase/types";
 
 export const runtime = "nodejs";
@@ -69,7 +70,13 @@ function processMessages(rows: MessageRow[]) {
 
 export async function GET(request: Request, context: ChatRouteContext) {
   const { workspaceId } = await context.params;
-  const workspace = await findWorkspaceById(workspaceId);
+  const userId = await getSessionUserId();
+
+  if (!userId) {
+    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+  }
+
+  const workspace = await findWorkspaceById(workspaceId, userId);
 
   if (!workspace) {
     return NextResponse.json({ error: "Workspace not found." }, { status: 404 });

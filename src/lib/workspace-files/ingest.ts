@@ -1,6 +1,7 @@
 import { Buffer } from "node:buffer";
 import pdfParse from "@cedrugs/pdf-parse";
 import mammoth from "mammoth";
+import { parseCsvRows, serializeCsvRows } from "./csv";
 import {
   inferWorkspaceFileExtension,
   MAX_WORKSPACE_FILE_BYTES,
@@ -91,6 +92,11 @@ function extractPlainText(buffer: Buffer): string {
   return sanitizeWorkspaceText(buffer.toString("utf8"));
 }
 
+function extractCsvText(buffer: Buffer): string {
+  const rows = parseCsvRows(buffer.toString("utf8"));
+  return serializeCsvRows(rows).join("\n");
+}
+
 export async function parseWorkspaceUpload(file: {
   name: string;
   type: string;
@@ -99,7 +105,7 @@ export async function parseWorkspaceUpload(file: {
 }): Promise<ParsedWorkspaceFile> {
   if (!isSupportedWorkspaceFileLike(file)) {
     throw new Error(
-      "Unsupported file type. Please upload a txt, md, pdf, or docx file under 20 MB.",
+      "Unsupported file type. Please upload a txt, md, csv, pdf, or docx file under 20 MB.",
     );
   }
 
@@ -116,6 +122,9 @@ export async function parseWorkspaceUpload(file: {
 
   let extractedText: string;
   switch (extension) {
+    case "csv":
+      extractedText = extractCsvText(buffer);
+      break;
     case "docx":
       extractedText = await extractDocxText(buffer);
       break;

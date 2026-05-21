@@ -218,7 +218,7 @@ export default function UploadModal({
 
                 {/* Format chips */}
                 <div className="flex items-center gap-2">
-                  {["TXT", "MD", "PDF", "DOCX"].map((fmt) => (
+                  {["TXT", "MD", "CSV", "PDF", "DOCX"].map((fmt) => (
                     <span
                       key={fmt}
                       className={`rounded-full px-3 py-1 text-[11px] font-semibold tracking-wide ${extBadgeBg}`}

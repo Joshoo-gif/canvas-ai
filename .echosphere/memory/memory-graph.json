@@ -1741,6 +1741,823 @@
       ],
       "createdAt": "2026-05-21T13:54:31.191Z",
       "updatedAt": "2026-05-21T13:54:31.191Z"
+    },
+    {
+      "memoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "rootMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad"
+      ],
+      "childMemoryIds": [
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9"
+      ],
+      "sectionKind": "fact",
+      "summary": "Fixed a Next.js production build failure caused by outdated workspace repository calls in workspace API routes. The chat and conversations workspace routes now fetch the authenticated user ID before calling findWorkspaceById, matching the repository signature and preserving user scoping. This addressed the TypeScript build error and aligned the route behavior with existing authorization patterns.",
+      "affectedFiles": [
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/chat/route.ts",
+          "action": "modified",
+          "reason": "This route caused the reported TypeScript build failure and now enforces authenticated workspace lookup.",
+          "notes": "Added user authentication guard and passed userId to findWorkspaceById."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/conversations/route.ts",
+          "action": "modified",
+          "reason": "This route used the same outdated repository call signature and would also fail type checking.",
+          "notes": "Added user authentication guard and passed userId to findWorkspaceById."
+        },
+        {
+          "path": "src/lib/workspace/repository.ts",
+          "action": "inspected",
+          "reason": "The helper signature defined the contract that the routes had to satisfy.",
+          "notes": "No code change was needed, only verification of the two-argument signature."
+        }
+      ],
+      "createdAt": "2026-05-21T16:11:15.731Z",
+      "updatedAt": "2026-05-21T16:11:15.731Z"
+    },
+    {
+      "memoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "rootMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "parentMemoryIds": [
+        "74ec3b71-6af1-4aa5-9749-76b1f554d17b"
+      ],
+      "relatedMemoryIds": [
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad"
+      ],
+      "childMemoryIds": [
+        "2e6d32d6-95f5-497b-b52b-984926cd00fc"
+      ],
+      "sectionKind": "decision",
+      "summary": "Fixed a Next.js production build failure caused by outdated workspace repository calls in workspace API routes. The chat and conversations workspace routes now fetch the authenticated user ID before calling findWorkspaceById, matching the repository signature and preserving user scoping. This addressed the TypeScript build error and aligned the route behavior with existing authorization patterns.",
+      "affectedFiles": [
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/chat/route.ts",
+          "action": "modified",
+          "reason": "This route caused the reported TypeScript build failure and now enforces authenticated workspace lookup.",
+          "notes": "Added user authentication guard and passed userId to findWorkspaceById."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/conversations/route.ts",
+          "action": "modified",
+          "reason": "This route used the same outdated repository call signature and would also fail type checking.",
+          "notes": "Added user authentication guard and passed userId to findWorkspaceById."
+        },
+        {
+          "path": "src/lib/workspace/repository.ts",
+          "action": "inspected",
+          "reason": "The helper signature defined the contract that the routes had to satisfy.",
+          "notes": "No code change was needed, only verification of the two-argument signature."
+        }
+      ],
+      "createdAt": "2026-05-21T16:11:15.820Z",
+      "updatedAt": "2026-05-21T16:11:15.820Z"
+    },
+    {
+      "memoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "rootMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "parentMemoryIds": [
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9"
+      ],
+      "relatedMemoryIds": [
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Fixed a Next.js production build failure caused by outdated workspace repository calls in workspace API routes. The chat and conversations workspace routes now fetch the authenticated user ID before calling findWorkspaceById, matching the repository signature and preserving user scoping. This addressed the TypeScript build error and aligned the route behavior with existing authorization patterns.",
+      "affectedFiles": [
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/chat/route.ts",
+          "action": "modified",
+          "reason": "This route caused the reported TypeScript build failure and now enforces authenticated workspace lookup.",
+          "notes": "Added user authentication guard and passed userId to findWorkspaceById."
+        },
+        {
+          "path": "src/app/api/workspaces/[workspaceId]/conversations/route.ts",
+          "action": "modified",
+          "reason": "This route used the same outdated repository call signature and would also fail type checking.",
+          "notes": "Added user authentication guard and passed userId to findWorkspaceById."
+        },
+        {
+          "path": "src/lib/workspace/repository.ts",
+          "action": "inspected",
+          "reason": "The helper signature defined the contract that the routes had to satisfy.",
+          "notes": "No code change was needed, only verification of the two-argument signature."
+        }
+      ],
+      "createdAt": "2026-05-21T16:11:15.904Z",
+      "updatedAt": "2026-05-21T16:11:15.904Z"
+    },
+    {
+      "memoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "rootMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "childMemoryIds": [
+        "5379af76-9915-476d-b6ea-a001e1560187"
+      ],
+      "sectionKind": "fact",
+      "summary": "Updated the workspace page modal flow so Upload files now chains through workspace creation when no workspace exists. The page tracks a pending upload intent, opens the Create Workspace modal when needed, clears the intent on cancel, and automatically opens the Upload modal after a successful workspace creation. The change stayed localized to src/app/page.tsx and reused existing modal components.",
+      "affectedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "This file owns the workspace page state and modal orchestration, so it was the correct place to add the create-then-upload handoff.",
+          "notes": "Added a pending upload flag, a close handler for the create modal, and automatic upload modal opening after workspace creation."
+        },
+        {
+          "path": "src/components/CreateWorkspaceModal/index.tsx",
+          "action": "inspected",
+          "reason": "The existing create workspace modal needed to be reused as-is, so its close and submit behavior was checked before wiring the new flow.",
+          "notes": "No code changes were required."
+        },
+        {
+          "path": "src/components/UploadModal/index.tsx",
+          "action": "inspected",
+          "reason": "The upload modal behavior was reviewed to ensure it could still open directly after workspace creation without needing component changes.",
+          "notes": "No code changes were required."
+        }
+      ],
+      "createdAt": "2026-05-21T16:14:09.026Z",
+      "updatedAt": "2026-05-21T16:14:09.026Z"
+    },
+    {
+      "memoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "rootMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "parentMemoryIds": [
+        "a5c2bf1f-addb-4c06-99a8-cba47e369338"
+      ],
+      "relatedMemoryIds": [
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "childMemoryIds": [
+        "0c4db658-ef5c-449e-97c6-c44adaa652c8"
+      ],
+      "sectionKind": "decision",
+      "summary": "Updated the workspace page modal flow so Upload files now chains through workspace creation when no workspace exists. The page tracks a pending upload intent, opens the Create Workspace modal when needed, clears the intent on cancel, and automatically opens the Upload modal after a successful workspace creation. The change stayed localized to src/app/page.tsx and reused existing modal components.",
+      "affectedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "This file owns the workspace page state and modal orchestration, so it was the correct place to add the create-then-upload handoff.",
+          "notes": "Added a pending upload flag, a close handler for the create modal, and automatic upload modal opening after workspace creation."
+        },
+        {
+          "path": "src/components/CreateWorkspaceModal/index.tsx",
+          "action": "inspected",
+          "reason": "The existing create workspace modal needed to be reused as-is, so its close and submit behavior was checked before wiring the new flow.",
+          "notes": "No code changes were required."
+        },
+        {
+          "path": "src/components/UploadModal/index.tsx",
+          "action": "inspected",
+          "reason": "The upload modal behavior was reviewed to ensure it could still open directly after workspace creation without needing component changes.",
+          "notes": "No code changes were required."
+        }
+      ],
+      "createdAt": "2026-05-21T16:14:09.134Z",
+      "updatedAt": "2026-05-21T16:14:09.134Z"
+    },
+    {
+      "memoryId": "0c4db658-ef5c-449e-97c6-c44adaa652c8",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "rootMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "parentMemoryIds": [
+        "5379af76-9915-476d-b6ea-a001e1560187"
+      ],
+      "relatedMemoryIds": [
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Updated the workspace page modal flow so Upload files now chains through workspace creation when no workspace exists. The page tracks a pending upload intent, opens the Create Workspace modal when needed, clears the intent on cancel, and automatically opens the Upload modal after a successful workspace creation. The change stayed localized to src/app/page.tsx and reused existing modal components.",
+      "affectedFiles": [
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "This file owns the workspace page state and modal orchestration, so it was the correct place to add the create-then-upload handoff.",
+          "notes": "Added a pending upload flag, a close handler for the create modal, and automatic upload modal opening after workspace creation."
+        },
+        {
+          "path": "src/components/CreateWorkspaceModal/index.tsx",
+          "action": "inspected",
+          "reason": "The existing create workspace modal needed to be reused as-is, so its close and submit behavior was checked before wiring the new flow.",
+          "notes": "No code changes were required."
+        },
+        {
+          "path": "src/components/UploadModal/index.tsx",
+          "action": "inspected",
+          "reason": "The upload modal behavior was reviewed to ensure it could still open directly after workspace creation without needing component changes.",
+          "notes": "No code changes were required."
+        }
+      ],
+      "createdAt": "2026-05-21T16:14:09.237Z",
+      "updatedAt": "2026-05-21T16:14:09.237Z"
+    },
+    {
+      "memoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "rootMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "parentMemoryIds": [
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "relatedMemoryIds": [
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1"
+      ],
+      "childMemoryIds": [
+        "5716ae84-94a3-44f4-b05f-f5bf6f3dd982"
+      ],
+      "sectionKind": "fact",
+      "summary": "Implemented CSV support in the workspace file upload flow. The upload validation allowlist, accept attribute, and user-facing labels now include CSV, and CSV is treated as a supported text-like upload without a separate parser. This was kept as a narrow change to the shared workspace-file boundary and the small UI copy surfaces that mention supported formats.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/validation.ts",
+          "action": "modified",
+          "reason": "Expanded the canonical supported file list and accept/mime mapping to include CSV uploads.",
+          "notes": "Shared source of truth for both client and server upload validation."
+        },
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Updated the unsupported-file error message so it matches the new CSV-capable upload list.",
+          "notes": "CSV continues to use the existing plain-text extraction path."
+        },
+        {
+          "path": "src/components/ArtifactViewer/EmptyWorkspace.tsx",
+          "action": "modified",
+          "reason": "Updated empty-state guidance so users see CSV listed among supported upload types.",
+          "notes": "Copy only; no behavioral changes."
+        },
+        {
+          "path": "src/components/ArtifactViewer/WorkspacePanelHeader.tsx",
+          "action": "modified",
+          "reason": "Updated the panel subtitle to keep the displayed supported file types accurate.",
+          "notes": "Copy only; no behavioral changes."
+        },
+        {
+          "path": "src/components/UploadModal/index.tsx",
+          "action": "modified",
+          "reason": "Updated the displayed format chips so the upload modal reflects CSV support.",
+          "notes": "The input already consumed the shared accept string, so no separate behavior change was needed here."
+        }
+      ],
+      "createdAt": "2026-05-21T16:19:03.328Z",
+      "updatedAt": "2026-05-21T16:19:03.328Z"
+    },
+    {
+      "memoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "rootMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "parentMemoryIds": [
+        "28b006e1-b64c-42f5-988b-f730bdc49600"
+      ],
+      "relatedMemoryIds": [
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1"
+      ],
+      "childMemoryIds": [
+        "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e"
+      ],
+      "sectionKind": "decision",
+      "summary": "Implemented CSV support in the workspace file upload flow. The upload validation allowlist, accept attribute, and user-facing labels now include CSV, and CSV is treated as a supported text-like upload without a separate parser. This was kept as a narrow change to the shared workspace-file boundary and the small UI copy surfaces that mention supported formats.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/validation.ts",
+          "action": "modified",
+          "reason": "Expanded the canonical supported file list and accept/mime mapping to include CSV uploads.",
+          "notes": "Shared source of truth for both client and server upload validation."
+        },
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Updated the unsupported-file error message so it matches the new CSV-capable upload list.",
+          "notes": "CSV continues to use the existing plain-text extraction path."
+        },
+        {
+          "path": "src/components/ArtifactViewer/EmptyWorkspace.tsx",
+          "action": "modified",
+          "reason": "Updated empty-state guidance so users see CSV listed among supported upload types.",
+          "notes": "Copy only; no behavioral changes."
+        },
+        {
+          "path": "src/components/ArtifactViewer/WorkspacePanelHeader.tsx",
+          "action": "modified",
+          "reason": "Updated the panel subtitle to keep the displayed supported file types accurate.",
+          "notes": "Copy only; no behavioral changes."
+        },
+        {
+          "path": "src/components/UploadModal/index.tsx",
+          "action": "modified",
+          "reason": "Updated the displayed format chips so the upload modal reflects CSV support.",
+          "notes": "The input already consumed the shared accept string, so no separate behavior change was needed here."
+        }
+      ],
+      "createdAt": "2026-05-21T16:19:03.425Z",
+      "updatedAt": "2026-05-21T16:19:03.425Z"
+    },
+    {
+      "memoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "rootMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "parentMemoryIds": [
+        "5716ae84-94a3-44f4-b05f-f5bf6f3dd982"
+      ],
+      "relatedMemoryIds": [
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+        "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+        "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Implemented CSV support in the workspace file upload flow. The upload validation allowlist, accept attribute, and user-facing labels now include CSV, and CSV is treated as a supported text-like upload without a separate parser. This was kept as a narrow change to the shared workspace-file boundary and the small UI copy surfaces that mention supported formats.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/validation.ts",
+          "action": "modified",
+          "reason": "Expanded the canonical supported file list and accept/mime mapping to include CSV uploads.",
+          "notes": "Shared source of truth for both client and server upload validation."
+        },
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Updated the unsupported-file error message so it matches the new CSV-capable upload list.",
+          "notes": "CSV continues to use the existing plain-text extraction path."
+        },
+        {
+          "path": "src/components/ArtifactViewer/EmptyWorkspace.tsx",
+          "action": "modified",
+          "reason": "Updated empty-state guidance so users see CSV listed among supported upload types.",
+          "notes": "Copy only; no behavioral changes."
+        },
+        {
+          "path": "src/components/ArtifactViewer/WorkspacePanelHeader.tsx",
+          "action": "modified",
+          "reason": "Updated the panel subtitle to keep the displayed supported file types accurate.",
+          "notes": "Copy only; no behavioral changes."
+        },
+        {
+          "path": "src/components/UploadModal/index.tsx",
+          "action": "modified",
+          "reason": "Updated the displayed format chips so the upload modal reflects CSV support.",
+          "notes": "The input already consumed the shared accept string, so no separate behavior change was needed here."
+        }
+      ],
+      "createdAt": "2026-05-21T16:19:03.514Z",
+      "updatedAt": "2026-05-21T16:19:03.514Z"
+    },
+    {
+      "memoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "rootMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "parentMemoryIds": [
+        "5716ae84-94a3-44f4-b05f-f5bf6f3dd982"
+      ],
+      "relatedMemoryIds": [
+        "28b006e1-b64c-42f5-988b-f730bdc49600",
+        "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "childMemoryIds": [
+        "489dabfb-39c7-4b14-8573-64940f8baf54"
+      ],
+      "sectionKind": "fact",
+      "summary": "Implemented CSV-to-table support for workspace uploads. CSV files now flow through a shared CSV parser/serializer at ingest time, are stored as canonical row text, and are mapped to the spreadsheet artifact viewer so they render as rows and columns instead of plain document lines. The existing line-based search and highlight flow remains intact because CSV rows are still persisted as line-oriented content.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/csv.ts",
+          "action": "created",
+          "reason": "Provides shared CSV parsing and serialization for both server-side ingest and client-side spreadsheet rendering.",
+          "notes": "Contains the canonical row parser/serializer used by the new CSV table flow."
+        },
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Uses the shared CSV helper to parse CSV uploads into canonical row text before storing extracted lines.",
+          "notes": "CSV now gets row-aware preprocessing while other file types keep their existing extraction paths."
+        },
+        {
+          "path": "src/lib/workspace-files/mappers.ts",
+          "action": "modified",
+          "reason": "Routes CSV workspace files to the sheet artifact type so the spreadsheet viewer is used.",
+          "notes": "Document files still use the text viewer."
+        },
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Parses CSV content with the shared helper to render accurate rows and columns instead of splitting by commas naively.",
+          "notes": "Keeps the existing line-number/highlight behavior."
+        }
+      ],
+      "createdAt": "2026-05-21T16:22:41.830Z",
+      "updatedAt": "2026-05-21T16:22:41.830Z"
+    },
+    {
+      "memoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "rootMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "parentMemoryIds": [
+        "11597013-39bc-42b3-b3d0-7d5c3730a88c"
+      ],
+      "relatedMemoryIds": [
+        "28b006e1-b64c-42f5-988b-f730bdc49600",
+        "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "childMemoryIds": [
+        "76cefe56-fcea-43da-9d9b-3f45ce3f7349"
+      ],
+      "sectionKind": "decision",
+      "summary": "Implemented CSV-to-table support for workspace uploads. CSV files now flow through a shared CSV parser/serializer at ingest time, are stored as canonical row text, and are mapped to the spreadsheet artifact viewer so they render as rows and columns instead of plain document lines. The existing line-based search and highlight flow remains intact because CSV rows are still persisted as line-oriented content.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/csv.ts",
+          "action": "created",
+          "reason": "Provides shared CSV parsing and serialization for both server-side ingest and client-side spreadsheet rendering.",
+          "notes": "Contains the canonical row parser/serializer used by the new CSV table flow."
+        },
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Uses the shared CSV helper to parse CSV uploads into canonical row text before storing extracted lines.",
+          "notes": "CSV now gets row-aware preprocessing while other file types keep their existing extraction paths."
+        },
+        {
+          "path": "src/lib/workspace-files/mappers.ts",
+          "action": "modified",
+          "reason": "Routes CSV workspace files to the sheet artifact type so the spreadsheet viewer is used.",
+          "notes": "Document files still use the text viewer."
+        },
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Parses CSV content with the shared helper to render accurate rows and columns instead of splitting by commas naively.",
+          "notes": "Keeps the existing line-number/highlight behavior."
+        }
+      ],
+      "createdAt": "2026-05-21T16:22:41.935Z",
+      "updatedAt": "2026-05-21T16:22:41.935Z"
+    },
+    {
+      "memoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "rootMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "parentMemoryIds": [
+        "489dabfb-39c7-4b14-8573-64940f8baf54"
+      ],
+      "relatedMemoryIds": [
+        "28b006e1-b64c-42f5-988b-f730bdc49600",
+        "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "144113e3-18c7-413e-a408-87aa6c726015"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Implemented CSV-to-table support for workspace uploads. CSV files now flow through a shared CSV parser/serializer at ingest time, are stored as canonical row text, and are mapped to the spreadsheet artifact viewer so they render as rows and columns instead of plain document lines. The existing line-based search and highlight flow remains intact because CSV rows are still persisted as line-oriented content.",
+      "affectedFiles": [
+        {
+          "path": "src/lib/workspace-files/csv.ts",
+          "action": "created",
+          "reason": "Provides shared CSV parsing and serialization for both server-side ingest and client-side spreadsheet rendering.",
+          "notes": "Contains the canonical row parser/serializer used by the new CSV table flow."
+        },
+        {
+          "path": "src/lib/workspace-files/ingest.ts",
+          "action": "modified",
+          "reason": "Uses the shared CSV helper to parse CSV uploads into canonical row text before storing extracted lines.",
+          "notes": "CSV now gets row-aware preprocessing while other file types keep their existing extraction paths."
+        },
+        {
+          "path": "src/lib/workspace-files/mappers.ts",
+          "action": "modified",
+          "reason": "Routes CSV workspace files to the sheet artifact type so the spreadsheet viewer is used.",
+          "notes": "Document files still use the text viewer."
+        },
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Parses CSV content with the shared helper to render accurate rows and columns instead of splitting by commas naively.",
+          "notes": "Keeps the existing line-number/highlight behavior."
+        }
+      ],
+      "createdAt": "2026-05-21T16:22:42.027Z",
+      "updatedAt": "2026-05-21T16:22:42.027Z"
+    },
+    {
+      "memoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "rootMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "489dabfb-39c7-4b14-8573-64940f8baf54",
+        "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+        "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+        "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+        "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e"
+      ],
+      "childMemoryIds": [
+        "4a7f82d7-807f-4428-8607-db50bc6225d2"
+      ],
+      "sectionKind": "fact",
+      "summary": "Refined the CSV spreadsheet viewer after initial table support landed. The row-number column now includes a left border so its cell edge matches the rest of the table, while the sticky bottom horizontal scrollbar arrangement remains in place for easier sideways scrolling. This change was limited to the ArtifactViewer spreadsheet component and did not alter CSV parsing or ingest behavior.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Added the missing left border to the row-number cells and preserved the sticky bottom scrollbar layout.",
+          "notes": "This is the only file changed in this follow-up fix."
+        }
+      ],
+      "createdAt": "2026-05-21T16:29:15.881Z",
+      "updatedAt": "2026-05-21T16:29:15.881Z"
+    },
+    {
+      "memoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "rootMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "parentMemoryIds": [
+        "20249434-af8a-4e49-ba83-8aed813d4d31"
+      ],
+      "relatedMemoryIds": [
+        "489dabfb-39c7-4b14-8573-64940f8baf54",
+        "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+        "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+        "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+        "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e"
+      ],
+      "childMemoryIds": [
+        "ce609f44-44b3-4fdf-95cc-673666609282"
+      ],
+      "sectionKind": "decision",
+      "summary": "Refined the CSV spreadsheet viewer after initial table support landed. The row-number column now includes a left border so its cell edge matches the rest of the table, while the sticky bottom horizontal scrollbar arrangement remains in place for easier sideways scrolling. This change was limited to the ArtifactViewer spreadsheet component and did not alter CSV parsing or ingest behavior.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Added the missing left border to the row-number cells and preserved the sticky bottom scrollbar layout.",
+          "notes": "This is the only file changed in this follow-up fix."
+        }
+      ],
+      "createdAt": "2026-05-21T16:29:15.980Z",
+      "updatedAt": "2026-05-21T16:29:15.980Z"
+    },
+    {
+      "memoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "rootMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "parentMemoryIds": [
+        "4a7f82d7-807f-4428-8607-db50bc6225d2"
+      ],
+      "relatedMemoryIds": [
+        "489dabfb-39c7-4b14-8573-64940f8baf54",
+        "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+        "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+        "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+        "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Refined the CSV spreadsheet viewer after initial table support landed. The row-number column now includes a left border so its cell edge matches the rest of the table, while the sticky bottom horizontal scrollbar arrangement remains in place for easier sideways scrolling. This change was limited to the ArtifactViewer spreadsheet component and did not alter CSV parsing or ingest behavior.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Added the missing left border to the row-number cells and preserved the sticky bottom scrollbar layout.",
+          "notes": "This is the only file changed in this follow-up fix."
+        }
+      ],
+      "createdAt": "2026-05-21T16:29:16.054Z",
+      "updatedAt": "2026-05-21T16:29:16.054Z"
+    },
+    {
+      "memoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "rootMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "parentMemoryIds": [
+        "20249434-af8a-4e49-ba83-8aed813d4d31"
+      ],
+      "relatedMemoryIds": [
+        "ce609f44-44b3-4fdf-95cc-673666609282",
+        "4a7f82d7-807f-4428-8607-db50bc6225d2",
+        "489dabfb-39c7-4b14-8573-64940f8baf54",
+        "76cefe56-fcea-43da-9d9b-3f45ce3f7349"
+      ],
+      "childMemoryIds": [
+        "1df2a4d2-41e2-4d48-97c8-a926e24eab0b"
+      ],
+      "sectionKind": "fact",
+      "summary": "Added the missing top border back to the CSV spreadsheet viewer's row-number column. The header number cell now includes a top border, and the first data-row number cell also receives a top border so the leftmost column edge reads correctly without altering the existing sticky bottom scrollbar or CSV parsing behavior.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Restored the top border on the row-number column without changing the CSV data flow or scrollbar behavior.",
+          "notes": "This is the only file changed for the top-border fix."
+        }
+      ],
+      "createdAt": "2026-05-21T16:30:06.080Z",
+      "updatedAt": "2026-05-21T16:30:06.080Z"
+    },
+    {
+      "memoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "rootMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "parentMemoryIds": [
+        "4a1df69b-771d-465d-b275-9bcfc82438ea"
+      ],
+      "relatedMemoryIds": [
+        "ce609f44-44b3-4fdf-95cc-673666609282",
+        "4a7f82d7-807f-4428-8607-db50bc6225d2",
+        "489dabfb-39c7-4b14-8573-64940f8baf54",
+        "76cefe56-fcea-43da-9d9b-3f45ce3f7349"
+      ],
+      "childMemoryIds": [
+        "f78645a7-7541-4b96-a7da-4b6bd81d59b2"
+      ],
+      "sectionKind": "decision",
+      "summary": "Added the missing top border back to the CSV spreadsheet viewer's row-number column. The header number cell now includes a top border, and the first data-row number cell also receives a top border so the leftmost column edge reads correctly without altering the existing sticky bottom scrollbar or CSV parsing behavior.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Restored the top border on the row-number column without changing the CSV data flow or scrollbar behavior.",
+          "notes": "This is the only file changed for the top-border fix."
+        }
+      ],
+      "createdAt": "2026-05-21T16:30:06.165Z",
+      "updatedAt": "2026-05-21T16:30:06.165Z"
+    },
+    {
+      "memoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "rootMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "parentMemoryIds": [
+        "1df2a4d2-41e2-4d48-97c8-a926e24eab0b"
+      ],
+      "relatedMemoryIds": [
+        "ce609f44-44b3-4fdf-95cc-673666609282",
+        "4a7f82d7-807f-4428-8607-db50bc6225d2",
+        "489dabfb-39c7-4b14-8573-64940f8baf54",
+        "76cefe56-fcea-43da-9d9b-3f45ce3f7349"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Added the missing top border back to the CSV spreadsheet viewer's row-number column. The header number cell now includes a top border, and the first data-row number cell also receives a top border so the leftmost column edge reads correctly without altering the existing sticky bottom scrollbar or CSV parsing behavior.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Restored the top border on the row-number column without changing the CSV data flow or scrollbar behavior.",
+          "notes": "This is the only file changed for the top-border fix."
+        }
+      ],
+      "createdAt": "2026-05-21T16:30:06.241Z",
+      "updatedAt": "2026-05-21T16:30:06.241Z"
+    },
+    {
+      "memoryId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "rootMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "parentMemoryIds": [
+        "1df2a4d2-41e2-4d48-97c8-a926e24eab0b"
+      ],
+      "relatedMemoryIds": [
+        "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+        "4a1df69b-771d-465d-b275-9bcfc82438ea",
+        "20249434-af8a-4e49-ba83-8aed813d4d31",
+        "ce609f44-44b3-4fdf-95cc-673666609282"
+      ],
+      "childMemoryIds": [
+        "529e6b7b-af38-40b3-a429-785ebd50dcaa"
+      ],
+      "sectionKind": "fact",
+      "summary": "Updated the CSV spreadsheet viewer so every row-number cell includes a top border, not just the first row. The change kept the existing sticky bottom horizontal scrollbar and all CSV parsing/data flow intact, and was limited to the ArtifactViewer presentation layer.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Applied a top border to every row-number cell so the CSV table grid remains consistent across all rows.",
+          "notes": "This is the only file changed in the follow-up fix."
+        }
+      ],
+      "createdAt": "2026-05-21T16:31:10.656Z",
+      "updatedAt": "2026-05-21T16:31:10.656Z"
+    },
+    {
+      "memoryId": "529e6b7b-af38-40b3-a429-785ebd50dcaa",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "rootMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "parentMemoryIds": [
+        "27877851-28cb-40b7-835d-85c573ba3ab3"
+      ],
+      "relatedMemoryIds": [
+        "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+        "4a1df69b-771d-465d-b275-9bcfc82438ea",
+        "20249434-af8a-4e49-ba83-8aed813d4d31",
+        "ce609f44-44b3-4fdf-95cc-673666609282"
+      ],
+      "childMemoryIds": [
+        "97084613-4462-4016-83b9-88373f501b01"
+      ],
+      "sectionKind": "decision",
+      "summary": "Updated the CSV spreadsheet viewer so every row-number cell includes a top border, not just the first row. The change kept the existing sticky bottom horizontal scrollbar and all CSV parsing/data flow intact, and was limited to the ArtifactViewer presentation layer.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Applied a top border to every row-number cell so the CSV table grid remains consistent across all rows.",
+          "notes": "This is the only file changed in the follow-up fix."
+        }
+      ],
+      "createdAt": "2026-05-21T16:31:10.739Z",
+      "updatedAt": "2026-05-21T16:31:10.739Z"
+    },
+    {
+      "memoryId": "97084613-4462-4016-83b9-88373f501b01",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "rootMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "parentMemoryIds": [
+        "529e6b7b-af38-40b3-a429-785ebd50dcaa"
+      ],
+      "relatedMemoryIds": [
+        "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+        "4a1df69b-771d-465d-b275-9bcfc82438ea",
+        "20249434-af8a-4e49-ba83-8aed813d4d31",
+        "ce609f44-44b3-4fdf-95cc-673666609282"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Updated the CSV spreadsheet viewer so every row-number cell includes a top border, not just the first row. The change kept the existing sticky bottom horizontal scrollbar and all CSV parsing/data flow intact, and was limited to the ArtifactViewer presentation layer.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ArtifactViewer/SpreadsheetViewer.tsx",
+          "action": "modified",
+          "reason": "Applied a top border to every row-number cell so the CSV table grid remains consistent across all rows.",
+          "notes": "This is the only file changed in the follow-up fix."
+        }
+      ],
+      "createdAt": "2026-05-21T16:31:10.809Z",
+      "updatedAt": "2026-05-21T16:31:10.809Z"
     }
   ],
   "edges": [
@@ -2842,7 +3659,882 @@
       "relation": "related",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
       "createdAt": "2026-05-21T13:54:31.191Z"
+    },
+    {
+      "fromMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.731Z"
+    },
+    {
+      "fromMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.731Z"
+    },
+    {
+      "fromMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.731Z"
+    },
+    {
+      "fromMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.731Z"
+    },
+    {
+      "fromMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.731Z"
+    },
+    {
+      "fromMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.731Z"
+    },
+    {
+      "fromMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "toMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.820Z"
+    },
+    {
+      "fromMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.820Z"
+    },
+    {
+      "fromMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.820Z"
+    },
+    {
+      "fromMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.820Z"
+    },
+    {
+      "fromMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.820Z"
+    },
+    {
+      "fromMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.820Z"
+    },
+    {
+      "fromMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "toMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.820Z"
+    },
+    {
+      "fromMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.904Z"
+    },
+    {
+      "fromMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.904Z"
+    },
+    {
+      "fromMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.904Z"
+    },
+    {
+      "fromMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.904Z"
+    },
+    {
+      "fromMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.904Z"
+    },
+    {
+      "fromMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:11:15.904Z"
+    },
+    {
+      "fromMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.026Z"
+    },
+    {
+      "fromMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.026Z"
+    },
+    {
+      "fromMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.026Z"
+    },
+    {
+      "fromMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.026Z"
+    },
+    {
+      "fromMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.026Z"
+    },
+    {
+      "fromMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "toMemoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.026Z"
+    },
+    {
+      "fromMemoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "toMemoryId": "a5c2bf1f-addb-4c06-99a8-cba47e369338",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.134Z"
+    },
+    {
+      "fromMemoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.134Z"
+    },
+    {
+      "fromMemoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.134Z"
+    },
+    {
+      "fromMemoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.134Z"
+    },
+    {
+      "fromMemoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.134Z"
+    },
+    {
+      "fromMemoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.134Z"
+    },
+    {
+      "fromMemoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "toMemoryId": "0c4db658-ef5c-449e-97c6-c44adaa652c8",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.134Z"
+    },
+    {
+      "fromMemoryId": "0c4db658-ef5c-449e-97c6-c44adaa652c8",
+      "toMemoryId": "5379af76-9915-476d-b6ea-a001e1560187",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.237Z"
+    },
+    {
+      "fromMemoryId": "0c4db658-ef5c-449e-97c6-c44adaa652c8",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.237Z"
+    },
+    {
+      "fromMemoryId": "0c4db658-ef5c-449e-97c6-c44adaa652c8",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.237Z"
+    },
+    {
+      "fromMemoryId": "0c4db658-ef5c-449e-97c6-c44adaa652c8",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.237Z"
+    },
+    {
+      "fromMemoryId": "0c4db658-ef5c-449e-97c6-c44adaa652c8",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.237Z"
+    },
+    {
+      "fromMemoryId": "0c4db658-ef5c-449e-97c6-c44adaa652c8",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:14:09.237Z"
+    },
+    {
+      "fromMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.328Z"
+    },
+    {
+      "fromMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.328Z"
+    },
+    {
+      "fromMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.328Z"
+    },
+    {
+      "fromMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.328Z"
+    },
+    {
+      "fromMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.328Z"
+    },
+    {
+      "fromMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "toMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.328Z"
+    },
+    {
+      "fromMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "toMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.425Z"
+    },
+    {
+      "fromMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.425Z"
+    },
+    {
+      "fromMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.425Z"
+    },
+    {
+      "fromMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.425Z"
+    },
+    {
+      "fromMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.425Z"
+    },
+    {
+      "fromMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "toMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.425Z"
+    },
+    {
+      "fromMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "toMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.514Z"
+    },
+    {
+      "fromMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.514Z"
+    },
+    {
+      "fromMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.514Z"
+    },
+    {
+      "fromMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "toMemoryId": "eb4f7a09-29ce-450f-b61a-85e2067333ee",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.514Z"
+    },
+    {
+      "fromMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "toMemoryId": "aecb2a7d-e4fc-45f0-a1fb-889deabc01b1",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:19:03.514Z"
+    },
+    {
+      "fromMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "toMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.830Z"
+    },
+    {
+      "fromMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "toMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.830Z"
+    },
+    {
+      "fromMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "toMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.830Z"
+    },
+    {
+      "fromMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.830Z"
+    },
+    {
+      "fromMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.830Z"
+    },
+    {
+      "fromMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "toMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.830Z"
+    },
+    {
+      "fromMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "toMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.935Z"
+    },
+    {
+      "fromMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "toMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.935Z"
+    },
+    {
+      "fromMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "toMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.935Z"
+    },
+    {
+      "fromMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.935Z"
+    },
+    {
+      "fromMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.935Z"
+    },
+    {
+      "fromMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "toMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:41.935Z"
+    },
+    {
+      "fromMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "toMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:42.027Z"
+    },
+    {
+      "fromMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "toMemoryId": "28b006e1-b64c-42f5-988b-f730bdc49600",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:42.027Z"
+    },
+    {
+      "fromMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "toMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:42.027Z"
+    },
+    {
+      "fromMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:42.027Z"
+    },
+    {
+      "fromMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "toMemoryId": "144113e3-18c7-413e-a408-87aa6c726015",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:22:42.027Z"
+    },
+    {
+      "fromMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "toMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.881Z"
+    },
+    {
+      "fromMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "toMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.881Z"
+    },
+    {
+      "fromMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "toMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.881Z"
+    },
+    {
+      "fromMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "toMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.881Z"
+    },
+    {
+      "fromMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "toMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.881Z"
+    },
+    {
+      "fromMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "toMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.881Z"
+    },
+    {
+      "fromMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "toMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.980Z"
+    },
+    {
+      "fromMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "toMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.980Z"
+    },
+    {
+      "fromMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "toMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.980Z"
+    },
+    {
+      "fromMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "toMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.980Z"
+    },
+    {
+      "fromMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "toMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.980Z"
+    },
+    {
+      "fromMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "toMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.980Z"
+    },
+    {
+      "fromMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "toMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:15.980Z"
+    },
+    {
+      "fromMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "toMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:16.054Z"
+    },
+    {
+      "fromMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "toMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:16.054Z"
+    },
+    {
+      "fromMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "toMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:16.054Z"
+    },
+    {
+      "fromMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "toMemoryId": "11597013-39bc-42b3-b3d0-7d5c3730a88c",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:16.054Z"
+    },
+    {
+      "fromMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "toMemoryId": "5716ae84-94a3-44f4-b05f-f5bf6f3dd982",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:16.054Z"
+    },
+    {
+      "fromMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "toMemoryId": "db08d98a-74c2-417a-a99c-6e4e7c0b2b0e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:29:16.054Z"
+    },
+    {
+      "fromMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "toMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.080Z"
+    },
+    {
+      "fromMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "toMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.080Z"
+    },
+    {
+      "fromMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "toMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.080Z"
+    },
+    {
+      "fromMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "toMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.080Z"
+    },
+    {
+      "fromMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "toMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.080Z"
+    },
+    {
+      "fromMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "toMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.080Z"
+    },
+    {
+      "fromMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "toMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.165Z"
+    },
+    {
+      "fromMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "toMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.165Z"
+    },
+    {
+      "fromMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "toMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.165Z"
+    },
+    {
+      "fromMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "toMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.165Z"
+    },
+    {
+      "fromMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "toMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.165Z"
+    },
+    {
+      "fromMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "toMemoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.165Z"
+    },
+    {
+      "fromMemoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "toMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.241Z"
+    },
+    {
+      "fromMemoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "toMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.241Z"
+    },
+    {
+      "fromMemoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "toMemoryId": "4a7f82d7-807f-4428-8607-db50bc6225d2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.241Z"
+    },
+    {
+      "fromMemoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "toMemoryId": "489dabfb-39c7-4b14-8573-64940f8baf54",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.241Z"
+    },
+    {
+      "fromMemoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "toMemoryId": "76cefe56-fcea-43da-9d9b-3f45ce3f7349",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:30:06.241Z"
+    },
+    {
+      "fromMemoryId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "toMemoryId": "1df2a4d2-41e2-4d48-97c8-a926e24eab0b",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.656Z"
+    },
+    {
+      "fromMemoryId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "toMemoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.656Z"
+    },
+    {
+      "fromMemoryId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "toMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.656Z"
+    },
+    {
+      "fromMemoryId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "toMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.656Z"
+    },
+    {
+      "fromMemoryId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "toMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.656Z"
+    },
+    {
+      "fromMemoryId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "toMemoryId": "529e6b7b-af38-40b3-a429-785ebd50dcaa",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.656Z"
+    },
+    {
+      "fromMemoryId": "529e6b7b-af38-40b3-a429-785ebd50dcaa",
+      "toMemoryId": "27877851-28cb-40b7-835d-85c573ba3ab3",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.739Z"
+    },
+    {
+      "fromMemoryId": "529e6b7b-af38-40b3-a429-785ebd50dcaa",
+      "toMemoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.739Z"
+    },
+    {
+      "fromMemoryId": "529e6b7b-af38-40b3-a429-785ebd50dcaa",
+      "toMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.739Z"
+    },
+    {
+      "fromMemoryId": "529e6b7b-af38-40b3-a429-785ebd50dcaa",
+      "toMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.739Z"
+    },
+    {
+      "fromMemoryId": "529e6b7b-af38-40b3-a429-785ebd50dcaa",
+      "toMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.739Z"
+    },
+    {
+      "fromMemoryId": "529e6b7b-af38-40b3-a429-785ebd50dcaa",
+      "toMemoryId": "97084613-4462-4016-83b9-88373f501b01",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.739Z"
+    },
+    {
+      "fromMemoryId": "97084613-4462-4016-83b9-88373f501b01",
+      "toMemoryId": "529e6b7b-af38-40b3-a429-785ebd50dcaa",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.809Z"
+    },
+    {
+      "fromMemoryId": "97084613-4462-4016-83b9-88373f501b01",
+      "toMemoryId": "f78645a7-7541-4b96-a7da-4b6bd81d59b2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.809Z"
+    },
+    {
+      "fromMemoryId": "97084613-4462-4016-83b9-88373f501b01",
+      "toMemoryId": "4a1df69b-771d-465d-b275-9bcfc82438ea",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.809Z"
+    },
+    {
+      "fromMemoryId": "97084613-4462-4016-83b9-88373f501b01",
+      "toMemoryId": "20249434-af8a-4e49-ba83-8aed813d4d31",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.809Z"
+    },
+    {
+      "fromMemoryId": "97084613-4462-4016-83b9-88373f501b01",
+      "toMemoryId": "ce609f44-44b3-4fdf-95cc-673666609282",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-21T16:31:10.809Z"
     }
   ],
-  "updatedAt": "2026-05-21T13:54:31.192Z"
+  "updatedAt": "2026-05-21T16:31:10.811Z"
 }
