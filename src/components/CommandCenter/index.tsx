@@ -6,7 +6,8 @@ import type { WorkspaceSettings } from "@/components/workspaceSettings";
 import ChatInput from "./ChatInput";
 import MessageBubble from "./MessageBubble";
 import type { Message, ToolCall } from "./types";
-import { Bot, MessageSquare } from "lucide-react";
+import { Bot, MessageSquare, History, Plus } from "lucide-react";
+import IconButton from "@/components/ui/IconButton";
 
 // Re-export types so consumers can import from the same path
 export type { Message, ToolCall } from "./types";
@@ -19,6 +20,8 @@ interface CommandCenterProps {
   settings: Pick<WorkspaceSettings, "theme" | "density" | "autoScroll">;
   /** True while the assistant is streaming a response. */
   isStreaming?: boolean;
+  onNewChat?: () => void;
+  onOpenHistory?: () => void;
 }
 
 /**
@@ -36,6 +39,8 @@ export default function CommandCenter({
   onToolCallClick,
   settings,
   isStreaming = false,
+  onNewChat,
+  onOpenHistory,
 }: CommandCenterProps) {
   const [inputText, setInputText] = useState("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -90,7 +95,24 @@ export default function CommandCenter({
             </p>
           </div>
         </div>
-        <StatusDot status={agentStatus} />
+        <div className="flex items-center gap-1">
+          <IconButton
+            label="Chat history"
+            colorClass={isDark ? "text-[#A8A29E] hover:bg-[#262626] hover:text-[#FAFAF9]" : "text-[#737373] hover:bg-[#F0EEEC] hover:text-[#101011]"}
+            sizeClass="h-8 w-8"
+            onClick={onOpenHistory}
+          >
+            <History className="h-4 w-4" />
+          </IconButton>
+          <IconButton
+            label="New chat"
+            colorClass={isDark ? "text-[#A8A29E] hover:bg-[#262626] hover:text-[#FAFAF9]" : "text-[#737373] hover:bg-[#F0EEEC] hover:text-[#101011]"}
+            sizeClass="h-8 w-8"
+            onClick={onNewChat}
+          >
+            <Plus className="h-4 w-4" />
+          </IconButton>
+        </div>
       </div>
 
       {/* Message thread */}

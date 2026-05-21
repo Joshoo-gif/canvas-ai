@@ -22,6 +22,7 @@ function timestamp(): string {
 
 interface UseChatOptions {
   workspaceId?: string | null;
+  conversationId?: string | null;
   /** Called whenever agent status should update. */
   onStatusChange?: (status: string) => void;
   initialMessages?: Message[];
@@ -37,6 +38,7 @@ interface UseChatReturn {
 
 export function useChat({
   workspaceId,
+  conversationId,
   onStatusChange,
   initialMessages = [],
 }: UseChatOptions = {}): UseChatReturn {
@@ -67,12 +69,28 @@ export function useChat({
       };
     }
 
+    if (conversationId === "new") {
+      conversationIdRef.current = null;
+      activeAssistantMessageIdRef.current = null;
+      setMessages([]);
+      setIsLoadingHistory(false);
+      setStatus("Agent Idle");
+      return () => {
+        cancelled = true;
+      };
+    }
+
     setIsLoadingHistory(true);
     setStatus("Loading workspace chat...");
 
     void (async () => {
       try {
-        const response = await fetch(`/api/workspaces/${workspaceId}/chat`);
+        const url = new URL(`/api/workspaces/${workspaceId}/chat`, window.location.origin);
+        if (conversationId) {
+          url.searchParams.set("conversationId", conversationId);
+        }
+        
+        const response = await fetch(url.toString());
         if (!response.ok) {
           throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
@@ -106,7 +124,7 @@ export function useChat({
     return () => {
       cancelled = true;
     };
-  }, [workspaceId, setStatus]);
+  }, [workspaceId, conversationId, setStatus]);
 
   const sendMessage = useCallback(
     async (text: string) => {

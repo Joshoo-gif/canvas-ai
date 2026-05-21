@@ -105,6 +105,22 @@ export async function updateConversationTitle(
     );
 }
 
+/**
+ * Delete a conversation by ID.
+ */
+export async function deleteConversation(id: string): Promise<void> {
+  const db = getSupabaseServer();
+  // Messages should cascade, but delete them explicitly just in case if no cascade is set up
+  await db.from("messages").delete().eq("conversation_id", id);
+  const { error } = await db
+    .from("conversations")
+    .delete()
+    .eq("id", id);
+
+  if (error)
+    throw new Error(`[conversation] deleteConversation failed: ${error.message}`);
+}
+
 // ---------------------------------------------------------------------------
 // Messages
 // ---------------------------------------------------------------------------

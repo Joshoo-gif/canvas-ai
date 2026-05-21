@@ -10,6 +10,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import ArtifactViewer, { type Artifact } from "@/components/ArtifactViewer";
 import CommandCenter, { type ToolCall } from "@/components/CommandCenter";
+import ChatHistoryModal from "@/components/CommandCenter/ChatHistoryModal";
 import CreateWorkspaceModal from "@/components/CreateWorkspaceModal";
 import Sidebar from "@/components/Sidebar";
 import UploadModal from "@/components/UploadModal";
@@ -37,6 +38,8 @@ export default function WorkspacePage() {
   const [activeWorkspaceId, setActiveWorkspaceId] = useState<string | null>(
     null,
   );
+  const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
+  const [historyModalOpen, setHistoryModalOpen] = useState(false);
   const [createWorkspaceOpen, setCreateWorkspaceOpen] = useState(false);
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [workspaceFiles, setWorkspaceFiles] = useState<WorkspaceFileRow[]>([]);
@@ -95,8 +98,17 @@ export default function WorkspacePage() {
 
   const { messages, isStreaming, sendMessage } = useChat({
     workspaceId: activeWorkspaceId,
+    conversationId: activeConversationId,
     onStatusChange: setAgentStatus,
   });
+
+  const handleNewChat = useCallback(() => {
+    setActiveConversationId("new");
+  }, []);
+
+  const handleSelectConversation = useCallback((id: string) => {
+    setActiveConversationId(id);
+  }, []);
 
   const activeWorkspace =
     workspaces.find((workspace) => workspace.id === activeWorkspaceId) ?? null;
@@ -123,6 +135,7 @@ export default function WorkspacePage() {
           ) {
             return current;
           }
+          setActiveConversationId(null);
           return nextWorkspaces[0]?.id ?? null;
         });
       } catch (error) {
@@ -182,6 +195,7 @@ export default function WorkspacePage() {
 
   const handleWorkspaceSelect = useCallback((workspaceId: string) => {
     setActiveWorkspaceId(workspaceId);
+    setActiveConversationId(null);
     setMobileActiveTab("chat");
   }, []);
 
@@ -205,6 +219,7 @@ export default function WorkspacePage() {
       ...current.filter((workspace) => workspace.id !== payload.workspace.id),
     ]);
     setActiveWorkspaceId(payload.workspace.id);
+    setActiveConversationId(null);
     setWorkspaceFiles([]);
     setOpenArtifacts([]);
     setActiveArtifactId(null);
@@ -466,6 +481,8 @@ export default function WorkspacePage() {
               onToolCallClick={handleToolCallClick}
               settings={settings}
               isStreaming={isStreaming}
+              onNewChat={handleNewChat}
+              onOpenHistory={() => setHistoryModalOpen(true)}
             />
           </div>
         </div>
@@ -482,6 +499,16 @@ export default function WorkspacePage() {
         onClose={() => setUploadModalOpen(false)}
         onUpload={handleUpload}
         isDark={isDark}
+      />
+
+      <ChatHistoryModal
+        open={historyModalOpen}
+        onClose={() => setHistoryModalOpen(false)}
+        workspaceId={activeWorkspaceId}
+        onSelectConversation={handleSelectConversation}
+        isDark={isDark}
+        activeConversationId={activeConversationId}
+        onActiveConversationDeleted={handleNewChat}
       />
     </div>
   );

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import {
   findLatestConversationByWorkspace,
+  findConversationById,
   listMessages,
 } from "@/lib/chat/repository";
 import { findWorkspaceById } from "@/lib/workspace/repository";
@@ -66,7 +67,7 @@ function processMessages(rows: MessageRow[]) {
   return result;
 }
 
-export async function GET(_: Request, context: ChatRouteContext) {
+export async function GET(request: Request, context: ChatRouteContext) {
   const { workspaceId } = await context.params;
   const workspace = await findWorkspaceById(workspaceId);
 
@@ -74,7 +75,16 @@ export async function GET(_: Request, context: ChatRouteContext) {
     return NextResponse.json({ error: "Workspace not found." }, { status: 404 });
   }
 
-  const conversation = await findLatestConversationByWorkspace(workspaceId);
+  const { searchParams } = new URL(request.url);
+  const conversationId = searchParams.get("conversationId");
+
+  let conversation = null;
+  if (conversationId && conversationId !== "new") {
+    conversation = await findConversationById(conversationId);
+  } else if (conversationId !== "new") {
+    conversation = await findLatestConversationByWorkspace(workspaceId);
+  }
+
   const messages = conversation ? await listMessages(conversation.id) : [];
 
   return NextResponse.json({

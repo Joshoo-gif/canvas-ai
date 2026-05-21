@@ -107,7 +107,8 @@ export async function POST(req: NextRequest) {
         }
 
         if (!conversationId) {
-          const conv = await createConversation(workspace.id);
+          const title = userMessage.length > 50 ? userMessage.substring(0, 47) + "..." : userMessage;
+          const conv = await createConversation(workspace.id, title);
           conversationId = conv.id;
         }
 
