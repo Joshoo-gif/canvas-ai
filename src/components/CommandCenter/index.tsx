@@ -137,12 +137,13 @@ export default function CommandCenter({
                 Start a conversation
               </div>
               <p className={`text-xs leading-relaxed ${tc.textSecondary}`}>
-                Select a workspace and type a message below. The agent can
-                read files, run tools, and stream responses in real time.
+                Select a workspace and type a message below. The assistant can
+                read documents, summarize content, compare files, and stream
+                responses in real time.
               </p>
             </div>
             <div className="flex flex-col gap-2 w-full max-w-xs">
-              {["Explain the project architecture", "What files are open?", "Run a lint check"].map(
+              {["Summarize this document", "Compare two files", "Draft a response from notes"].map(
                 (suggestion) => (
                   <button
                     key={suggestion}

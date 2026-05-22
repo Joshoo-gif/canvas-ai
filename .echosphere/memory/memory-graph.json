@@ -2558,6 +2558,523 @@
       ],
       "createdAt": "2026-05-21T16:31:10.809Z",
       "updatedAt": "2026-05-21T16:31:10.809Z"
+    },
+    {
+      "memoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "rootMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3"
+      ],
+      "childMemoryIds": [
+        "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c"
+      ],
+      "sectionKind": "fact",
+      "summary": "Updated the assistant persona and chat empty state to be document-focused rather than code-centric. The persona prompt now describes Canvas as a professional workspace assistant for documents, notes, files, and project work, and the command center empty state now offers document-oriented suggestions instead of lint/architecture prompts.",
+      "affectedFiles": [
+        {
+          "path": "src/prompts/assistant-persona.md",
+          "action": "modified",
+          "reason": "Updated the assistant identity and behavior guidance to be document-focused rather than code-centric.",
+          "notes": "Reworded the assistant description, role, and behavior sections."
+        },
+        {
+          "path": "src/components/CommandCenter/index.tsx",
+          "action": "modified",
+          "reason": "Changed the empty-state copy and suggested actions so the chat UI no longer centers coding tasks like linting or architecture checks.",
+          "notes": "Only the empty-state text and suggestion buttons changed."
+        }
+      ],
+      "createdAt": "2026-05-22T02:22:30.328Z",
+      "updatedAt": "2026-05-22T02:22:30.328Z"
+    },
+    {
+      "memoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "rootMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "parentMemoryIds": [
+        "ea298a87-0f07-43eb-a597-61377ad7c510"
+      ],
+      "relatedMemoryIds": [
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3"
+      ],
+      "childMemoryIds": [
+        "b597bdb3-6075-4344-b0de-5aa04f5d7340"
+      ],
+      "sectionKind": "decision",
+      "summary": "Updated the assistant persona and chat empty state to be document-focused rather than code-centric. The persona prompt now describes Canvas as a professional workspace assistant for documents, notes, files, and project work, and the command center empty state now offers document-oriented suggestions instead of lint/architecture prompts.",
+      "affectedFiles": [
+        {
+          "path": "src/prompts/assistant-persona.md",
+          "action": "modified",
+          "reason": "Updated the assistant identity and behavior guidance to be document-focused rather than code-centric.",
+          "notes": "Reworded the assistant description, role, and behavior sections."
+        },
+        {
+          "path": "src/components/CommandCenter/index.tsx",
+          "action": "modified",
+          "reason": "Changed the empty-state copy and suggested actions so the chat UI no longer centers coding tasks like linting or architecture checks.",
+          "notes": "Only the empty-state text and suggestion buttons changed."
+        }
+      ],
+      "createdAt": "2026-05-22T02:22:30.498Z",
+      "updatedAt": "2026-05-22T02:22:30.498Z"
+    },
+    {
+      "memoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "rootMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "parentMemoryIds": [
+        "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c"
+      ],
+      "relatedMemoryIds": [
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "f711082b-2766-4a8a-9e95-dd15d29678fa",
+        "0fbd4f84-34d9-4153-ab3b-a069ca465fa3"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Updated the assistant persona and chat empty state to be document-focused rather than code-centric. The persona prompt now describes Canvas as a professional workspace assistant for documents, notes, files, and project work, and the command center empty state now offers document-oriented suggestions instead of lint/architecture prompts.",
+      "affectedFiles": [
+        {
+          "path": "src/prompts/assistant-persona.md",
+          "action": "modified",
+          "reason": "Updated the assistant identity and behavior guidance to be document-focused rather than code-centric.",
+          "notes": "Reworded the assistant description, role, and behavior sections."
+        },
+        {
+          "path": "src/components/CommandCenter/index.tsx",
+          "action": "modified",
+          "reason": "Changed the empty-state copy and suggested actions so the chat UI no longer centers coding tasks like linting or architecture checks.",
+          "notes": "Only the empty-state text and suggestion buttons changed."
+        }
+      ],
+      "createdAt": "2026-05-22T02:22:30.580Z",
+      "updatedAt": "2026-05-22T02:22:30.580Z"
+    },
+    {
+      "memoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "rootMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd"
+      ],
+      "childMemoryIds": [
+        "3053a888-cf99-47a0-8af4-057012bd7690"
+      ],
+      "sectionKind": "fact",
+      "summary": "Fixed the Canvas sidebar header create-workspace action so it no longer appears in collapsed mode and now reuses a shared normalized create-workspace button component that matches the workspace files header styling.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ui/CreateWorkspaceButton.tsx",
+          "action": "created",
+          "reason": "New shared UI primitive for the normalized create-workspace icon button used in multiple workspace shell locations.",
+          "notes": "Icon-only button based on the existing workspace header button design."
+        },
+        {
+          "path": "src/components/ui/index.ts",
+          "action": "modified",
+          "reason": "Export the new shared create-workspace button from the UI barrel so consumers can import it consistently.",
+          "notes": "Keeps UI imports centralized with existing primitives."
+        },
+        {
+          "path": "src/components/Sidebar.tsx",
+          "action": "modified",
+          "reason": "Hide the header create-workspace button when collapsed and reuse the shared button for the expanded header state.",
+          "notes": "The empty-state create button remains in place."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Replace the inline workspace header create button with the shared component for consistent styling.",
+          "notes": "Removes duplicated button markup from the page header."
+        }
+      ],
+      "createdAt": "2026-05-22T02:31:23.706Z",
+      "updatedAt": "2026-05-22T02:31:23.706Z"
+    },
+    {
+      "memoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "rootMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "parentMemoryIds": [
+        "99f89160-25dc-4137-87a0-5f1db445b504"
+      ],
+      "relatedMemoryIds": [
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd"
+      ],
+      "childMemoryIds": [
+        "5f37da12-0e5b-41bc-9c20-c65660150a67"
+      ],
+      "sectionKind": "decision",
+      "summary": "Fixed the Canvas sidebar header create-workspace action so it no longer appears in collapsed mode and now reuses a shared normalized create-workspace button component that matches the workspace files header styling.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ui/CreateWorkspaceButton.tsx",
+          "action": "created",
+          "reason": "New shared UI primitive for the normalized create-workspace icon button used in multiple workspace shell locations.",
+          "notes": "Icon-only button based on the existing workspace header button design."
+        },
+        {
+          "path": "src/components/ui/index.ts",
+          "action": "modified",
+          "reason": "Export the new shared create-workspace button from the UI barrel so consumers can import it consistently.",
+          "notes": "Keeps UI imports centralized with existing primitives."
+        },
+        {
+          "path": "src/components/Sidebar.tsx",
+          "action": "modified",
+          "reason": "Hide the header create-workspace button when collapsed and reuse the shared button for the expanded header state.",
+          "notes": "The empty-state create button remains in place."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Replace the inline workspace header create button with the shared component for consistent styling.",
+          "notes": "Removes duplicated button markup from the page header."
+        }
+      ],
+      "createdAt": "2026-05-22T02:31:23.890Z",
+      "updatedAt": "2026-05-22T02:31:23.890Z"
+    },
+    {
+      "memoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "rootMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "parentMemoryIds": [
+        "3053a888-cf99-47a0-8af4-057012bd7690"
+      ],
+      "relatedMemoryIds": [
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "71f297da-7502-4e6e-ab49-adaf6ab38490",
+        "84f40668-eecb-4871-abbc-1cad807fc0eb",
+        "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Fixed the Canvas sidebar header create-workspace action so it no longer appears in collapsed mode and now reuses a shared normalized create-workspace button component that matches the workspace files header styling.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ui/CreateWorkspaceButton.tsx",
+          "action": "created",
+          "reason": "New shared UI primitive for the normalized create-workspace icon button used in multiple workspace shell locations.",
+          "notes": "Icon-only button based on the existing workspace header button design."
+        },
+        {
+          "path": "src/components/ui/index.ts",
+          "action": "modified",
+          "reason": "Export the new shared create-workspace button from the UI barrel so consumers can import it consistently.",
+          "notes": "Keeps UI imports centralized with existing primitives."
+        },
+        {
+          "path": "src/components/Sidebar.tsx",
+          "action": "modified",
+          "reason": "Hide the header create-workspace button when collapsed and reuse the shared button for the expanded header state.",
+          "notes": "The empty-state create button remains in place."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Replace the inline workspace header create button with the shared component for consistent styling.",
+          "notes": "Removes duplicated button markup from the page header."
+        }
+      ],
+      "createdAt": "2026-05-22T02:31:23.979Z",
+      "updatedAt": "2026-05-22T02:31:23.979Z"
+    },
+    {
+      "memoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "rootMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "1f471cc6-33ed-4c62-8d19-4ee459838855",
+        "a5d7853b-3185-4cbd-8d26-723a3c058478"
+      ],
+      "childMemoryIds": [
+        "3b6c80b3-46de-429f-b92b-b1cf892ac73b"
+      ],
+      "sectionKind": "fact",
+      "summary": "Adjusted the CommandCenter tool call card so `read_file_segments` line-range labels no longer get truncated at the right edge. The fix keeps the file target text truncatable while rendering the line-range badge as a separate non-shrinking element.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\CommandCenter\\ToolCallCard.tsx",
+          "action": "modified",
+          "reason": "Updated the tool call card layout to keep the line-range badge visible without truncation.",
+          "notes": "Separated the badge from the truncating target text and made it non-shrinking."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\CommandCenter\\MessageBubble.tsx",
+          "action": "inspected",
+          "reason": "Confirmed the tool call card is rendered from the message bubble and that the layout fix belongs in the dedicated card component.",
+          "notes": "No code changes required."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\CommandCenter\\types.ts",
+          "action": "inspected",
+          "reason": "Confirmed the `ToolCall` type already carries the optional `range` needed by the UI card.",
+          "notes": "No code changes required."
+        }
+      ],
+      "createdAt": "2026-05-22T02:33:47.669Z",
+      "updatedAt": "2026-05-22T02:33:47.669Z"
+    },
+    {
+      "memoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "rootMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "parentMemoryIds": [
+        "b0391767-e4ee-4dbb-bb27-626a0715d792"
+      ],
+      "relatedMemoryIds": [
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "1f471cc6-33ed-4c62-8d19-4ee459838855",
+        "a5d7853b-3185-4cbd-8d26-723a3c058478"
+      ],
+      "childMemoryIds": [
+        "7b693746-2614-49a5-8a15-92b316f3576e"
+      ],
+      "sectionKind": "decision",
+      "summary": "Adjusted the CommandCenter tool call card so `read_file_segments` line-range labels no longer get truncated at the right edge. The fix keeps the file target text truncatable while rendering the line-range badge as a separate non-shrinking element.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\CommandCenter\\ToolCallCard.tsx",
+          "action": "modified",
+          "reason": "Updated the tool call card layout to keep the line-range badge visible without truncation.",
+          "notes": "Separated the badge from the truncating target text and made it non-shrinking."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\CommandCenter\\MessageBubble.tsx",
+          "action": "inspected",
+          "reason": "Confirmed the tool call card is rendered from the message bubble and that the layout fix belongs in the dedicated card component.",
+          "notes": "No code changes required."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\CommandCenter\\types.ts",
+          "action": "inspected",
+          "reason": "Confirmed the `ToolCall` type already carries the optional `range` needed by the UI card.",
+          "notes": "No code changes required."
+        }
+      ],
+      "createdAt": "2026-05-22T02:33:47.755Z",
+      "updatedAt": "2026-05-22T02:33:47.755Z"
+    },
+    {
+      "memoryId": "7b693746-2614-49a5-8a15-92b316f3576e",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "rootMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "parentMemoryIds": [
+        "3b6c80b3-46de-429f-b92b-b1cf892ac73b"
+      ],
+      "relatedMemoryIds": [
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+        "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "1f471cc6-33ed-4c62-8d19-4ee459838855",
+        "a5d7853b-3185-4cbd-8d26-723a3c058478"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Adjusted the CommandCenter tool call card so `read_file_segments` line-range labels no longer get truncated at the right edge. The fix keeps the file target text truncatable while rendering the line-range badge as a separate non-shrinking element.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\CommandCenter\\ToolCallCard.tsx",
+          "action": "modified",
+          "reason": "Updated the tool call card layout to keep the line-range badge visible without truncation.",
+          "notes": "Separated the badge from the truncating target text and made it non-shrinking."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\CommandCenter\\MessageBubble.tsx",
+          "action": "inspected",
+          "reason": "Confirmed the tool call card is rendered from the message bubble and that the layout fix belongs in the dedicated card component.",
+          "notes": "No code changes required."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\CommandCenter\\types.ts",
+          "action": "inspected",
+          "reason": "Confirmed the `ToolCall` type already carries the optional `range` needed by the UI card.",
+          "notes": "No code changes required."
+        }
+      ],
+      "createdAt": "2026-05-22T02:33:47.843Z",
+      "updatedAt": "2026-05-22T02:33:47.843Z"
+    },
+    {
+      "memoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "rootMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "parentMemoryIds": [
+        "3053a888-cf99-47a0-8af4-057012bd7690"
+      ],
+      "relatedMemoryIds": [
+        "5f37da12-0e5b-41bc-9c20-c65660150a67",
+        "99f89160-25dc-4137-87a0-5f1db445b504",
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd"
+      ],
+      "childMemoryIds": [
+        "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb"
+      ],
+      "sectionKind": "fact",
+      "summary": "Aligned the left sidebar create-workspace plus button with the workspace files header plus button by centralizing it in a shared component that now uses the same compact square shape and theme classes. The collapsed sidebar still hides the button entirely to avoid overlap with the Canvas icon.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ui/CreateWorkspaceButton.tsx",
+          "action": "modified",
+          "reason": "Changed the shared create-workspace button to match the workspace files button shape and styling contract.",
+          "notes": "Now requires theme classes via colorClass and uses the compact square icon-button form."
+        },
+        {
+          "path": "src/components/Sidebar.tsx",
+          "action": "modified",
+          "reason": "Updated the sidebar header to use the shared create-workspace button with workspace-files styling and to keep it hidden when collapsed.",
+          "notes": "Collapsed state remains overlap-free."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Updated the workspace page header to use the shared create-workspace button with the same styling contract.",
+          "notes": "Imports useThemeClasses so the button matches the workspace files button theme classes."
+        },
+        {
+          "path": "src/components/ui/index.ts",
+          "action": "modified",
+          "reason": "Continues exporting the shared UI primitive so callers can import the normalized button consistently.",
+          "notes": "No API shape change beyond the button component itself."
+        }
+      ],
+      "createdAt": "2026-05-22T02:35:15.865Z",
+      "updatedAt": "2026-05-22T02:35:15.865Z"
+    },
+    {
+      "memoryId": "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "rootMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "parentMemoryIds": [
+        "7412525f-36e4-4bb2-babf-8d275a9b2869"
+      ],
+      "relatedMemoryIds": [
+        "5f37da12-0e5b-41bc-9c20-c65660150a67",
+        "99f89160-25dc-4137-87a0-5f1db445b504",
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd"
+      ],
+      "childMemoryIds": [
+        "b088781e-c833-4690-b05a-ac0b805e0bec"
+      ],
+      "sectionKind": "decision",
+      "summary": "Aligned the left sidebar create-workspace plus button with the workspace files header plus button by centralizing it in a shared component that now uses the same compact square shape and theme classes. The collapsed sidebar still hides the button entirely to avoid overlap with the Canvas icon.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ui/CreateWorkspaceButton.tsx",
+          "action": "modified",
+          "reason": "Changed the shared create-workspace button to match the workspace files button shape and styling contract.",
+          "notes": "Now requires theme classes via colorClass and uses the compact square icon-button form."
+        },
+        {
+          "path": "src/components/Sidebar.tsx",
+          "action": "modified",
+          "reason": "Updated the sidebar header to use the shared create-workspace button with workspace-files styling and to keep it hidden when collapsed.",
+          "notes": "Collapsed state remains overlap-free."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Updated the workspace page header to use the shared create-workspace button with the same styling contract.",
+          "notes": "Imports useThemeClasses so the button matches the workspace files button theme classes."
+        },
+        {
+          "path": "src/components/ui/index.ts",
+          "action": "modified",
+          "reason": "Continues exporting the shared UI primitive so callers can import the normalized button consistently.",
+          "notes": "No API shape change beyond the button component itself."
+        }
+      ],
+      "createdAt": "2026-05-22T02:35:15.961Z",
+      "updatedAt": "2026-05-22T02:35:15.961Z"
+    },
+    {
+      "memoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "rootMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "parentMemoryIds": [
+        "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb"
+      ],
+      "relatedMemoryIds": [
+        "5f37da12-0e5b-41bc-9c20-c65660150a67",
+        "99f89160-25dc-4137-87a0-5f1db445b504",
+        "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+        "2996afdc-48fb-4980-a1b6-a2c2f01068dd"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Aligned the left sidebar create-workspace plus button with the workspace files header plus button by centralizing it in a shared component that now uses the same compact square shape and theme classes. The collapsed sidebar still hides the button entirely to avoid overlap with the Canvas icon.",
+      "affectedFiles": [
+        {
+          "path": "src/components/ui/CreateWorkspaceButton.tsx",
+          "action": "modified",
+          "reason": "Changed the shared create-workspace button to match the workspace files button shape and styling contract.",
+          "notes": "Now requires theme classes via colorClass and uses the compact square icon-button form."
+        },
+        {
+          "path": "src/components/Sidebar.tsx",
+          "action": "modified",
+          "reason": "Updated the sidebar header to use the shared create-workspace button with workspace-files styling and to keep it hidden when collapsed.",
+          "notes": "Collapsed state remains overlap-free."
+        },
+        {
+          "path": "src/app/page.tsx",
+          "action": "modified",
+          "reason": "Updated the workspace page header to use the shared create-workspace button with the same styling contract.",
+          "notes": "Imports useThemeClasses so the button matches the workspace files button theme classes."
+        },
+        {
+          "path": "src/components/ui/index.ts",
+          "action": "modified",
+          "reason": "Continues exporting the shared UI primitive so callers can import the normalized button consistently.",
+          "notes": "No API shape change beyond the button component itself."
+        }
+      ],
+      "createdAt": "2026-05-22T02:35:16.055Z",
+      "updatedAt": "2026-05-22T02:35:16.055Z"
     }
   ],
   "edges": [
@@ -4534,7 +5051,525 @@
       "relation": "related",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
       "createdAt": "2026-05-21T16:31:10.809Z"
+    },
+    {
+      "fromMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.328Z"
+    },
+    {
+      "fromMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.328Z"
+    },
+    {
+      "fromMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.328Z"
+    },
+    {
+      "fromMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.328Z"
+    },
+    {
+      "fromMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.328Z"
+    },
+    {
+      "fromMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "toMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.328Z"
+    },
+    {
+      "fromMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "toMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.498Z"
+    },
+    {
+      "fromMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.498Z"
+    },
+    {
+      "fromMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.498Z"
+    },
+    {
+      "fromMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.498Z"
+    },
+    {
+      "fromMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.498Z"
+    },
+    {
+      "fromMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.498Z"
+    },
+    {
+      "fromMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "toMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.498Z"
+    },
+    {
+      "fromMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "toMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.580Z"
+    },
+    {
+      "fromMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.580Z"
+    },
+    {
+      "fromMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.580Z"
+    },
+    {
+      "fromMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.580Z"
+    },
+    {
+      "fromMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "toMemoryId": "f711082b-2766-4a8a-9e95-dd15d29678fa",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.580Z"
+    },
+    {
+      "fromMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "toMemoryId": "0fbd4f84-34d9-4153-ab3b-a069ca465fa3",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:22:30.580Z"
+    },
+    {
+      "fromMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.706Z"
+    },
+    {
+      "fromMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.706Z"
+    },
+    {
+      "fromMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.706Z"
+    },
+    {
+      "fromMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.706Z"
+    },
+    {
+      "fromMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.706Z"
+    },
+    {
+      "fromMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "toMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.706Z"
+    },
+    {
+      "fromMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "toMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.890Z"
+    },
+    {
+      "fromMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.890Z"
+    },
+    {
+      "fromMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.890Z"
+    },
+    {
+      "fromMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.890Z"
+    },
+    {
+      "fromMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.890Z"
+    },
+    {
+      "fromMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.890Z"
+    },
+    {
+      "fromMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "toMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.890Z"
+    },
+    {
+      "fromMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "toMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.979Z"
+    },
+    {
+      "fromMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.979Z"
+    },
+    {
+      "fromMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "toMemoryId": "71f297da-7502-4e6e-ab49-adaf6ab38490",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.979Z"
+    },
+    {
+      "fromMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "toMemoryId": "84f40668-eecb-4871-abbc-1cad807fc0eb",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.979Z"
+    },
+    {
+      "fromMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "toMemoryId": "0b0171bf-6992-4bab-b344-77c71a2ee9cf",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.979Z"
+    },
+    {
+      "fromMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:31:23.979Z"
+    },
+    {
+      "fromMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.669Z"
+    },
+    {
+      "fromMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.669Z"
+    },
+    {
+      "fromMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.669Z"
+    },
+    {
+      "fromMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "toMemoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.669Z"
+    },
+    {
+      "fromMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "toMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.669Z"
+    },
+    {
+      "fromMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "toMemoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.669Z"
+    },
+    {
+      "fromMemoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "toMemoryId": "b0391767-e4ee-4dbb-bb27-626a0715d792",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.755Z"
+    },
+    {
+      "fromMemoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.755Z"
+    },
+    {
+      "fromMemoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.755Z"
+    },
+    {
+      "fromMemoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.755Z"
+    },
+    {
+      "fromMemoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "toMemoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.755Z"
+    },
+    {
+      "fromMemoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "toMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.755Z"
+    },
+    {
+      "fromMemoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "toMemoryId": "7b693746-2614-49a5-8a15-92b316f3576e",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.755Z"
+    },
+    {
+      "fromMemoryId": "7b693746-2614-49a5-8a15-92b316f3576e",
+      "toMemoryId": "3b6c80b3-46de-429f-b92b-b1cf892ac73b",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.844Z"
+    },
+    {
+      "fromMemoryId": "7b693746-2614-49a5-8a15-92b316f3576e",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.844Z"
+    },
+    {
+      "fromMemoryId": "7b693746-2614-49a5-8a15-92b316f3576e",
+      "toMemoryId": "f30e200e-6abc-4ff5-bed1-3913c8209a6e",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.844Z"
+    },
+    {
+      "fromMemoryId": "7b693746-2614-49a5-8a15-92b316f3576e",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.844Z"
+    },
+    {
+      "fromMemoryId": "7b693746-2614-49a5-8a15-92b316f3576e",
+      "toMemoryId": "1f471cc6-33ed-4c62-8d19-4ee459838855",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.844Z"
+    },
+    {
+      "fromMemoryId": "7b693746-2614-49a5-8a15-92b316f3576e",
+      "toMemoryId": "a5d7853b-3185-4cbd-8d26-723a3c058478",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:33:47.844Z"
+    },
+    {
+      "fromMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "toMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.865Z"
+    },
+    {
+      "fromMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "toMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.865Z"
+    },
+    {
+      "fromMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "toMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.865Z"
+    },
+    {
+      "fromMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.865Z"
+    },
+    {
+      "fromMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.865Z"
+    },
+    {
+      "fromMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "toMemoryId": "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.865Z"
+    },
+    {
+      "fromMemoryId": "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb",
+      "toMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.961Z"
+    },
+    {
+      "fromMemoryId": "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb",
+      "toMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.961Z"
+    },
+    {
+      "fromMemoryId": "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb",
+      "toMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.961Z"
+    },
+    {
+      "fromMemoryId": "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.961Z"
+    },
+    {
+      "fromMemoryId": "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.961Z"
+    },
+    {
+      "fromMemoryId": "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb",
+      "toMemoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:15.961Z"
+    },
+    {
+      "fromMemoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "toMemoryId": "28cdd4c2-176f-429f-9a6e-9c7262c2b5bb",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:16.055Z"
+    },
+    {
+      "fromMemoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "toMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:16.055Z"
+    },
+    {
+      "fromMemoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "toMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:16.055Z"
+    },
+    {
+      "fromMemoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "toMemoryId": "a4d5a963-2ee7-4209-8d35-bed85c8e1e76",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:16.055Z"
+    },
+    {
+      "fromMemoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "toMemoryId": "2996afdc-48fb-4980-a1b6-a2c2f01068dd",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T02:35:16.055Z"
     }
   ],
-  "updatedAt": "2026-05-21T16:31:10.811Z"
+  "updatedAt": "2026-05-22T02:35:16.057Z"
 }

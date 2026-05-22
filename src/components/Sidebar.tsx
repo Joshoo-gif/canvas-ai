@@ -2,8 +2,7 @@
 
 import { Folder, Plus, Settings, Trash2, LogOut } from "lucide-react";
 import { useCallback, useState, useEffect } from "react";
-import { useThemeClasses } from "@/components/ui";
-import IconButton from "@/components/ui/IconButton";
+import { CreateWorkspaceButton, IconButton, useThemeClasses } from "@/components/ui";
 import SettingsModal from "@/components/SettingsModal";
 import type {
   WorkspaceSettingUpdater,
@@ -95,14 +94,12 @@ export default function Sidebar({
             </span>
           </div>
 
-          <IconButton
-            label="Create workspace"
-            colorClass={tc.btnGhost}
-            sizeClass="h-11 w-11"
-            onClick={onCreateWorkspace}
-          >
-            <Plus className="h-4 w-4" />
-          </IconButton>
+          {!collapsed && (
+            <CreateWorkspaceButton
+              colorClass={`${tc.border} ${tc.btnGhost}`}
+              onClick={onCreateWorkspace}
+            />
+          )}
         </div>
 
         {/* Workspace list */}

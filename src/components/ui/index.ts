@@ -4,6 +4,7 @@
  * future renames / moves only need a single update here.
  */
 export { default as Badge } from "./Badge";
+export { default as CreateWorkspaceButton } from "./CreateWorkspaceButton";
 export { default as IconButton } from "./IconButton";
 export { default as SegmentedControl } from "./SegmentedControl";
 export { default as StatusDot } from "./StatusDot";

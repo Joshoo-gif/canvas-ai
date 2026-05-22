@@ -5,7 +5,6 @@ import {
   GripVertical,
   MessageSquare,
   Monitor,
-  Plus,
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ArtifactViewer, { type Artifact } from "@/components/ArtifactViewer";
@@ -14,6 +13,7 @@ import ChatHistoryModal from "@/components/CommandCenter/ChatHistoryModal";
 import CreateWorkspaceModal from "@/components/CreateWorkspaceModal";
 import Sidebar from "@/components/Sidebar";
 import UploadModal from "@/components/UploadModal";
+import { CreateWorkspaceButton, useThemeClasses } from "@/components/ui";
 import {
   DEFAULT_WORKSPACE_SETTINGS,
   type WorkspaceSettingUpdater,
@@ -371,6 +371,7 @@ export default function WorkspacePage() {
   }, [activeArtifactId]);
 
   const isDark = settings.theme === "dark";
+  const tc = useThemeClasses(isDark);
   const shellClass = isDark
     ? "bg-[#111111] text-[#FAFAF9]"
     : "bg-[#F5F5F4] text-[#0A0A0A]";
@@ -454,15 +455,10 @@ export default function WorkspacePage() {
               </button>
             </div>
 
-            <button
-              type="button"
+            <CreateWorkspaceButton
+              colorClass={`${tc.border} ${tc.btnGhost}`}
               onClick={() => setCreateWorkspaceOpen(true)}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-[#E7E5E4] bg-white text-[#101011] transition-colors hover:bg-[#F4F4F5]"
-              aria-label="Create workspace"
-              title="Create workspace"
-            >
-              <Plus className="h-4 w-4" />
-            </button>
+            />
           </div>
         </header>
 

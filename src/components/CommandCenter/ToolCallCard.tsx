@@ -37,7 +37,7 @@ export default function ToolCallCard({
         isClickable ? tc.toolCardHover : ""
       } ${statusOverrideClass}`}
     >
-      <div className="flex items-center gap-2 overflow-hidden">
+      <div className="flex min-w-0 flex-1 items-center gap-2">
         {toolCall.status === "running" ? (
           <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin text-amber-600" />
         ) : toolCall.status === "failed" ? (
@@ -46,11 +46,13 @@ export default function ToolCallCard({
           <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
         )}
 
-        <span className="truncate font-mono">
-          <strong className={tc.textPrimary}>{toolCall.name}</strong>{" "}
-          {toolCall.target}
+        <span className="flex min-w-0 flex-1 items-center gap-1.5 font-mono">
+          <span className={`shrink-0 font-semibold ${tc.textPrimary}`}>
+            {toolCall.name}
+          </span>
+          <span className="min-w-0 truncate">{toolCall.target}</span>
           {toolCall.range && (
-            <span className="ml-1.5 rounded border border-[#E7E5E4] bg-[#F5F5F4] px-1.5 py-0.5 text-[10px] font-bold text-[#404040]">
+            <span className="shrink-0 whitespace-nowrap rounded border border-[#E7E5E4] bg-[#F5F5F4] px-1.5 py-0.5 text-[10px] font-bold text-[#404040]">
               L{toolCall.range.startLine}–{toolCall.range.endLine}
             </span>
           )}
