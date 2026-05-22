@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  allowedDevOrigins: ["testing-canvas.echosphere.cfd"],
+  allowedDevOrigins: ["canvas-ai.echosphere.cfd"],
   reactCompiler: true,
 };
 
