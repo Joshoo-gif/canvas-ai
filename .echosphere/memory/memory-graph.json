@@ -3520,6 +3520,219 @@
       ],
       "createdAt": "2026-05-22T03:48:32.982Z",
       "updatedAt": "2026-05-22T03:48:32.982Z"
+    },
+    {
+      "memoryId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "rootMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "parentMemoryIds": [
+        "99f89160-25dc-4137-87a0-5f1db445b504"
+      ],
+      "relatedMemoryIds": [
+        "5f37da12-0e5b-41bc-9c20-c65660150a67",
+        "3053a888-cf99-47a0-8af4-057012bd7690",
+        "b088781e-c833-4690-b05a-ac0b805e0bec",
+        "7412525f-36e4-4bb2-babf-8d275a9b2869"
+      ],
+      "childMemoryIds": [
+        "de26bce9-dfbc-4f04-af9a-2889203915de"
+      ],
+      "sectionKind": "fact",
+      "summary": "Adjusted the leftmost workspace sidebar empty state so it is no longer rendered as a bordered card and is fully hidden whenever the sidebar is collapsed. The change was kept local to the sidebar component to preserve the shared theme classes and other components that still rely on the empty-card token.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\Sidebar.tsx",
+          "action": "modified",
+          "reason": "Changed the workspace sidebar empty state conditional rendering and presentation so it is hidden when collapsed and no longer uses card-like framing.",
+          "notes": "Removed the bordered/rounded wrapper and gated the empty state behind !collapsed."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\ui\\useThemeClasses.ts",
+          "action": "inspected",
+          "reason": "Confirmed the shared emptyCard token is used by other components, so the change should not remove or repurpose it globally.",
+          "notes": "No edit was needed."
+        }
+      ],
+      "createdAt": "2026-05-22T03:56:17.836Z",
+      "updatedAt": "2026-05-22T03:56:17.836Z"
+    },
+    {
+      "memoryId": "de26bce9-dfbc-4f04-af9a-2889203915de",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "rootMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "parentMemoryIds": [
+        "b861a7f5-65d9-4147-8f1f-e698d62c2111"
+      ],
+      "relatedMemoryIds": [
+        "5f37da12-0e5b-41bc-9c20-c65660150a67",
+        "3053a888-cf99-47a0-8af4-057012bd7690",
+        "b088781e-c833-4690-b05a-ac0b805e0bec",
+        "7412525f-36e4-4bb2-babf-8d275a9b2869"
+      ],
+      "childMemoryIds": [
+        "44e0e6d6-ace3-4bfa-baf3-6305767d41b8"
+      ],
+      "sectionKind": "decision",
+      "summary": "Adjusted the leftmost workspace sidebar empty state so it is no longer rendered as a bordered card and is fully hidden whenever the sidebar is collapsed. The change was kept local to the sidebar component to preserve the shared theme classes and other components that still rely on the empty-card token.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\Sidebar.tsx",
+          "action": "modified",
+          "reason": "Changed the workspace sidebar empty state conditional rendering and presentation so it is hidden when collapsed and no longer uses card-like framing.",
+          "notes": "Removed the bordered/rounded wrapper and gated the empty state behind !collapsed."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\ui\\useThemeClasses.ts",
+          "action": "inspected",
+          "reason": "Confirmed the shared emptyCard token is used by other components, so the change should not remove or repurpose it globally.",
+          "notes": "No edit was needed."
+        }
+      ],
+      "createdAt": "2026-05-22T03:56:17.918Z",
+      "updatedAt": "2026-05-22T03:56:17.918Z"
+    },
+    {
+      "memoryId": "44e0e6d6-ace3-4bfa-baf3-6305767d41b8",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "rootMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "parentMemoryIds": [
+        "de26bce9-dfbc-4f04-af9a-2889203915de"
+      ],
+      "relatedMemoryIds": [
+        "5f37da12-0e5b-41bc-9c20-c65660150a67",
+        "3053a888-cf99-47a0-8af4-057012bd7690",
+        "b088781e-c833-4690-b05a-ac0b805e0bec",
+        "7412525f-36e4-4bb2-babf-8d275a9b2869"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Adjusted the leftmost workspace sidebar empty state so it is no longer rendered as a bordered card and is fully hidden whenever the sidebar is collapsed. The change was kept local to the sidebar component to preserve the shared theme classes and other components that still rely on the empty-card token.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\Sidebar.tsx",
+          "action": "modified",
+          "reason": "Changed the workspace sidebar empty state conditional rendering and presentation so it is hidden when collapsed and no longer uses card-like framing.",
+          "notes": "Removed the bordered/rounded wrapper and gated the empty state behind !collapsed."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\components\\ui\\useThemeClasses.ts",
+          "action": "inspected",
+          "reason": "Confirmed the shared emptyCard token is used by other components, so the change should not remove or repurpose it globally.",
+          "notes": "No edit was needed."
+        }
+      ],
+      "createdAt": "2026-05-22T03:56:17.996Z",
+      "updatedAt": "2026-05-22T03:56:17.996Z"
+    },
+    {
+      "memoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "rootMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "4e634935-2b47-4669-934d-0d71b4d708a9",
+        "9f870183-ad18-45ec-9509-ef39d2913f58",
+        "10307311-96bc-4afc-9414-f1b671ca4c46",
+        "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7"
+      ],
+      "childMemoryIds": [
+        "70cd45d0-f995-4fe4-94fc-274e99e3353a"
+      ],
+      "sectionKind": "fact",
+      "summary": "Fixed the Docker runtime ENOENT by copying src/prompts into the final image so the production container can read src/prompts/assistant-persona.md at startup. The issue was that the prompt loader uses process.cwd()/src/prompts/assistant-persona.md, but the previous final image only included .next and public assets.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\Dockerfile",
+          "action": "modified",
+          "reason": "Added the prompt asset directory to the final image so the runtime file read can succeed.",
+          "notes": "Copies /app/src/prompts into the production layer."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\lib\\chat\\system-prompt.ts",
+          "action": "inspected",
+          "reason": "Confirmed the runtime file path used by the prompt loader and identified why the container was failing.",
+          "notes": "No code change needed in the loader itself."
+        }
+      ],
+      "createdAt": "2026-05-22T03:58:02.985Z",
+      "updatedAt": "2026-05-22T03:58:02.985Z"
+    },
+    {
+      "memoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "rootMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "parentMemoryIds": [
+        "219d6dcc-e126-4cca-a5c2-b85eb5cad339"
+      ],
+      "relatedMemoryIds": [
+        "4e634935-2b47-4669-934d-0d71b4d708a9",
+        "9f870183-ad18-45ec-9509-ef39d2913f58",
+        "10307311-96bc-4afc-9414-f1b671ca4c46",
+        "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7"
+      ],
+      "childMemoryIds": [
+        "887e2d98-e713-4a26-9acb-ee3a05fd1a70"
+      ],
+      "sectionKind": "decision",
+      "summary": "Fixed the Docker runtime ENOENT by copying src/prompts into the final image so the production container can read src/prompts/assistant-persona.md at startup. The issue was that the prompt loader uses process.cwd()/src/prompts/assistant-persona.md, but the previous final image only included .next and public assets.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\Dockerfile",
+          "action": "modified",
+          "reason": "Added the prompt asset directory to the final image so the runtime file read can succeed.",
+          "notes": "Copies /app/src/prompts into the production layer."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\lib\\chat\\system-prompt.ts",
+          "action": "inspected",
+          "reason": "Confirmed the runtime file path used by the prompt loader and identified why the container was failing.",
+          "notes": "No code change needed in the loader itself."
+        }
+      ],
+      "createdAt": "2026-05-22T03:58:03.074Z",
+      "updatedAt": "2026-05-22T03:58:03.074Z"
+    },
+    {
+      "memoryId": "887e2d98-e713-4a26-9acb-ee3a05fd1a70",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "rootMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "parentMemoryIds": [
+        "70cd45d0-f995-4fe4-94fc-274e99e3353a"
+      ],
+      "relatedMemoryIds": [
+        "4e634935-2b47-4669-934d-0d71b4d708a9",
+        "9f870183-ad18-45ec-9509-ef39d2913f58",
+        "10307311-96bc-4afc-9414-f1b671ca4c46",
+        "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Fixed the Docker runtime ENOENT by copying src/prompts into the final image so the production container can read src/prompts/assistant-persona.md at startup. The issue was that the prompt loader uses process.cwd()/src/prompts/assistant-persona.md, but the previous final image only included .next and public assets.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\Dockerfile",
+          "action": "modified",
+          "reason": "Added the prompt asset directory to the final image so the runtime file read can succeed.",
+          "notes": "Copies /app/src/prompts into the production layer."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\lib\\chat\\system-prompt.ts",
+          "action": "inspected",
+          "reason": "Confirmed the runtime file path used by the prompt loader and identified why the container was failing.",
+          "notes": "No code change needed in the loader itself."
+        }
+      ],
+      "createdAt": "2026-05-22T03:58:03.151Z",
+      "updatedAt": "2026-05-22T03:58:03.151Z"
     }
   ],
   "edges": [
@@ -6532,7 +6745,259 @@
       "relation": "related",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
       "createdAt": "2026-05-22T03:48:32.982Z"
+    },
+    {
+      "fromMemoryId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "toMemoryId": "99f89160-25dc-4137-87a0-5f1db445b504",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.836Z"
+    },
+    {
+      "fromMemoryId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "toMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.836Z"
+    },
+    {
+      "fromMemoryId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "toMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.836Z"
+    },
+    {
+      "fromMemoryId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "toMemoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.836Z"
+    },
+    {
+      "fromMemoryId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "toMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.836Z"
+    },
+    {
+      "fromMemoryId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "toMemoryId": "de26bce9-dfbc-4f04-af9a-2889203915de",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.836Z"
+    },
+    {
+      "fromMemoryId": "de26bce9-dfbc-4f04-af9a-2889203915de",
+      "toMemoryId": "b861a7f5-65d9-4147-8f1f-e698d62c2111",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.918Z"
+    },
+    {
+      "fromMemoryId": "de26bce9-dfbc-4f04-af9a-2889203915de",
+      "toMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.918Z"
+    },
+    {
+      "fromMemoryId": "de26bce9-dfbc-4f04-af9a-2889203915de",
+      "toMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.918Z"
+    },
+    {
+      "fromMemoryId": "de26bce9-dfbc-4f04-af9a-2889203915de",
+      "toMemoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.918Z"
+    },
+    {
+      "fromMemoryId": "de26bce9-dfbc-4f04-af9a-2889203915de",
+      "toMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.918Z"
+    },
+    {
+      "fromMemoryId": "de26bce9-dfbc-4f04-af9a-2889203915de",
+      "toMemoryId": "44e0e6d6-ace3-4bfa-baf3-6305767d41b8",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.918Z"
+    },
+    {
+      "fromMemoryId": "44e0e6d6-ace3-4bfa-baf3-6305767d41b8",
+      "toMemoryId": "de26bce9-dfbc-4f04-af9a-2889203915de",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.996Z"
+    },
+    {
+      "fromMemoryId": "44e0e6d6-ace3-4bfa-baf3-6305767d41b8",
+      "toMemoryId": "5f37da12-0e5b-41bc-9c20-c65660150a67",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.996Z"
+    },
+    {
+      "fromMemoryId": "44e0e6d6-ace3-4bfa-baf3-6305767d41b8",
+      "toMemoryId": "3053a888-cf99-47a0-8af4-057012bd7690",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.996Z"
+    },
+    {
+      "fromMemoryId": "44e0e6d6-ace3-4bfa-baf3-6305767d41b8",
+      "toMemoryId": "b088781e-c833-4690-b05a-ac0b805e0bec",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.996Z"
+    },
+    {
+      "fromMemoryId": "44e0e6d6-ace3-4bfa-baf3-6305767d41b8",
+      "toMemoryId": "7412525f-36e4-4bb2-babf-8d275a9b2869",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:56:17.996Z"
+    },
+    {
+      "fromMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "toMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:02.985Z"
+    },
+    {
+      "fromMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "toMemoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:02.985Z"
+    },
+    {
+      "fromMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "toMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:02.985Z"
+    },
+    {
+      "fromMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "toMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:02.985Z"
+    },
+    {
+      "fromMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:02.985Z"
+    },
+    {
+      "fromMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "toMemoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:02.985Z"
+    },
+    {
+      "fromMemoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "toMemoryId": "219d6dcc-e126-4cca-a5c2-b85eb5cad339",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.074Z"
+    },
+    {
+      "fromMemoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "toMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.074Z"
+    },
+    {
+      "fromMemoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "toMemoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.074Z"
+    },
+    {
+      "fromMemoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "toMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.074Z"
+    },
+    {
+      "fromMemoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "toMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.074Z"
+    },
+    {
+      "fromMemoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.074Z"
+    },
+    {
+      "fromMemoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "toMemoryId": "887e2d98-e713-4a26-9acb-ee3a05fd1a70",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.074Z"
+    },
+    {
+      "fromMemoryId": "887e2d98-e713-4a26-9acb-ee3a05fd1a70",
+      "toMemoryId": "70cd45d0-f995-4fe4-94fc-274e99e3353a",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.151Z"
+    },
+    {
+      "fromMemoryId": "887e2d98-e713-4a26-9acb-ee3a05fd1a70",
+      "toMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.151Z"
+    },
+    {
+      "fromMemoryId": "887e2d98-e713-4a26-9acb-ee3a05fd1a70",
+      "toMemoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.151Z"
+    },
+    {
+      "fromMemoryId": "887e2d98-e713-4a26-9acb-ee3a05fd1a70",
+      "toMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.151Z"
+    },
+    {
+      "fromMemoryId": "887e2d98-e713-4a26-9acb-ee3a05fd1a70",
+      "toMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.151Z"
+    },
+    {
+      "fromMemoryId": "887e2d98-e713-4a26-9acb-ee3a05fd1a70",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:58:03.151Z"
     }
   ],
-  "updatedAt": "2026-05-22T03:48:32.984Z"
+  "updatedAt": "2026-05-22T03:58:03.152Z"
 }

@@ -115,9 +115,9 @@ export default function Sidebar({
           )}
 
           {workspaces.length === 0 ? (
-            <div className={`mx-2 rounded-2xl border p-3 ${tc.emptyCard} ${tc.border}`}>
-              {!collapsed && (
-                <div className="space-y-2">
+            !collapsed ? (
+              <div className="mx-2 space-y-3 px-1 py-2">
+                <div className="space-y-1.5">
                   <div className={`text-xs font-medium ${tc.textPrimary}`}>
                     No workspaces yet
                   </div>
@@ -126,20 +126,20 @@ export default function Sidebar({
                     chats here.
                   </p>
                 </div>
-              )}
-              <button
-                type="button"
-                onClick={onCreateWorkspace}
-                className={`mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-xl text-xs font-medium transition-colors ${
-                  isDark
-                    ? "bg-[#FAFAF9] text-[#171717] hover:bg-[#E7E5E4]"
-                    : "bg-[#0A0A0A] text-white hover:bg-[#404040]"
-                }`}
-              >
-                <Plus className="h-4 w-4" />
-                {!collapsed && "Create workspace"}
-              </button>
-            </div>
+                <button
+                  type="button"
+                  onClick={onCreateWorkspace}
+                  className={`flex h-10 w-full items-center justify-center gap-2 rounded-xl text-xs font-medium transition-colors ${
+                    isDark
+                      ? "bg-[#FAFAF9] text-[#171717] hover:bg-[#E7E5E4]"
+                      : "bg-[#0A0A0A] text-white hover:bg-[#404040]"
+                  }`}
+                >
+                  <Plus className="h-4 w-4" />
+                  Create workspace
+                </button>
+              </div>
+            ) : null
           ) : (
             workspaces.map((item) => {
               const isActive = item.id === activeWorkspaceId;
