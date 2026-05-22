@@ -1,5 +1,77 @@
 [
   {
+    "id": "604c2cb4-9103-4dd6-8254-0467f825ab8e",
+    "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+    "memoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+    "sectionKind": "fact",
+    "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\app\\login\\page.tsx",
+    "action": "modified",
+    "reason": "Added autocomplete attributes to the login form fields to satisfy browser expectations and improve password manager support.",
+    "notes": "Email uses autoComplete=\\\"email\\\" and password uses autoComplete=\\\"current-password\\\".",
+    "createdAt": "2026-05-22T03:40:58.783Z",
+    "updatedAt": "2026-05-22T03:40:58.783Z"
+  },
+  {
+    "id": "c55f3ff2-b499-4585-87e5-af27cbf718bc",
+    "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+    "memoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+    "sectionKind": "decision",
+    "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\app\\login\\page.tsx",
+    "action": "modified",
+    "reason": "Added autocomplete attributes to the login form fields to satisfy browser expectations and improve password manager support.",
+    "notes": "Email uses autoComplete=\\\"email\\\" and password uses autoComplete=\\\"current-password\\\".",
+    "createdAt": "2026-05-22T03:40:58.859Z",
+    "updatedAt": "2026-05-22T03:40:58.859Z"
+  },
+  {
+    "id": "d9abe274-e933-40cc-9904-87be14d25c1a",
+    "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+    "memoryId": "cdc9fa2f-1251-410b-8af7-edae46dac812",
+    "sectionKind": "task",
+    "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\app\\login\\page.tsx",
+    "action": "modified",
+    "reason": "Added autocomplete attributes to the login form fields to satisfy browser expectations and improve password manager support.",
+    "notes": "Email uses autoComplete=\\\"email\\\" and password uses autoComplete=\\\"current-password\\\".",
+    "createdAt": "2026-05-22T03:40:58.926Z",
+    "updatedAt": "2026-05-22T03:40:58.926Z"
+  },
+  {
+    "id": "a8cb8d58-5311-4dfd-991e-e4fecebd4ee8",
+    "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+    "memoryId": "78511494-2066-4515-8610-2df5af95616f",
+    "sectionKind": "fact",
+    "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\next.config.ts",
+    "action": "modified",
+    "reason": "Added the allowedDevOrigins entry for the specified development origin while preserving existing Next.js configuration.",
+    "notes": "The config remains typed with NextConfig and exported as a default ES module.",
+    "createdAt": "2026-05-22T03:38:21.516Z",
+    "updatedAt": "2026-05-22T03:38:21.516Z"
+  },
+  {
+    "id": "91c9aee5-6644-4910-9844-6e1193a18c47",
+    "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+    "memoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+    "sectionKind": "decision",
+    "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\next.config.ts",
+    "action": "modified",
+    "reason": "Added the allowedDevOrigins entry for the specified development origin while preserving existing Next.js configuration.",
+    "notes": "The config remains typed with NextConfig and exported as a default ES module.",
+    "createdAt": "2026-05-22T03:38:21.594Z",
+    "updatedAt": "2026-05-22T03:38:21.594Z"
+  },
+  {
+    "id": "60e542a7-e8a0-4349-80f4-bb0432a71486",
+    "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+    "memoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+    "sectionKind": "task",
+    "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\next.config.ts",
+    "action": "modified",
+    "reason": "Added the allowedDevOrigins entry for the specified development origin while preserving existing Next.js configuration.",
+    "notes": "The config remains typed with NextConfig and exported as a default ES module.",
+    "createdAt": "2026-05-22T03:38:21.666Z",
+    "updatedAt": "2026-05-22T03:38:21.666Z"
+  },
+  {
     "id": "28a63aec-f2d8-4d55-bbf2-74d30732291e",
     "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
     "memoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",

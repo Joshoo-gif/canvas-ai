@@ -3218,6 +3218,184 @@
       ],
       "createdAt": "2026-05-22T03:30:52.832Z",
       "updatedAt": "2026-05-22T03:30:52.832Z"
+    },
+    {
+      "memoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "78511494-2066-4515-8610-2df5af95616f",
+      "rootMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+        "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+        "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9"
+      ],
+      "childMemoryIds": [
+        "facd3681-c3bf-4c09-bedb-1fa9593fb11d"
+      ],
+      "sectionKind": "fact",
+      "summary": "Updated the Next.js config to allow the dev origin testing-canvas.echosphere.cfd while preserving the existing React compiler setting. The project uses a TypeScript next.config.ts with a default export, so the change was made in that style instead of switching to CommonJS.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\next.config.ts",
+          "action": "modified",
+          "reason": "Added the allowedDevOrigins entry for the specified development origin while preserving existing Next.js configuration.",
+          "notes": "The config remains typed with NextConfig and exported as a default ES module."
+        }
+      ],
+      "createdAt": "2026-05-22T03:38:21.516Z",
+      "updatedAt": "2026-05-22T03:38:21.516Z"
+    },
+    {
+      "memoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "78511494-2066-4515-8610-2df5af95616f",
+      "rootMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "parentMemoryIds": [
+        "78511494-2066-4515-8610-2df5af95616f"
+      ],
+      "relatedMemoryIds": [
+        "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+        "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+        "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9"
+      ],
+      "childMemoryIds": [
+        "b858b429-51b2-4c77-912c-4962235babf2"
+      ],
+      "sectionKind": "decision",
+      "summary": "Updated the Next.js config to allow the dev origin testing-canvas.echosphere.cfd while preserving the existing React compiler setting. The project uses a TypeScript next.config.ts with a default export, so the change was made in that style instead of switching to CommonJS.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\next.config.ts",
+          "action": "modified",
+          "reason": "Added the allowedDevOrigins entry for the specified development origin while preserving existing Next.js configuration.",
+          "notes": "The config remains typed with NextConfig and exported as a default ES module."
+        }
+      ],
+      "createdAt": "2026-05-22T03:38:21.594Z",
+      "updatedAt": "2026-05-22T03:38:21.594Z"
+    },
+    {
+      "memoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "78511494-2066-4515-8610-2df5af95616f",
+      "rootMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "parentMemoryIds": [
+        "facd3681-c3bf-4c09-bedb-1fa9593fb11d"
+      ],
+      "relatedMemoryIds": [
+        "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+        "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+        "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Updated the Next.js config to allow the dev origin testing-canvas.echosphere.cfd while preserving the existing React compiler setting. The project uses a TypeScript next.config.ts with a default export, so the change was made in that style instead of switching to CommonJS.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\next.config.ts",
+          "action": "modified",
+          "reason": "Added the allowedDevOrigins entry for the specified development origin while preserving existing Next.js configuration.",
+          "notes": "The config remains typed with NextConfig and exported as a default ES module."
+        }
+      ],
+      "createdAt": "2026-05-22T03:38:21.666Z",
+      "updatedAt": "2026-05-22T03:38:21.666Z"
+    },
+    {
+      "memoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "rootMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+        "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+        "ea298a87-0f07-43eb-a597-61377ad7c510",
+        "b858b429-51b2-4c77-912c-4962235babf2",
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9"
+      ],
+      "childMemoryIds": [
+        "5148e67f-10f8-475d-9dd2-6d081d98aecb"
+      ],
+      "sectionKind": "fact",
+      "summary": "Fixed the login form autocomplete warning by adding autocomplete attributes to the email and password inputs in the login page. The Cloudflare Insights beacon error was identified as a blocked third-party analytics request from the browser environment and not an application bug.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\app\\login\\page.tsx",
+          "action": "modified",
+          "reason": "Added autocomplete attributes to the login form fields to satisfy browser expectations and improve password manager support.",
+          "notes": "Email uses autoComplete=\\\"email\\\" and password uses autoComplete=\\\"current-password\\\"."
+        }
+      ],
+      "createdAt": "2026-05-22T03:40:58.783Z",
+      "updatedAt": "2026-05-22T03:40:58.783Z"
+    },
+    {
+      "memoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "rootMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "parentMemoryIds": [
+        "eac20f26-25d2-4952-95ef-2509ed50cc2c"
+      ],
+      "relatedMemoryIds": [
+        "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+        "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+        "ea298a87-0f07-43eb-a597-61377ad7c510",
+        "b858b429-51b2-4c77-912c-4962235babf2",
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9"
+      ],
+      "childMemoryIds": [
+        "cdc9fa2f-1251-410b-8af7-edae46dac812"
+      ],
+      "sectionKind": "decision",
+      "summary": "Fixed the login form autocomplete warning by adding autocomplete attributes to the email and password inputs in the login page. The Cloudflare Insights beacon error was identified as a blocked third-party analytics request from the browser environment and not an application bug.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\app\\login\\page.tsx",
+          "action": "modified",
+          "reason": "Added autocomplete attributes to the login form fields to satisfy browser expectations and improve password manager support.",
+          "notes": "Email uses autoComplete=\\\"email\\\" and password uses autoComplete=\\\"current-password\\\"."
+        }
+      ],
+      "createdAt": "2026-05-22T03:40:58.859Z",
+      "updatedAt": "2026-05-22T03:40:58.859Z"
+    },
+    {
+      "memoryId": "cdc9fa2f-1251-410b-8af7-edae46dac812",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "rootMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "parentMemoryIds": [
+        "5148e67f-10f8-475d-9dd2-6d081d98aecb"
+      ],
+      "relatedMemoryIds": [
+        "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+        "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+        "ea298a87-0f07-43eb-a597-61377ad7c510",
+        "b858b429-51b2-4c77-912c-4962235babf2",
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Fixed the login form autocomplete warning by adding autocomplete attributes to the email and password inputs in the login page. The Cloudflare Insights beacon error was identified as a blocked third-party analytics request from the browser environment and not an application bug.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\app\\login\\page.tsx",
+          "action": "modified",
+          "reason": "Added autocomplete attributes to the login form fields to satisfy browser expectations and improve password manager support.",
+          "notes": "Email uses autoComplete=\\\"email\\\" and password uses autoComplete=\\\"current-password\\\"."
+        }
+      ],
+      "createdAt": "2026-05-22T03:40:58.926Z",
+      "updatedAt": "2026-05-22T03:40:58.926Z"
     }
   ],
   "edges": [
@@ -5845,7 +6023,273 @@
       "relation": "related",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
       "createdAt": "2026-05-22T03:30:52.832Z"
+    },
+    {
+      "fromMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "toMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.516Z"
+    },
+    {
+      "fromMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.516Z"
+    },
+    {
+      "fromMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "toMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.516Z"
+    },
+    {
+      "fromMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "toMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.516Z"
+    },
+    {
+      "fromMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.516Z"
+    },
+    {
+      "fromMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "toMemoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.516Z"
+    },
+    {
+      "fromMemoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "toMemoryId": "78511494-2066-4515-8610-2df5af95616f",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.594Z"
+    },
+    {
+      "fromMemoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "toMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.594Z"
+    },
+    {
+      "fromMemoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.594Z"
+    },
+    {
+      "fromMemoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "toMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.594Z"
+    },
+    {
+      "fromMemoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "toMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.594Z"
+    },
+    {
+      "fromMemoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.594Z"
+    },
+    {
+      "fromMemoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "toMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.594Z"
+    },
+    {
+      "fromMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "toMemoryId": "facd3681-c3bf-4c09-bedb-1fa9593fb11d",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.666Z"
+    },
+    {
+      "fromMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "toMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.666Z"
+    },
+    {
+      "fromMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.666Z"
+    },
+    {
+      "fromMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "toMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.666Z"
+    },
+    {
+      "fromMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "toMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.666Z"
+    },
+    {
+      "fromMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:38:21.666Z"
+    },
+    {
+      "fromMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "toMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.783Z"
+    },
+    {
+      "fromMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "toMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.783Z"
+    },
+    {
+      "fromMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "toMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.783Z"
+    },
+    {
+      "fromMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "toMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.783Z"
+    },
+    {
+      "fromMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.783Z"
+    },
+    {
+      "fromMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "toMemoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.783Z"
+    },
+    {
+      "fromMemoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "toMemoryId": "eac20f26-25d2-4952-95ef-2509ed50cc2c",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.859Z"
+    },
+    {
+      "fromMemoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "toMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.859Z"
+    },
+    {
+      "fromMemoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "toMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.859Z"
+    },
+    {
+      "fromMemoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "toMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.859Z"
+    },
+    {
+      "fromMemoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "toMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.859Z"
+    },
+    {
+      "fromMemoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.859Z"
+    },
+    {
+      "fromMemoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "toMemoryId": "cdc9fa2f-1251-410b-8af7-edae46dac812",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.859Z"
+    },
+    {
+      "fromMemoryId": "cdc9fa2f-1251-410b-8af7-edae46dac812",
+      "toMemoryId": "5148e67f-10f8-475d-9dd2-6d081d98aecb",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.926Z"
+    },
+    {
+      "fromMemoryId": "cdc9fa2f-1251-410b-8af7-edae46dac812",
+      "toMemoryId": "1496fb9c-eb37-48c8-83f2-5fd48ea3c86c",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.926Z"
+    },
+    {
+      "fromMemoryId": "cdc9fa2f-1251-410b-8af7-edae46dac812",
+      "toMemoryId": "b597bdb3-6075-4344-b0de-5aa04f5d7340",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.926Z"
+    },
+    {
+      "fromMemoryId": "cdc9fa2f-1251-410b-8af7-edae46dac812",
+      "toMemoryId": "ea298a87-0f07-43eb-a597-61377ad7c510",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.926Z"
+    },
+    {
+      "fromMemoryId": "cdc9fa2f-1251-410b-8af7-edae46dac812",
+      "toMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.926Z"
+    },
+    {
+      "fromMemoryId": "cdc9fa2f-1251-410b-8af7-edae46dac812",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:40:58.926Z"
     }
   ],
-  "updatedAt": "2026-05-22T03:30:52.834Z"
+  "updatedAt": "2026-05-22T03:40:58.927Z"
 }
