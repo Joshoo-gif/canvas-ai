@@ -3396,6 +3396,130 @@
       ],
       "createdAt": "2026-05-22T03:40:58.926Z",
       "updatedAt": "2026-05-22T03:40:58.926Z"
+    },
+    {
+      "memoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "rootMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "parentMemoryIds": [
+        "81fcc86a-036a-4e86-b7be-7d4910e9ba35"
+      ],
+      "relatedMemoryIds": [
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+        "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "b858b429-51b2-4c77-912c-4962235babf2"
+      ],
+      "childMemoryIds": [
+        "4e634935-2b47-4669-934d-0d71b4d708a9"
+      ],
+      "sectionKind": "fact",
+      "summary": "Updated Docker Compose so the Canvas container now receives the root .env file at runtime via env_file, while still exposing port 3075 and using restart: always. The README now documents that docker compose loads the project .env into the container, matching the app’s process.env-based config loading.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\docker-compose.yml",
+          "action": "modified",
+          "reason": "Added env_file so the container receives runtime environment variables from the project .env file.",
+          "notes": "Preserves port 3075 mapping and restart policy."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\README.md",
+          "action": "modified",
+          "reason": "Documented that docker compose loads the root .env file into the container at runtime.",
+          "notes": "Helps operators understand where the container gets its env values."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\lib\\env\\index.ts",
+          "action": "inspected",
+          "reason": "Confirmed the application depends on process.env values for server-side configuration, which makes runtime env injection necessary.",
+          "notes": "No code changes were needed in this module."
+        }
+      ],
+      "createdAt": "2026-05-22T03:48:32.814Z",
+      "updatedAt": "2026-05-22T03:48:32.814Z"
+    },
+    {
+      "memoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "rootMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "parentMemoryIds": [
+        "10307311-96bc-4afc-9414-f1b671ca4c46"
+      ],
+      "relatedMemoryIds": [
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+        "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "b858b429-51b2-4c77-912c-4962235babf2"
+      ],
+      "childMemoryIds": [
+        "9f870183-ad18-45ec-9509-ef39d2913f58"
+      ],
+      "sectionKind": "decision",
+      "summary": "Updated Docker Compose so the Canvas container now receives the root .env file at runtime via env_file, while still exposing port 3075 and using restart: always. The README now documents that docker compose loads the project .env into the container, matching the app’s process.env-based config loading.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\docker-compose.yml",
+          "action": "modified",
+          "reason": "Added env_file so the container receives runtime environment variables from the project .env file.",
+          "notes": "Preserves port 3075 mapping and restart policy."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\README.md",
+          "action": "modified",
+          "reason": "Documented that docker compose loads the root .env file into the container at runtime.",
+          "notes": "Helps operators understand where the container gets its env values."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\lib\\env\\index.ts",
+          "action": "inspected",
+          "reason": "Confirmed the application depends on process.env values for server-side configuration, which makes runtime env injection necessary.",
+          "notes": "No code changes were needed in this module."
+        }
+      ],
+      "createdAt": "2026-05-22T03:48:32.900Z",
+      "updatedAt": "2026-05-22T03:48:32.900Z"
+    },
+    {
+      "memoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "rootMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "parentMemoryIds": [
+        "4e634935-2b47-4669-934d-0d71b4d708a9"
+      ],
+      "relatedMemoryIds": [
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+        "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "b858b429-51b2-4c77-912c-4962235babf2"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Updated Docker Compose so the Canvas container now receives the root .env file at runtime via env_file, while still exposing port 3075 and using restart: always. The README now documents that docker compose loads the project .env into the container, matching the app’s process.env-based config loading.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\docker-compose.yml",
+          "action": "modified",
+          "reason": "Added env_file so the container receives runtime environment variables from the project .env file.",
+          "notes": "Preserves port 3075 mapping and restart policy."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\README.md",
+          "action": "modified",
+          "reason": "Documented that docker compose loads the root .env file into the container at runtime.",
+          "notes": "Helps operators understand where the container gets its env values."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\src\\lib\\env\\index.ts",
+          "action": "inspected",
+          "reason": "Confirmed the application depends on process.env values for server-side configuration, which makes runtime env injection necessary.",
+          "notes": "No code changes were needed in this module."
+        }
+      ],
+      "createdAt": "2026-05-22T03:48:32.982Z",
+      "updatedAt": "2026-05-22T03:48:32.982Z"
     }
   ],
   "edges": [
@@ -6289,7 +6413,126 @@
       "relation": "related",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
       "createdAt": "2026-05-22T03:40:58.926Z"
+    },
+    {
+      "fromMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "toMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.814Z"
+    },
+    {
+      "fromMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.814Z"
+    },
+    {
+      "fromMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "toMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.814Z"
+    },
+    {
+      "fromMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.814Z"
+    },
+    {
+      "fromMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "toMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.814Z"
+    },
+    {
+      "fromMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "toMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.814Z"
+    },
+    {
+      "fromMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "toMemoryId": "10307311-96bc-4afc-9414-f1b671ca4c46",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.900Z"
+    },
+    {
+      "fromMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.900Z"
+    },
+    {
+      "fromMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "toMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.900Z"
+    },
+    {
+      "fromMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.900Z"
+    },
+    {
+      "fromMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "toMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.900Z"
+    },
+    {
+      "fromMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "toMemoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.900Z"
+    },
+    {
+      "fromMemoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "toMemoryId": "4e634935-2b47-4669-934d-0d71b4d708a9",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.982Z"
+    },
+    {
+      "fromMemoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.982Z"
+    },
+    {
+      "fromMemoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "toMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.982Z"
+    },
+    {
+      "fromMemoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.982Z"
+    },
+    {
+      "fromMemoryId": "9f870183-ad18-45ec-9509-ef39d2913f58",
+      "toMemoryId": "b858b429-51b2-4c77-912c-4962235babf2",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:48:32.982Z"
     }
   ],
-  "updatedAt": "2026-05-22T03:40:58.927Z"
+  "updatedAt": "2026-05-22T03:48:32.984Z"
 }

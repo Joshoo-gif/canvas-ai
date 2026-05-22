@@ -72,7 +72,7 @@ docker compose up --build -d
 
 The service listens on `http://localhost:3075`.
 
-Make sure the runtime environment variables required by the app are available to the container before starting it.
+`docker compose` loads the root `.env` file into the container at runtime, so the app receives the same Supabase, OpenAI, and Canvas variables used in local development.
 
 ## Product structure
 
