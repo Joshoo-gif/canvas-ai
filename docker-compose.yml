@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: canvas
+    env_file:
+      - .env
     ports:
       - "3075:3075"
     restart: always
