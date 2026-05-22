@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background Workspace Layer -->
+  <rect x="4" y="4" width="24" height="24" rx="6" fill="#0F172A"/>
+  
+  <!-- Outer Focus Ring / Frame -->
+  <rect x="4" y="4" width="24" height="24" rx="6" stroke="#1E293B" stroke-width="1.5"/>
+  
+  <!-- The Canvas / Document Element -->
+  <path d="M9 10C9 8.89543 9.89543 8 11 8H17L23 14V22C23 23.1046 22.1046 24 11 24C9.89543 24 9 23.1046 9 22V10Z" fill="#1E40AF" opacity="0.4"/>
+  <path d="M11 8H17L23 14H11V8Z" fill="#3B82F6" opacity="0.6"/>
+  
+  <!-- Focused Agent Viewport / Target Reticle -->
+  <path d="M13 13H19V19H13V13Z" stroke="#60A5FA" stroke-width="2" stroke-linejoin="round"/>
+  
+  <!-- Scanning Indicator Lines -->
+  <line x1="15" y1="16" x2="17" y2="16" stroke="#93C5FD" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

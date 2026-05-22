@@ -62,6 +62,18 @@ The app is especially useful when you want an assistant to reason about project 
   - line numbers,
   - font size.
 
+## Running with Docker
+
+Build and run the app on port `3075` with an always-restarting container:
+
+```bash
+docker compose up --build -d
+```
+
+The service listens on `http://localhost:3075`.
+
+Make sure the runtime environment variables required by the app are available to the container before starting it.
+
 ## Product structure
 
 Canvas is organized around two major surfaces:
@@ -249,191 +261,36 @@ Stores user and assistant messages plus observability metadata:
 - completion token count
 
 #### `workspace_files`
-Stores uploaded files and their extracted content:
+Stores uploaded workspace files and normalized content.
 
-- original filename
-- MIME type
-- extension
-- byte size
-- extracted text
-- extracted line array
-- line count
-- processing status
-- optional error message
+#### `workspace_file_lines`
+Stores line-level content for parsed files.
 
-## File ingestion pipeline
+#### `artifact_snapshots`
+Stores rendered snapshot metadata for open artifacts.
 
-Uploaded files are handled by `src/lib/workspace-files/ingest.ts`.
+## Environment variables
 
-The ingestion pipeline:
+The app expects runtime credentials for its backend services.
 
-- validates supported file types,
-- enforces a maximum file size of 20 MB,
-- parses PDF content,
-- extracts raw text from DOCX files,
-- normalizes CSV input,
-- sanitizes text for safe storage and viewing,
-- converts content into a line-based structure for artifact navigation.
+At minimum, configure the values required by the auth, Supabase, and OpenAI integrations before starting the container.
 
-This line-based format is what makes precise reading and line highlighting possible later in the workspace.
+## Development
 
-## Search and inspection helpers
-
-Workspace search helpers live in `src/lib/workspace-files/search.ts` and power the read-oriented agent tools.
-
-They support:
-
-- listing workspace artifacts,
-- searching across all loaded files,
-- locating keyword instances inside a specific file,
-- reading exact line segments from a file.
-
-This separation keeps search/inspection logic out of the UI and out of the OpenAI streaming loop.
-
-## Repository structure
-
-```txt
-src/
-  app/                Next.js App Router pages and API routes
-  components/         Feature components and shared UI primitives
-  lib/                Server/data/AI/auth/workspace logic
-  prompts/            Agent prompt files
-  types/              Local ambient type declarations
-sqls/                 Supabase schema migrations
-public/               Static assets
-```
-
-### Notable folders
-
-- `src/app/` — route entry points, login/register pages, and API routes
-- `src/components/ArtifactViewer/` — file viewing and artifact navigation
-- `src/components/CommandCenter/` — chat thread, tool-call rendering, and composer
-- `src/lib/chat/` — prompt assembly, OpenAI streaming, conversation storage
-- `src/lib/workspace-files/` — upload ingestion, file client helpers, and search utilities
-- `src/lib/auth/` — password hashing and session management
-- `src/lib/supabase/` — typed Supabase client and schema types
-
-## Technology stack
-
-- **Next.js 16** — App Router, server routes, and page composition
-- **React 19** — client-side interaction and streaming UI
-- **TypeScript** — typed data flow across UI, API, and server modules
-- **Tailwind CSS v4** — design system and responsive styling
-- **Supabase** — persistence for users, sessions, workspaces, files, conversations, and messages
-- **OpenAI SDK** — streamed assistant completions and tool calling
-- **Zod** — runtime validation for tool inputs and boundary checks
-- **Biome** — linting and formatting
-- **lucide-react** — iconography
-
-## Configuration
-
-Copy `.env.example` to `.env` and fill in the required values.
-
-### Required server variables
-
-```bash
-SUPABASE_URL=
-SUPABASE_SECRET=
-OPENAI_API_KEY=
-```
-
-### Optional server variables
-
-```bash
-OPENAI_MODEL=gpt-4o-mini
-OPENAI_BASE_URL=
-CANVAS_DEFAULT_WORKSPACE_ID=
-```
-
-### Notes on Supabase variables
-
-The example env file also includes browser-facing Supabase variables for completeness:
-
-- `SUPABASE_PUBLISHABLE_KEY`
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
-
-Those values are documented in `.env.example`, but the current server-side code path primarily relies on `SUPABASE_URL` and `SUPABASE_SECRET`.
-
-## Setup
-
-### 1. Install dependencies
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-### 2. Configure environment variables
-
-Create a `.env` file based on `.env.example` and set the required credentials.
-
-### 3. Apply the database schema
-
-Run the SQL files in order:
-
-1. `sqls/001_initial_schema.sql`
-2. `sqls/002_workspace_files.sql`
-3. `sqls/003_auth_schema.sql`
-
-### 4. Run the app locally
+Run locally:
 
 ```bash
 npm run dev
 ```
 
-Then open the local development URL shown by Next.js.
-
-## Available scripts
+Build for production:
 
 ```bash
-npm run dev     # start the development server
-npm run build   # build the production app
-npm run start   # start the production server
-npm run lint    # run biome checks
-npm run format  # format the codebase with Biome
+npm run build
 ```
-
-## Operational notes
-
-- Chat responses stream over SSE, so the UI updates progressively instead of waiting for a full completion.
-- Tool calls are validated before execution, which helps keep file reads and search operations bounded.
-- The server environment loader fails fast if required variables are missing.
-- Supabase access is centralized through typed repository modules rather than being scattered across the UI.
-- The UI is built to work as a split workspace/chat shell on desktop and a tabbed experience on mobile.
-
-## Design intent
-
-The product visual language aims to stay calm and practical:
-
-- light surfaces,
-- strong readability,
-- restrained shadows,
-- rounded cards and panels,
-- compact but not sparse layout density,
-- mobile-first responsiveness.
-
-## Current scope
-
-Canvas currently focuses on:
-
-- authenticated workspace sessions,
-- document ingestion and viewing,
-- chat-based analysis,
-- tool-assisted file inspection,
-- conversation history,
-- workspace settings.
-
-It does **not** expose a general-purpose code editor or file writer in the chat toolset at the moment. The agent is primarily read/inspect oriented.
-
-## Contributing / extending
-
-When extending Canvas, keep the architecture boundaries intact:
-
-- keep route files thin,
-- move logic into `src/lib/` or focused feature modules,
-- validate at API and tool boundaries,
-- keep artifact and command-center concerns separate,
-- preserve typed data flow from Supabase to UI,
-- update the SQL schema and generated types together when the data model changes.
-
-If you add new workspace tools, make sure their input schema is validated and their UI representation is explicit so users can understand what the agent is doing.

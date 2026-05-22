@@ -3075,6 +3075,149 @@
       ],
       "createdAt": "2026-05-22T02:35:16.055Z",
       "updatedAt": "2026-05-22T02:35:16.055Z"
+    },
+    {
+      "memoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "rootMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "parentMemoryIds": [],
+      "relatedMemoryIds": [
+        "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+        "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b"
+      ],
+      "childMemoryIds": [
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7"
+      ],
+      "sectionKind": "fact",
+      "summary": "Added Docker support for the Next.js app so it can be built and run in a container on port 3075 with restart policy always. The implementation keeps the app entrypoint unchanged and uses a multi-stage image plus docker compose for runtime configuration.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\Dockerfile",
+          "action": "created",
+          "reason": "Defines the production container build and runtime configuration for the Next.js app.",
+          "notes": "Multi-stage build; exposes port 3075 and starts Next with explicit host/port flags."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\docker-compose.yml",
+          "action": "created",
+          "reason": "Provides the service definition with restart policy always and port mapping for local container orchestration.",
+          "notes": "Service maps 3075:3075 and sets runtime PORT/HOSTNAME env vars."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\.dockerignore",
+          "action": "created",
+          "reason": "Reduces build context size and prevents local artifacts from being sent to Docker during builds.",
+          "notes": "Ignores node_modules, .next, and common log files."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\README.md",
+          "action": "modified",
+          "reason": "Documents how to build and run the containerized app on port 3075 with docker compose.",
+          "notes": "Added a concise Docker usage section."
+        }
+      ],
+      "createdAt": "2026-05-22T03:30:52.640Z",
+      "updatedAt": "2026-05-22T03:30:52.640Z"
+    },
+    {
+      "memoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "rootMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "parentMemoryIds": [
+        "81fcc86a-036a-4e86-b7be-7d4910e9ba35"
+      ],
+      "relatedMemoryIds": [
+        "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+        "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b"
+      ],
+      "childMemoryIds": [
+        "b182c37f-c3a8-4e82-9fd4-15276881b53a"
+      ],
+      "sectionKind": "decision",
+      "summary": "Added Docker support for the Next.js app so it can be built and run in a container on port 3075 with restart policy always. The implementation keeps the app entrypoint unchanged and uses a multi-stage image plus docker compose for runtime configuration.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\Dockerfile",
+          "action": "created",
+          "reason": "Defines the production container build and runtime configuration for the Next.js app.",
+          "notes": "Multi-stage build; exposes port 3075 and starts Next with explicit host/port flags."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\docker-compose.yml",
+          "action": "created",
+          "reason": "Provides the service definition with restart policy always and port mapping for local container orchestration.",
+          "notes": "Service maps 3075:3075 and sets runtime PORT/HOSTNAME env vars."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\.dockerignore",
+          "action": "created",
+          "reason": "Reduces build context size and prevents local artifacts from being sent to Docker during builds.",
+          "notes": "Ignores node_modules, .next, and common log files."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\README.md",
+          "action": "modified",
+          "reason": "Documents how to build and run the containerized app on port 3075 with docker compose.",
+          "notes": "Added a concise Docker usage section."
+        }
+      ],
+      "createdAt": "2026-05-22T03:30:52.738Z",
+      "updatedAt": "2026-05-22T03:30:52.738Z"
+    },
+    {
+      "memoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "graphGroupId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "rootMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "parentMemoryIds": [
+        "0845f881-f466-4bb3-ac0e-e1e74bc92cd7"
+      ],
+      "relatedMemoryIds": [
+        "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+        "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+        "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+        "7172e073-ec40-4061-93ad-f53d00167aad",
+        "cfb1766e-4c88-4781-b34b-96212cf6f96b"
+      ],
+      "childMemoryIds": [],
+      "sectionKind": "task",
+      "summary": "Added Docker support for the Next.js app so it can be built and run in a container on port 3075 with restart policy always. The implementation keeps the app entrypoint unchanged and uses a multi-stage image plus docker compose for runtime configuration.",
+      "affectedFiles": [
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\Dockerfile",
+          "action": "created",
+          "reason": "Defines the production container build and runtime configuration for the Next.js app.",
+          "notes": "Multi-stage build; exposes port 3075 and starts Next with explicit host/port flags."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\docker-compose.yml",
+          "action": "created",
+          "reason": "Provides the service definition with restart policy always and port mapping for local container orchestration.",
+          "notes": "Service maps 3075:3075 and sets runtime PORT/HOSTNAME env vars."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\.dockerignore",
+          "action": "created",
+          "reason": "Reduces build context size and prevents local artifacts from being sent to Docker during builds.",
+          "notes": "Ignores node_modules, .next, and common log files."
+        },
+        {
+          "path": "C:\\Users\\Administrator\\Desktop\\canvas-ai\\README.md",
+          "action": "modified",
+          "reason": "Documents how to build and run the containerized app on port 3075 with docker compose.",
+          "notes": "Added a concise Docker usage section."
+        }
+      ],
+      "createdAt": "2026-05-22T03:30:52.832Z",
+      "updatedAt": "2026-05-22T03:30:52.832Z"
     }
   ],
   "edges": [
@@ -5569,7 +5712,140 @@
       "relation": "related",
       "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
       "createdAt": "2026-05-22T02:35:16.055Z"
+    },
+    {
+      "fromMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "toMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.640Z"
+    },
+    {
+      "fromMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.640Z"
+    },
+    {
+      "fromMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "toMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.640Z"
+    },
+    {
+      "fromMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.640Z"
+    },
+    {
+      "fromMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.640Z"
+    },
+    {
+      "fromMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.640Z"
+    },
+    {
+      "fromMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "toMemoryId": "81fcc86a-036a-4e86-b7be-7d4910e9ba35",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.738Z"
+    },
+    {
+      "fromMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "toMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.738Z"
+    },
+    {
+      "fromMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.738Z"
+    },
+    {
+      "fromMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "toMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.738Z"
+    },
+    {
+      "fromMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.738Z"
+    },
+    {
+      "fromMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.738Z"
+    },
+    {
+      "fromMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "toMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "relation": "child",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.738Z"
+    },
+    {
+      "fromMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "toMemoryId": "0845f881-f466-4bb3-ac0e-e1e74bc92cd7",
+      "relation": "parent",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.832Z"
+    },
+    {
+      "fromMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "toMemoryId": "2e6d32d6-95f5-497b-b52b-984926cd00fc",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.832Z"
+    },
+    {
+      "fromMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "toMemoryId": "60054ff4-85bb-4618-9f42-5e31ac7882c9",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.832Z"
+    },
+    {
+      "fromMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "toMemoryId": "74ec3b71-6af1-4aa5-9749-76b1f554d17b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.832Z"
+    },
+    {
+      "fromMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "toMemoryId": "7172e073-ec40-4061-93ad-f53d00167aad",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.832Z"
+    },
+    {
+      "fromMemoryId": "b182c37f-c3a8-4e82-9fd4-15276881b53a",
+      "toMemoryId": "cfb1766e-4c88-4781-b34b-96212cf6f96b",
+      "relation": "related",
+      "projectPath": "C:\\Users\\Administrator\\Desktop\\canvas-ai",
+      "createdAt": "2026-05-22T03:30:52.832Z"
     }
   ],
-  "updatedAt": "2026-05-22T02:35:16.057Z"
+  "updatedAt": "2026-05-22T03:30:52.834Z"
 }

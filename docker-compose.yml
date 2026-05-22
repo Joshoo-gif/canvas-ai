@@ -1,0 +1,12 @@
+services:
+  canvas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: canvas
+    ports:
+      - "3075:3075"
+    restart: always
+    environment:
+      PORT: "3075"
+      HOSTNAME: "0.0.0.0"
